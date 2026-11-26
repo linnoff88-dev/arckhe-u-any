@@ -4,7 +4,7 @@
 
 > **Para o Claude:** SUB-SKILL OBRIGATÓRIA: Use superpowers:executing-plans para implementar este plano tarefa por tarefa.
 
-**Objetivo:** Construir uma homepage cinematográfica, com rolagem dirigida, para o Understand Anything usando Astro, publicada no GitHub Pages via branch `gh-pages`.
+**Objetivo:** Construir uma homepage cARCKHÉtográfica, com rolagem dirigida, para o Understand Anything usando Astro, publicada no GitHub Pages via branch `gh-pages`.
 
 **Arquitetura:** Projeto Astro SSG em `homepage/` na main. Fontes auto-hospedadas (DM Serif Display, Inter, JetBrains Mono) com fallbacks robustos. Animações puramente em CSS disparadas por `IntersectionObserver`. Um workflow do GitHub Actions faz build e deploy para `gh-pages` a cada push.
 

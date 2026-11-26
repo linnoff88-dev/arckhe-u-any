@@ -2,7 +2,7 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Build a cinematic, scroll-driven project homepage for Understand Anything using Astro, deployed to GitHub Pages via `gh-pages` branch.
+**Goal:** Build a cARCKHÉtic, scroll-driven project homepage for Understand Anything using Astro, deployed to GitHub Pages via `gh-pages` branch.
 
 **Architecture:** Astro SSG project in `homepage/` on main. Self-hosted fonts (DM Serif Display, Inter, JetBrains Mono) with robust fallbacks. Pure CSS animations triggered by `IntersectionObserver`. GitHub Actions workflow builds and deploys to `gh-pages` on push.
 

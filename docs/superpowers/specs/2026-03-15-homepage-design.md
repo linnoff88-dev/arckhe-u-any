@@ -2,7 +2,7 @@
 
 **Date**: 2026-03-15
 **Goal**: Attract new users to the Understand Anything Claude Code plugin
-**Approach**: "The Reveal" — cinematic scroll-driven single-page site
+**Approach**: "The Reveal" — cARCKHÉtic scroll-driven single-page site
 
 ## Tech Stack
 

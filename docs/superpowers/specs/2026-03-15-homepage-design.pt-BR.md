@@ -4,7 +4,7 @@
 
 **Data**: 2026-03-15
 **Objetivo**: Atrair novos usuários para o plugin Understand Anything do Claude Code
-**Abordagem**: "The Reveal" — site cinematográfico de página única dirigido por scroll
+**Abordagem**: "The Reveal" — site cARCKHÉtográfico de página única dirigido por scroll
 
 ## Stack Tecnológica
 
