@@ -1,6 +1,6 @@
 # Understand Anything: Suporte Universal a Tipos de Arquivo
 
-> 🇬🇧 Versão original em inglês: [2026-03-28-understand-anything-extension-design.md](./2026-03-28-understand-anything-extension-design.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-28-understand-anything-extension-design.md](./2026-03-28-understand-anything-extension-design.md)
 
 **Data**: 2026-03-28
 **Status**: Aprovado
@@ -8,21 +8,21 @@
 
 ## Objetivos
 
-1. Estender o Understand Anything para analisar **qualquer** tipo de arquivo, não apenas código
-2. Suportar tanto enriquecimento holístico do projeto (arquivos não-código enriquecem grafos de código) quanto análise standalone (repos só de docs, coleções de schema SQL, projetos IaC)
+1. Estender o Understand Anything para analisar **qualquer** tipo de arquivo, nêo apenas código
+2. Suportar tanto enriquecimento holístico do projeto (arquivos nêo-código enriquecem grafos de código) quanto análise standalone (repos só de docs, coleções de schema SQL, projetos IaC)
 3. Manter compatibilidade retroativa com análise existente só de código
 
 ## Tipos de Arquivo Suportados (26 novos)
 
-### Documentação (3)
+### Documentaçêo (3)
 
 | Tipo | Extensões | Parser | Tipos de Nó |
 |------|-----------|--------|------------|
-| Markdown | `.md`, `.mdx` | LLM + regex de extração de heading | `document` |
+| Markdown | `.md`, `.mdx` | LLM + regex de extraçêo de heading | `document` |
 | reStructuredText | `.rst` | LLM | `document` |
 | Texto puro | `.txt` | LLM | `document` |
 
-### Configuração (5)
+### Configuraçêo (5)
 
 | Tipo | Extensões | Parser | Tipos de Nó |
 |------|-----------|--------|------------|
@@ -36,11 +36,11 @@
 
 | Tipo | Extensões | Parser | Tipos de Nó |
 |------|-----------|--------|------------|
-| Dockerfile | `Dockerfile`, `Dockerfile.*`, `.dockerfile` | Parser de instrução customizado | `service`, `pipeline` |
-| Docker Compose | `docker-compose.yml`, `compose.yml` | Parser YAML + extração de serviço | `service` |
+| Dockerfile | `Dockerfile`, `Dockerfile.*`, `.dockerfile` | Parser de instruçêo customizado | `service`, `pipeline` |
+| Docker Compose | `docker-compose.yml`, `compose.yml` | Parser YAML + extraçêo de serviço | `service` |
 | Terraform | `.tf`, `.tfvars` | Parser de bloco por regex | `resource` |
-| Kubernetes | YAML K8s (detectado por campo `apiVersion`) | YAML + detecção de kind | `service`, `resource` |
-| GitHub Actions | `.github/workflows/*.yml` | YAML + extração de job/step | `pipeline` |
+| Kubernetes | YAML K8s (detectado por campo `apiVersion`) | YAML + detecçêo de kind | `service`, `resource` |
+| GitHub Actions | `.github/workflows/*.yml` | YAML + extraçêo de job/step | `pipeline` |
 | Jenkinsfile | `Jenkinsfile` | LLM (DSL Groovy) | `pipeline` |
 | Makefile | `Makefile`, `*.mk` | Parser de target por regex | `pipeline` |
 
@@ -50,16 +50,16 @@
 |------|-----------|--------|------------|
 | SQL | `.sql` | Parser DDL simples | `table`, `endpoint` |
 | GraphQL | `.graphql`, `.gql` | Parser de type/query por regex | `schema`, `endpoint` |
-| OpenAPI/Swagger | `openapi.yaml`, `swagger.json` | YAML/JSON + extração de path | `endpoint`, `schema` |
+| OpenAPI/Swagger | `openapi.yaml`, `swagger.json` | YAML/JSON + extraçêo de path | `endpoint`, `schema` |
 | Protocol Buffers | `.proto` | Parser de message/service por regex | `schema` |
-| JSON Schema | `*.schema.json` | JSON + extração de `$ref`/`$defs` | `schema` |
-| CSV/TSV | `.csv`, `.tsv` | Extração de linha de header | `table` |
+| JSON Schema | `*.schema.json` | JSON + extraçêo de `$ref`/`$defs` | `schema` |
+| CSV/TSV | `.csv`, `.tsv` | Extraçêo de linha de header | `table` |
 
 ### Shell e Scripts (3)
 
 | Tipo | Extensões | Parser | Tipos de Nó |
 |------|-----------|--------|------------|
-| Shell | `.sh`, `.bash`, `.zsh` | Parser de função por regex | `file`, `function` |
+| Shell | `.sh`, `.bash`, `.zsh` | Parser de funçêo por regex | `file`, `function` |
 | PowerShell | `.ps1`, `.psm1` | LLM | `file`, `function` |
 | Batch | `.bat`, `.cmd` | LLM | `file` |
 
@@ -78,8 +78,8 @@ Adicionados ao existente `file | function | class | module | concept`:
 
 | Tipo de Nó | Propósito | Exemplo |
 |-----------|---------|---------|
-| `config` | Arquivos de configuração e settings-chave | `package.json`, `tsconfig.json`, env vars |
-| `document` | Documentação, prosa, guias | `README.md`, docs de API |
+| `config` | Arquivos de configuraçêo e settings-chave | `package.json`, `tsconfig.json`, env vars |
+| `document` | Documentaçêo, prosa, guias | `README.md`, docs de API |
 | `service` | Serviços/containers deployáveis | Containers Docker, Deployments K8s |
 | `table` | Tabelas de dados, objetos de banco | Tabelas SQL, datasets CSV |
 | `endpoint` | Rotas de API, queries, mutations | Paths REST, queries GraphQL |
@@ -100,9 +100,9 @@ Adicionados aos 18 tipos de aresta existentes:
 | `provisions` | Infraestrutura | IaC cria recurso | Terraform -> recurso AWS |
 | `routes` | Comportamental | Roteia tráfego para serviço | config nginx -> serviço |
 | `defines_schema` | Fluxo de dados | Define forma de dado | Protobuf -> endpoint |
-| `triggers` | Comportamental | Dispara pipeline/ação | Git push -> GitHub Actions |
+| `triggers` | Comportamental | Dispara pipeline/açêo | Git push -> GitHub Actions |
 
-### Aliases de Auto-Fix da Validação de Esquema
+### Aliases de Auto-Fix da Validaçêo de Esquema
 
 Novos aliases de tipo de nó:
 - `container` -> `service`, `migration` -> `table`, `workflow` -> `pipeline`
@@ -156,12 +156,12 @@ interface StructuralAnalysis {
 
 Todos leves — em sua maioria baseados em regex, dependências mínimas:
 
-| Parser | Implementação | Extrai |
+| Parser | Implementaçêo | Extrai |
 |--------|---------------|----------|
 | `MarkdownParser` | Regex | Headings, links, blocos de código, front matter |
 | `YAMLParser` | npm `yaml` | Hierarquia de chaves, âncoras, multi-doc |
 | `JSONParser` | `JSON.parse` built-in | Estrutura de chaves, `$ref`/`$defs` |
-| `TOMLParser` | `@iarna/toml` | Estrutura de seção |
+| `TOMLParser` | `@iarna/toml` | Estrutura de seçêo |
 | `EnvParser` | Regex | Nomes e referências de variáveis |
 | `DockerfileParser` | Regex | Estágios FROM, portas EXPOSE, fontes COPY |
 | `SQLParser` | Regex | CREATE TABLE/VIEW/INDEX, colunas, foreign keys |
@@ -185,12 +185,12 @@ Templates de prompt cientes do tipo por categoria:
 
 - **Code**: Comportamento atual (funções, classes, imports, call graph)
 - **Config**: Extrair settings-chave, o que configuram, quais arquivos de código afetam
-- **Documentation**: Extrair seções, conceitos-chave, quais componentes de código são documentados
+- **Documentation**: Extrair seções, conceitos-chave, quais componentes de código sêo documentados
 - **Infrastructure**: Extrair serviços, portas, volumes, dependências, qual código eles deployam
 - **Data/Schema**: Extrair tabelas, colunas, tipos, relações, qual código consome esses dados
 - **Pipelines**: Extrair jobs, steps, triggers, qual código/infra eles fazem build/deploy
 
-### Resolução de Referência Cross-Type
+### Resoluçêo de Referência Cross-Type
 
 Passo pós-análise conectando:
 - `COPY` de Dockerfile -> diretórios de código-fonte
@@ -202,21 +202,21 @@ Passo pós-análise conectando:
 
 ### Architecture Analyzer
 
-Nova detecção de padrões:
+Nova detecçêo de padrões:
 - Topologia de deployment: cadeia Dockerfile -> compose -> K8s
 - Fluxo de dados: Schema -> migration -> endpoint de API -> código cliente
-- Cobertura de documentação: quais módulos têm docs vs. não
-- Dependência de configuração: quais arquivos de config afetam quais caminhos de código
+- Cobertura de documentaçêo: quais módulos têm docs vs. nêo
+- Dependência de configuraçêo: quais arquivos de config afetam quais caminhos de código
 
 ### Tour Builder
 
-Incluir paradas de tour não-código:
-- Visão geral do README do projeto
-- Containerização via Dockerfile
+Incluir paradas de tour nêo-código:
+- Visêo geral do README do projeto
+- Containerizaçêo via Dockerfile
 - Schema de banco via migration SQL
-- Explicação do pipeline CI/CD
+- Explicaçêo do pipeline CI/CD
 
-## Visualização no Dashboard
+## Visualizaçêo no Dashboard
 
 ### Novos Estilos Visuais de Nó
 
@@ -233,8 +233,8 @@ Incluir paradas de tour não-código:
 
 ### Layout do Grafo
 
-1. Agrupamento por camada conforme categoria — nós não-código se agrupam separados dos nós de código
-2. Atualização da legenda com 8 novos tipos de nó
+1. Agrupamento por camada conforme categoria — nós nêo-código se agrupam separados dos nós de código
+2. Atualizaçêo da legenda com 8 novos tipos de nó
 3. Controles de filtro — checkboxes para mostrar/esconder cada categoria de arquivo
 
 ### Melhorias na Sidebar
@@ -249,7 +249,7 @@ Atualizações do painel NodeInfo por tipo de nó:
 - **Schema**: campos, tipos aninhados, consumidores
 - **Resource**: provider, tipo, dependências
 
-Painel ProjectOverview: adicionar quebra "File Types" (distribuição código vs. não-código).
+Painel ProjectOverview: adicionar quebra "File Types" (distribuiçêo código vs. nêo-código).
 
 ## Novas Dependências
 
@@ -257,12 +257,12 @@ Painel ProjectOverview: adicionar quebra "File Types" (distribuição código vs
 - `@iarna/toml` — parseamento TOML (~30KB)
 - `jsonc-parser` — JSON com comentários (~20KB)
 
-Sem adições de tree-sitter WASM. Todos os outros parsers são baseados em regex com zero dependências.
+Sem adições de tree-sitter WASM. Todos os outros parsers sêo baseados em regex com zero dependências.
 
 ## Compatibilidade Retroativa
 
-- Todos os novos campos de `StructuralAnalysis` são opcionais
+- Todos os novos campos de `StructuralAnalysis` sêo opcionais
 - `resolveImports` se torna opcional em `AnalyzerPlugin`
 - Entradas existentes de `LanguageConfig` inalteradas
-- Validação de esquema auto-corrige os novos aliases de tipo
-- Grafos de conhecimento existentes permanecem válidos (novos tipos são aditivos)
+- Validaçêo de esquema auto-corrige os novos aliases de tipo
+- Grafos de conhecimento existentes permanecem válidos (novos tipos sêo aditivos)

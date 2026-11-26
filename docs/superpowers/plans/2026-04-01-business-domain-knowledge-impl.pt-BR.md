@@ -1,12 +1,12 @@
-# Extração de Conhecimento de Domínio de Negócio — Plano de Implementação
+# Extraçêo de Conhecimento de Domínio de Negócio — Plano de Implementaçêo
 
-> 🇬🇧 Versão original em inglês: [2026-04-01-business-domain-knowledge-impl.md](./2026-04-01-business-domain-knowledge-impl.md)
+> 🇬🇧 Versêo original em inglês: [2026-04-01-business-domain-knowledge-impl.md](./2026-04-01-business-domain-knowledge-impl.md)
 
 > **Para workers agênticos:** SUB-SKILL OBRIGATÓRIA: Use superpowers:subagent-driven-development (recomendado) ou superpowers:executing-plans para implementar este plano tarefa por tarefa. Os passos usam sintaxe de checkbox (`- [ ]`) para tracking.
 
 **Objetivo:** Adicionar uma skill `/understand-domain` que extrai conhecimento de domínio de negócio de codebases e o renderiza como um grafo de fluxo horizontal interativo no dashboard.
 
-**Arquitetura:** Arquivo separado `domain-graph.json` usando schema `KnowledgeGraph` estendido (3 novos tipos de node, 4 novos tipos de edge, campo opcional `domainMeta`). Dois caminhos de análise: scan leve (sem grafo existente) ou derivação a partir de grafo existente. O dashboard mostra a domain view por padrão quando disponível, com pill toggle para alternar para a structural view.
+**Arquitetura:** Arquivo separado `domain-graph.json` usando schema `KnowledgeGraph` estendido (3 novos tipos de node, 4 novos tipos de edge, campo opcional `domainMeta`). Dois caminhos de análise: scan leve (sem grafo existente) ou derivaçêo a partir de grafo existente. O dashboard mostra a domain view por padrêo quando disponível, com pill toggle para alternar para a structural view.
 
 **Stack Técnica:** TypeScript, Zod, React Flow (dagre LR layout), Zustand, Vitest, web-tree-sitter
 
@@ -173,7 +173,7 @@ describe("domain graph types", () => {
 
 Rode: `cd understand-anything-plugin && pnpm --filter @understand-anything/core test -- --run src/__tests__/domain-types.test.ts`
 
-Esperado: FAIL — "domain" não é um valor válido do enum NodeType
+Esperado: FAIL — "domain" nêo é um valor válido do enum NodeType
 
 - [ ] **Passo 3: Adicionar domain/flow/step ao union NodeType**
 
@@ -248,7 +248,7 @@ Adicione aliases de domínio ao `NODE_TYPE_ALIASES` (após a linha 52):
   task: "step",
 ```
 
-Nota: Isso sobrescreve os mapeamentos existentes `workflow: "pipeline"` e `action: "pipeline"`. Como a extração de domínio é a feature mais recente e de maior prioridade, os aliases de domínio têm precedência. O prompt LLM para análise estrutural já usa `"pipeline"` diretamente.
+Nota: Isso sobrescreve os mapeamentos existentes `workflow: "pipeline"` e `action: "pipeline"`. Como a extraçêo de domínio é a feature mais recente e de maior prioridade, os aliases de domínio têm precedência. O prompt LLM para análise estrutural já usa `"pipeline"` diretamente.
 
 Adicione aliases de edge de domínio ao `EDGE_TYPE_ALIASES` (após a linha 81):
 
@@ -281,7 +281,7 @@ export const GraphNodeSchema = z.object({
 }).passthrough();
 ```
 
-O `.passthrough()` permite que `domainMeta` e outros campos extras sobrevivam à validação sem precisar defini-los no Zod (mantém o schema simples e compatível para o futuro).
+O `.passthrough()` permite que `domainMeta` e outros campos extras sobrevivam à validaçêo sem precisar defini-los no Zod (mantém o schema simples e compatível para o futuro).
 
 - [ ] **Passo 5: Rodar os testes para verificar que passam**
 
@@ -289,7 +289,7 @@ Rode: `cd understand-anything-plugin && pnpm --filter @understand-anything/core 
 
 Esperado: Todos os 7 testes PASS
 
-- [ ] **Passo 6: Rodar os testes existentes para verificar que não há regressões**
+- [ ] **Passo 6: Rodar os testes existentes para verificar que nêo há regressões**
 
 Rode: `cd understand-anything-plugin && pnpm --filter @understand-anything/core test -- --run`
 
@@ -386,11 +386,11 @@ describe("domain graph persistence", () => {
 
 Rode: `cd understand-anything-plugin && pnpm --filter @understand-anything/core test -- --run src/__tests__/domain-persistence.test.ts`
 
-Esperado: FAIL — `saveDomainGraph` não está exportado
+Esperado: FAIL — `saveDomainGraph` nêo está exportado
 
 - [ ] **Passo 3: Implementar saveDomainGraph e loadDomainGraph**
 
-Adicione a `understand-anything-plugin/packages/core/src/persistence/index.ts` (após a função `loadConfig`, antes do fim do arquivo):
+Adicione a `understand-anything-plugin/packages/core/src/persistence/index.ts` (após a funçêo `loadConfig`, antes do fim do arquivo):
 
 ```typescript
 const DOMAIN_GRAPH_FILE = "domain-graph.json";
@@ -461,7 +461,7 @@ git commit -m "feat(core): add saveDomainGraph/loadDomainGraph persistence funct
 **Arquivos:**
 - Modificar: `understand-anything-plugin/packages/core/src/analyzer/normalize-graph.ts`
 
-- [ ] **Passo 1: Escrever teste que falha para normalização de ID de domínio**
+- [ ] **Passo 1: Escrever teste que falha para normalizaçêo de ID de domínio**
 
 ```typescript
 // understand-anything-plugin/packages/core/src/__tests__/domain-normalize.test.ts
@@ -508,7 +508,7 @@ describe("domain node ID normalization", () => {
 
 Rode: `cd understand-anything-plugin && pnpm --filter @understand-anything/core test -- --run src/__tests__/domain-normalize.test.ts`
 
-Esperado: FAIL — "domain" não é um prefixo válido em `VALID_PREFIXES`
+Esperado: FAIL — "domain" nêo é um prefixo válido em `VALID_PREFIXES`
 
 - [ ] **Passo 3: Adicionar prefixos de domínio a normalize-graph.ts**
 
@@ -558,7 +558,7 @@ git commit -m "feat(core): add domain/flow/step prefixes to node ID normalizatio
 ## Tarefa 4: Buildar o Pacote Core e Verificar
 
 **Arquivos:**
-- Nenhum (verificação de build)
+- Nenhum (verificaçêo de build)
 
 - [ ] **Passo 1: Buildar o pacote core**
 
@@ -719,7 +719,7 @@ Adicione um `useEffect` para carregar `domain-graph.json` (após o useEffect de 
 
 - [ ] **Passo 2: Adicionar pill de toggle de view mode ao header**
 
-Na seção esquerda do header (após o PersonaSelector, em torno da linha 290), adicione o toggle pill. Mostre apenas quando ambos os grafos existem:
+Na seçêo esquerda do header (após o PersonaSelector, em torno da linha 290), adicione o toggle pill. Mostre apenas quando ambos os grafos existem:
 
 ```typescript
           {graph && domainGraph && (
@@ -1263,7 +1263,7 @@ Adicione o import no topo:
 import DomainGraphView from "./components/DomainGraphView";
 ```
 
-Substitua a seção da área do grafo (em torno das linhas 394-400) para renderizar condicionalmente:
+Substitua a seçêo da área do grafo (em torno das linhas 394-400) para renderizar condicionalmente:
 
 ```typescript
         {/* Graph area */}
@@ -1302,16 +1302,16 @@ git commit -m "feat(dashboard): add DomainGraphView with domain overview and det
 
 - [ ] **Passo 1: Adicionar seções cientes de domínio ao NodeInfo**
 
-Leia primeiro o NodeInfo.tsx existente, depois adicione a renderização específica de domínio. Após as seções de conexão existentes, adicione tratamento para os tipos de node domain/flow/step.
+Leia primeiro o NodeInfo.tsx existente, depois adicione a renderizaçêo específica de domínio. Após as seções de conexêo existentes, adicione tratamento para os tipos de node domain/flow/step.
 
 As mudanças-chave:
 1. Ler `viewMode` e `domainGraph` do store
 2. Quando `viewMode === "domain"`, buscar o node selecionado em `domainGraph` ao invés de `graph`
 3. Para nodes `domain`: mostrar entities, business rules, cross-domain interactions, lista de flows
 4. Para nodes `flow`: mostrar entry point, lista de steps em ordem
-5. Para nodes `step`: mostrar descrição, file path, link "View in code"
+5. Para nodes `step`: mostrar descriçêo, file path, link "View in code"
 
-Adicione uma função auxiliar acima do componente:
+Adicione uma funçêo auxiliar acima do componente:
 
 ```typescript
 function DomainNodeDetails({ node, graph }: { node: GraphNode; graph: KnowledgeGraph }) {
@@ -1434,7 +1434,7 @@ function DomainNodeDetails({ node, graph }: { node: GraphNode; graph: KnowledgeG
 }
 ```
 
-Depois no componente principal NodeInfo, adicione renderização ciente de domínio. Após obter o `node` do grafo, adicione lógica para também checar `domainGraph`:
+Depois no componente principal NodeInfo, adicione renderizaçêo ciente de domínio. Após obter o `node` do grafo, adicione lógica para também checar `domainGraph`:
 
 ```typescript
   const viewMode = useDashboardStore((s) => s.viewMode);
@@ -1444,7 +1444,7 @@ Depois no componente principal NodeInfo, adicione renderização ciente de domí
   const node = activeGraph?.nodes.find((n) => n.id === selectedNodeId);
 ```
 
-E após a seção de summary, adicione:
+E após a seçêo de summary, adicione:
 
 ```typescript
         {/* Domain-specific details */}
@@ -1509,7 +1509,7 @@ git commit -m "feat(dashboard): add domain node types to NODE_TYPE_TO_CATEGORY m
 **Arquivos:**
 - Create: `understand-anything-plugin/agents/domain-analyzer.md`
 
-- [ ] **Passo 1: Criar a definição do agente**
+- [ ] **Passo 1: Criar a definiçêo do agente**
 
 ```markdown
 ---
@@ -1718,18 +1718,18 @@ Leia `understand-anything-plugin/skills/understand-dashboard/SKILL.md` para ente
 
 O servidor do dashboard serve arquivos a partir de `.understand-anything/`. O arquivo do domain graph (`domain-graph.json`) precisa ser servido junto com `knowledge-graph.json` e `meta.json`.
 
-Atualize a skill para mencionar que `domain-graph.json` também deve ser servido se existir. A mudança exata depende de como o servidor é configurado na skill — tipicamente ele serve o diretório `.understand-anything/` inteiro, então `domain-graph.json` deve estar automaticamente disponível. Verifique que esse é o caso.
+Atualize a skill para mencionar que `domain-graph.json` também deve ser servido se existir. A mudança exata depende de como o servidor é configurado na skill — tipicamente ele serve o diretório `.understand-anything/` inteiro, entêo `domain-graph.json` deve estar automaticamente disponível. Verifique que esse é o caso.
 
 - [ ] **Passo 2: Commit (se mudanças forem necessárias)**
 
-Só faça commit se a skill precisou de atualização.
+Só faça commit se a skill precisou de atualizaçêo.
 
 ---
 
-## Tarefa 15: Verificação Completa de Build e Integração
+## Tarefa 15: Verificaçêo Completa de Build e Integraçêo
 
 **Arquivos:**
-- Nenhum (apenas verificação)
+- Nenhum (apenas verificaçêo)
 
 - [ ] **Passo 1: Buildar o pacote core**
 
@@ -1755,7 +1755,7 @@ Rode: `cd understand-anything-plugin && pnpm lint`
 
 Esperado: Sem erros (warnings aceitáveis)
 
-- [ ] **Passo 5: Commit final (se alguma correção de lint for necessária)**
+- [ ] **Passo 5: Commit final (se alguma correçêo de lint for necessária)**
 
 Corrija quaisquer issues de lint e faça commit.
 
@@ -1781,6 +1781,6 @@ Corrija quaisquer issues de lint e faça commit.
 - `understand-anything-plugin/packages/core/src/persistence/index.ts` — saveDomainGraph/loadDomainGraph
 - `understand-anything-plugin/packages/core/src/analyzer/normalize-graph.ts` — prefixos de ID de domínio
 - `understand-anything-plugin/packages/dashboard/src/store.ts` — viewMode, domainGraph, activeDomainId
-- `understand-anything-plugin/packages/dashboard/src/App.tsx` — loading do domain graph, view toggle, renderização condicional
+- `understand-anything-plugin/packages/dashboard/src/App.tsx` — loading do domain graph, view toggle, renderizaçêo condicional
 - `understand-anything-plugin/packages/dashboard/src/components/NodeInfo.tsx` — sidebar ciente de domínio
-- `understand-anything-plugin/packages/dashboard/src/components/GraphView.tsx` — atualização de NODE_TYPE_TO_CATEGORY
+- `understand-anything-plugin/packages/dashboard/src/components/GraphView.tsx` — atualizaçêo de NODE_TYPE_TO_CATEGORY

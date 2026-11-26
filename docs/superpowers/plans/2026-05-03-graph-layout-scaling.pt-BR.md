@@ -1,6 +1,6 @@
-# Plano de Implementação de Escalabilidade do Layout de Grafo
+# Plano de Implementaçêo de Escalabilidade do Layout de Grafo
 
-> 🇬🇧 Versão original em inglês: [2026-05-03-graph-layout-scaling.md](./2026-05-03-graph-layout-scaling.md)
+> 🇬🇧 Versêo original em inglês: [2026-05-03-graph-layout-scaling.md](./2026-05-03-graph-layout-scaling.md)
 
 > **Para workers agênticos:** SUB-SKILL OBRIGATÓRIA: Use superpowers:subagent-driven-development (recomendado) ou superpowers:executing-plans para implementar este plano tarefa a tarefa. Os passos usam sintaxe de checkbox (`- [ ]`) para acompanhamento.
 
@@ -1085,7 +1085,7 @@ git commit -m "feat(dashboard): elk-layout repair pipeline + applyElkLayout"
 
 ---
 
-## Tarefa 6: Teste de integração de applyElkLayout
+## Tarefa 6: Teste de integraçêo de applyElkLayout
 
 **Arquivos:**
 - Modificar: `understand-anything-plugin/packages/dashboard/src/utils/__tests__/elk-layout.test.ts`
@@ -1739,7 +1739,7 @@ git commit -m "feat(dashboard): layer-detail Stage 1 — containers + ELK"
 
 ---
 
-## Tarefa 12: Layer-detail Estágio 2 + expansão de edge
+## Tarefa 12: Layer-detail Estágio 2 + expansêo de edge
 
 **Arquivos:**
 - Modificar: `understand-anything-plugin/packages/dashboard/src/components/GraphView.tsx`
@@ -2272,7 +2272,7 @@ git commit -m "test(dashboard): layout perf benchmark script"
 
 ---
 
-## Auto-Revisão
+## Auto-Revisêo
 
 **Spec coverage check** (compared against `docs/superpowers/specs/2026-05-03-graph-layout-scaling-design.md`):
 
@@ -2296,7 +2296,7 @@ git commit -m "test(dashboard): layout perf benchmark script"
 
 ---
 
-## Handoff de Execução
+## Handoff de Execuçêo
 
 Plan complete and saved to `docs/superpowers/plans/2026-05-03-graph-layout-scaling.md`. Two execution options:
 

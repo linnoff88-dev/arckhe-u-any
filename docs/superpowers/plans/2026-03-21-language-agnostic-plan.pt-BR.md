@@ -1,12 +1,12 @@
-# Plano de Implementação de Suporte Agnóstico a Linguagens
+# Plano de Implementaçêo de Suporte Agnóstico a Linguagens
 
-> 🇬🇧 Versão original em inglês: [2026-03-21-language-agnostic-plan.md](./2026-03-21-language-agnostic-plan.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-21-language-agnostic-plan.md](./2026-03-21-language-agnostic-plan.md)
 
 > **Para o Claude:** SUB-SKILL OBRIGATÓRIA: Use superpowers:executing-plans para implementar este plano tarefa a tarefa.
 
-**Objetivo:** Tornar o Understand-Anything agnóstico a linguagens introduzindo um framework de linguagens dirigido por configuração, substituindo o plugin tree-sitter restrito a TS e criando prompts cientes de linguagem para 12 linguagens.
+**Objetivo:** Tornar o Understand-Anything agnóstico a linguagens introduzindo um framework de linguagens dirigido por configuraçêo, substituindo o plugin tree-sitter restrito a TS e criando prompts cientes de linguagem para 12 linguagens.
 
-**Arquitetura:** Abordagem híbrida orientada por configuração — cada linguagem é definida por um objeto `LanguageConfig` (mapeamentos de nós tree-sitter, conceitos, extensões) mais um arquivo markdown de snippet de prompt. Um único `GenericTreeSitterPlugin` substitui o plugin restrito a TS hardcoded, dirigido pela configuração que casar com a extensão do arquivo.
+**Arquitetura:** Abordagem híbrida orientada por configuraçêo — cada linguagem é definida por um objeto `LanguageConfig` (mapeamentos de nós tree-sitter, conceitos, extensões) mais um arquivo markdown de snippet de prompt. Um único `GenericTreeSitterPlugin` substitui o plugin restrito a TS hardcoded, dirigido pela configuraçêo que casar com a extensêo do arquivo.
 
 **Stack Técnico:** TypeScript, web-tree-sitter (WASM), Zod v4, Vitest
 
@@ -81,9 +81,9 @@ describe("LanguageConfigSchema", () => {
 **Passo 2: Rodar o teste para confirmar que falha**
 
 Rodar: `cd understand-anything-plugin && pnpm --filter @understand-anything/core test -- --run src/languages/__tests__/types.test.ts`
-Esperado: FAIL — módulo `../types.js` não encontrado
+Esperado: FAIL — módulo `../types.js` nêo encontrado
 
-**Passo 3: Escrever implementação mínima**
+**Passo 3: Escrever implementaçêo mínima**
 
 Criar: `understand-anything-plugin/packages/core/src/languages/types.ts`
 
@@ -224,9 +224,9 @@ describe("LanguageRegistry", () => {
 **Passo 2: Rodar o teste para confirmar que falha**
 
 Rodar: `cd understand-anything-plugin && pnpm --filter @understand-anything/core test -- --run src/languages/__tests__/registry.test.ts`
-Esperado: FAIL — módulo `../registry.js` não encontrado
+Esperado: FAIL — módulo `../registry.js` nêo encontrado
 
-**Passo 3: Escrever implementação mínima**
+**Passo 3: Escrever implementaçêo mínima**
 
 ```typescript
 // understand-anything-plugin/packages/core/src/languages/registry.ts
@@ -347,11 +347,11 @@ describe("builtin language configs", () => {
 **Passo 2: Rodar o teste para confirmar que falha**
 
 Rodar: `cd understand-anything-plugin && pnpm --filter @understand-anything/core test -- --run src/languages/__tests__/configs.test.ts`
-Esperado: FAIL — módulo não encontrado
+Esperado: FAIL — módulo nêo encontrado
 
-**Passo 3: Escrever todos os arquivos de configuração**
+**Passo 3: Escrever todos os arquivos de configuraçêo**
 
-Cada arquivo de configuração exporta um `LanguageConfig`. Aqui estão os principais (os demais seguem o mesmo padrão):
+Cada arquivo de configuraçêo exporta um `LanguageConfig`. Aqui estêo os principais (os demais seguem o mesmo padrêo):
 
 **typescript.ts:**
 ```typescript
@@ -797,7 +797,7 @@ cd understand-anything-plugin && pnpm --filter @understand-anything/core add \
   tree-sitter-kotlin
 ```
 
-Observação: Alguns pacotes de gramática podem não distribuir arquivos `.wasm`. Para esses, precisamos verificar disponibilidade e potencialmente compilar a partir do código-fonte ou usar a CLI `tree-sitter` para gerar WASM. Verifique cada pacote depois da instalação:
+Observaçêo: Alguns pacotes de gramática podem nêo distribuir arquivos `.wasm`. Para esses, precisamos verificar disponibilidade e potencialmente compilar a partir do código-fonte ou usar a CLI `tree-sitter` para gerar WASM. Verifique cada pacote depois da instalaçêo:
 
 ```bash
 cd understand-anything-plugin && for lang in python go java rust cpp c-sharp ruby php swift kotlin; do
@@ -806,7 +806,7 @@ cd understand-anything-plugin && for lang in python go java rust cpp c-sharp rub
 done
 ```
 
-Para pacotes sem WASM pré-compilado, use `tree-sitter build --wasm` para compilá-los, ou encontre pacotes npm alternativos que distribuam builds WASM. Documente quais pacotes precisaram de geração manual de WASM.
+Para pacotes sem WASM pré-compilado, use `tree-sitter build --wasm` para compilá-los, ou encontre pacotes npm alternativos que distribuam builds WASM. Documente quais pacotes precisaram de geraçêo manual de WASM.
 
 **Passo 2: Verificar que o build continua passando**
 
@@ -947,32 +947,32 @@ from typing import Optional
 **Passo 2: Rodar o teste para confirmar que falha**
 
 Rodar: `cd understand-anything-plugin && pnpm --filter @understand-anything/core test -- --run src/plugins/generic-tree-sitter-plugin.test.ts`
-Esperado: FAIL — módulo não encontrado
+Esperado: FAIL — módulo nêo encontrado
 
-**Passo 3: Escrever implementação**
+**Passo 3: Escrever implementaçêo**
 
 Criar `understand-anything-plugin/packages/core/src/plugins/generic-tree-sitter-plugin.ts`:
 
 Esse arquivo implementa um `GenericTreeSitterPlugin` que:
 - Recebe um `LanguageRegistry` no construtor
 - Em `init()`, carrega lazily as gramáticas WASM por linguagem usando `require.resolve(config.treeSitter.grammarPackage + '/' + config.treeSitter.wasmFile)`
-- Em `analyzeFile()`, determina a linguagem a partir da extensão via registry e então percorre a AST usando `config.treeSitter.nodeTypes` para extrair funções/classes/imports/exports
-- Reutiliza os mesmos padrões auxiliares do antigo `TreeSitterPlugin` (traverse, getStringValue, extractParams) mas dirigidos por configuração em vez de tipos de nó hardcoded
+- Em `analyzeFile()`, determina a linguagem a partir da extensêo via registry e entêo percorre a AST usando `config.treeSitter.nodeTypes` para extrair funções/classes/imports/exports
+- Reutiliza os mesmos padrões auxiliares do antigo `TreeSitterPlugin` (traverse, getStringValue, extractParams) mas dirigidos por configuraçêo em vez de tipos de nó hardcoded
 - Implementa `resolveImports()` e `extractCallGraph()` com a mesma lógica de antes
 
-Notas-chave de implementação:
+Notas-chave de implementaçêo:
 - O método `extractNodes()` percorre a AST e casa nós contra `nodeTypes.function`, `nodeTypes.class`, etc.
 - Para TS/JS, também trata `lexical_declaration`/`variable_declaration` com valores de arrow function (comportamento existente)
-- Para extração de imports, usa a mesma abordagem `getStringValue()` mas casa contra tipos de nó de import específicos da linguagem
-- Para extração de exports, mesmo padrão de casamento contra tipos de nó de export
-- Carregamento de gramática: tente `require.resolve()` primeiro; se WASM não for encontrado, loga warning e pula essa linguagem
+- Para extraçêo de imports, usa a mesma abordagem `getStringValue()` mas casa contra tipos de nó de import específicos da linguagem
+- Para extraçêo de exports, mesmo padrêo de casamento contra tipos de nó de export
+- Carregamento de gramática: tente `require.resolve()` primeiro; se WASM nêo for encontrado, loga warning e pula essa linguagem
 
 **Passo 4: Rodar o teste para confirmar que passa**
 
 Rodar: `cd understand-anything-plugin && pnpm --filter @understand-anything/core test -- --run src/plugins/generic-tree-sitter-plugin.test.ts`
 Esperado: PASS
 
-**Passo 5: Rodar os testes antigos de TreeSitterPlugin com o novo plugin para verificar paridade de migração**
+**Passo 5: Rodar os testes antigos de TreeSitterPlugin com o novo plugin para verificar paridade de migraçêo**
 
 Garanta que os casos de teste existentes em `tree-sitter-plugin.test.ts` também passem com `GenericTreeSitterPlugin` + configs TS/JS.
 
@@ -993,7 +993,7 @@ git commit -m "feat: add GenericTreeSitterPlugin driven by LanguageConfig"
 
 **Passo 1: Adicionar casos de teste para Go, Java, Rust, C++, C#, Ruby, PHP, Swift, Kotlin**
 
-Para cada linguagem, adicione um bloco `describe` com uma pequena fixture testando extração de função/classe/import. Exemplo para Go:
+Para cada linguagem, adicione um bloco `describe` com uma pequena fixture testando extraçêo de funçêo/classe/import. Exemplo para Go:
 
 ```typescript
 describe("Go", () => {
@@ -1037,9 +1037,9 @@ import (
 });
 ```
 
-Siga o mesmo padrão para cada linguagem com sintaxe apropriada. Cada teste usa ~10-20 linhas de código idiomático.
+Siga o mesmo padrêo para cada linguagem com sintaxe apropriada. Cada teste usa ~10-20 linhas de código idiomático.
 
-Observação: Algumas gramáticas WASM podem não estar disponíveis. Para linguagens em que a gramática falhar ao carregar, registre-as no `beforeAll` com try/catch e use `it.skipIf()` para pular condicionalmente os testes. Isso previne falhas de CI enquanto ainda testa o que está disponível.
+Observaçêo: Algumas gramáticas WASM podem nêo estar disponíveis. Para linguagens em que a gramática falhar ao carregar, registre-as no `beforeAll` com try/catch e use `it.skipIf()` para pular condicionalmente os testes. Isso previne falhas de CI enquanto ainda testa o que está disponível.
 
 **Passo 2: Rodar todos os testes**
 
@@ -1060,7 +1060,7 @@ git commit -m "test: add per-language fixtures for GenericTreeSitterPlugin"
 **Arquivos:**
 - Modificar: `understand-anything-plugin/packages/core/src/index.ts`
 - Modificar: `understand-anything-plugin/packages/core/src/plugins/registry.ts`
-- Deletar: `understand-anything-plugin/packages/core/src/plugins/tree-sitter-plugin.ts` (após confirmar que não há outros imports)
+- Deletar: `understand-anything-plugin/packages/core/src/plugins/tree-sitter-plugin.ts` (após confirmar que nêo há outros imports)
 
 **Passo 1: Atualizar exports do core**
 
@@ -1080,7 +1080,7 @@ Procure por todos os imports de `TreeSitterPlugin` no codebase:
 
 Rodar: `grep -r "TreeSitterPlugin" understand-anything-plugin/`
 
-Atualize cada import para usar `GenericTreeSitterPlugin`. Os principais consumidores são:
+Atualize cada import para usar `GenericTreeSitterPlugin`. Os principais consumidores sêo:
 - `understand-anything-plugin/packages/core/src/index.ts`
 - Quaisquer arquivos de código de skill que instanciem o plugin
 
@@ -1133,14 +1133,14 @@ it("detects concepts from language config", () => {
 
 Rodar: `cd understand-anything-plugin && pnpm --filter @understand-anything/core test -- --run src/__tests__/language-lesson.test.ts`
 
-**Passo 3: Atualizar implementação**
+**Passo 3: Atualizar implementaçêo**
 
 Em `language-lesson.ts`:
 - Importar `LanguageRegistry` e `builtinConfigs`
 - Criar uma instância de registry no nível do módulo, pré-populada com builtinConfigs
 - Substituir lookups de `LANGUAGE_DISPLAY_NAMES` por `registry.getById(lang)?.displayName`
 - Substituir o `CONCEPT_PATTERNS` hardcoded por `registry.getById(lang)?.concepts` mesclado com padrões genéricos (async/await, error handling, etc. que se aplicam a todas as linguagens)
-- Manter a lógica de detecção (buscar em tags/summary por palavras-chave de conceito) mas tirar as palavras-chave da configuração
+- Manter a lógica de detecçêo (buscar em tags/summary por palavras-chave de conceito) mas tirar as palavras-chave da configuraçêo
 
 **Passo 4: Rodar o teste para confirmar que passa**
 
@@ -1203,9 +1203,9 @@ Cada arquivo segue essa estrutura:
 
 Cada arquivo deve ter 30-50 linhas, com conteúdo específico ao ecossistema e idiomas daquela linguagem. O conteúdo deve ajudar o LLM a produzir melhor análise através do entendimento de padrões específicos da linguagem.
 
-**Passo 2: Verificar que os arquivos estão bem formados**
+**Passo 2: Verificar que os arquivos estêo bem formados**
 
-Revisar manualmente cada arquivo quanto a precisão e completude.
+Revisar manualmente cada arquivo quanto a precisêo e completude.
 
 **Passo 3: Commit**
 
@@ -1216,7 +1216,7 @@ git commit -m "feat: add language-specific prompt snippet files for 12 languages
 
 ---
 
-### Tarefa 11: Tornar prompts base neutros de linguagem com pontos de injeção
+### Tarefa 11: Tornar prompts base neutros de linguagem com pontos de injeçêo
 
 **Arquivos:**
 - Modificar: `understand-anything-plugin/skills/understand/file-analyzer-prompt.md`
@@ -1227,7 +1227,7 @@ git commit -m "feat: add language-specific prompt snippet files for 12 languages
 
 - Remover todos os exemplos específicos de TypeScript (ex.: "TypeScript barrel file", referências a type guard)
 - Substituir listas de conceitos específicas de TS por placeholders genéricos
-- Adicionar ponto de injeção:
+- Adicionar ponto de injeçêo:
 
 ```markdown
 ## Language-Specific Guidance
@@ -1235,12 +1235,12 @@ git commit -m "feat: add language-specific prompt snippet files for 12 languages
 {{LANGUAGE_CONTEXT}}
 ```
 
-- Tornar a detecção de scripts da Fase 1 ciente da linguagem (não apenas "Node.js recommended")
+- Tornar a detecçêo de scripts da Fase 1 ciente da linguagem (nêo apenas "Node.js recommended")
 
 **Passo 2: Atualizar tour-builder-prompt.md**
 
-- Remover exemplos de lição de linguagem específicos de TS ("generics, discriminated unions, utility types")
-- Substituir por ponto de injeção para linguagens detectadas:
+- Remover exemplos de liçêo de linguagem específicos de TS ("generics, discriminated unions, utility types")
+- Substituir por ponto de injeçêo para linguagens detectadas:
 
 ```markdown
 ## Language-Specific Concepts
@@ -1250,9 +1250,9 @@ git commit -m "feat: add language-specific prompt snippet files for 12 languages
 
 **Passo 3: Atualizar project-scanner-prompt.md**
 
-- Remover verificação hardcoded de `tsconfig.json`
-- Tornar a detecção de frameworks genérica (injetar listas de frameworks das linguagens detectadas)
-- Adicionar seção multi-linguagem:
+- Remover verificaçêo hardcoded de `tsconfig.json`
+- Tornar a detecçêo de frameworks genérica (injetar listas de frameworks das linguagens detectadas)
+- Adicionar seçêo multi-linguagem:
 
 ```markdown
 ## Detected Languages
@@ -1260,9 +1260,9 @@ git commit -m "feat: add language-specific prompt snippet files for 12 languages
 {{LANGUAGE_CONTEXT}}
 ```
 
-**Passo 4: Verificar que prompts estão bem formados**
+**Passo 4: Verificar que prompts estêo bem formados**
 
-Leia cada prompt modificado para garantir que está coerente com os pontos de injeção e sem viés residual de TS.
+Leia cada prompt modificado para garantir que está coerente com os pontos de injeçêo e sem viés residual de TS.
 
 **Passo 5: Commit**
 
@@ -1275,12 +1275,12 @@ git commit -m "refactor: make agent prompts language-neutral with injection poin
 
 ---
 
-### Tarefa 12: Implementar lógica de injeção de prompts no código da skill
+### Tarefa 12: Implementar lógica de injeçêo de prompts no código da skill
 
 **Arquivos:**
-- Modificar: `understand-anything-plugin/skills/understand/SKILL.md` (a definição da skill `/understand`)
+- Modificar: `understand-anything-plugin/skills/understand/SKILL.md` (a definiçêo da skill `/understand`)
 
-**Passo 1: Atualizar a orquestração da skill**
+**Passo 1: Atualizar a orquestraçêo da skill**
 
 Na skill `/understand` (SKILL.md), atualizar a lógica de despacho de agentes:
 
@@ -1290,7 +1290,7 @@ Na skill `/understand` (SKILL.md), atualizar a lógica de despacho de agentes:
 - **Fase 5 (Tour Builder):** Injetar conteúdo `.md` de todas as linguagens detectadas no placeholder `{{LANGUAGE_CONTEXT}}`
 - **Fase 1 (Project Scanner):** Injetar conteúdo `.md` de todas as linguagens detectadas
 
-A lógica de injeção:
+A lógica de injeçêo:
 1. Mapear extensões de arquivo para IDs de linguagem (reutilizar `LanguageRegistry.getByExtension()`)
 2. Ler o arquivo `languages/<id>.md` correspondente
 3. Substituir `{{LANGUAGE_CONTEXT}}` no prompt base pelo conteúdo do arquivo
@@ -1299,7 +1299,7 @@ Para projetos multi-linguagem, concatenar todos os arquivos de linguagens detect
 
 **Passo 2: Verificar lendo o SKILL.md modificado**
 
-Garantir que o fluxo de orquestração inclui detecção de linguagem e passos de injeção de prompt.
+Garantir que o fluxo de orquestraçêo inclui detecçêo de linguagem e passos de injeçêo de prompt.
 
 **Passo 3: Commit**
 
@@ -1321,7 +1321,7 @@ Se o antigo `tree-sitter-plugin.test.ts` ainda existir:
 - Ou atualize-o para importar `GenericTreeSitterPlugin` e instanciar com um `LanguageRegistry` contendo configs TS/JS
 - Ou delete-o se todos os seus casos de teste estiverem cobertos em `generic-tree-sitter-plugin.test.ts`
 
-Prefira deletar para evitar duplicação.
+Prefira deletar para evitar duplicaçêo.
 
 **Passo 2: Rodar suite completa de testes**
 
@@ -1337,7 +1337,7 @@ git commit -m "test: migrate old tree-sitter-plugin tests to generic plugin"
 
 ---
 
-### Tarefa 14: Verificação de build e linter
+### Tarefa 14: Verificaçêo de build e linter
 
 **Passo 1: Buildar core**
 
@@ -1352,7 +1352,7 @@ Esperado: PASS
 **Passo 3: Buildar dashboard**
 
 Rodar: `cd understand-anything-plugin && pnpm --filter @understand-anything/dashboard build`
-Esperado: PASS (o dashboard não importa módulos de linguagem diretamente)
+Esperado: PASS (o dashboard nêo importa módulos de linguagem diretamente)
 
 **Passo 4: Rodar linter**
 
@@ -1373,7 +1373,7 @@ git commit -m "fix: resolve build and lint issues from language-agnostic refacto
 
 ---
 
-### Tarefa 15: Atualizar CLAUDE.md e documentação
+### Tarefa 15: Atualizar CLAUDE.md e documentaçêo
 
 **Arquivos:**
 - Modificar: `CLAUDE.md`
@@ -1381,9 +1381,9 @@ git commit -m "fix: resolve build and lint issues from language-agnostic refacto
 
 **Passo 1: Atualizar CLAUDE.md**
 
-Adicionar à seção de Arquitetura:
+Adicionar à seçêo de Arquitetura:
 - Mencionar os diretórios `languages/` (tanto em core quanto em skills)
-- Documentar como adicionar uma nova linguagem (criar configuração + snippet de prompt)
+- Documentar como adicionar uma nova linguagem (criar configuraçêo + snippet de prompt)
 - Listar linguagens suportadas
 
 **Passo 2: Commit**

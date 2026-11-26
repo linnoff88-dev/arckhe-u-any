@@ -1,15 +1,15 @@
 # Design: Robustez do Dashboard — Carregamento Permissivo do Grafo
 
-> 🇬🇧 Versão original em inglês: [2026-03-25-dashboard-robustness-plan.md](./2026-03-25-dashboard-robustness-plan.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-25-dashboard-robustness-plan.md](./2026-03-25-dashboard-robustness-plan.md)
 
 ## Problema
 
-Quando o agente LLM produz um `knowledge-graph.json` que desvia do schema Zod estrito, o dashboard exibe uma tela em branco com paths de erro Zod crípticos. Os usuários não sabem se é bug de sistema ou problema de geração do agente, e o único recurso é rodar `/understand` do zero.
+Quando o agente LLM produz um `knowledge-graph.json` que desvia do schema Zod estrito, o dashboard exibe uma tela em branco com paths de erro Zod crípticos. Os usuários nêo sabem se é bug de sistema ou problema de geraçêo do agente, e o único recurso é rodar `/understand` do zero.
 
 ## Objetivos
 
 1. **Maximizar o que o usuário pode ver** — carregar nodes/edges válidos mesmo que alguns estejam quebrados
-2. **Comunicar claramente problemas de geração** — avisos âmbar (não erros vermelhos) com mensagens prontas para copiar e colar
+2. **Comunicar claramente problemas de geraçêo** — avisos âmbar (nêo erros vermelhos) com mensagens prontas para copiar e colar
 3. **Capacitar correções pontuais** — usuários podem copiar o relatório de issues e pedir ao agente para corrigir problemas específicos em vez de rodar tudo de novo
 
 ## Design
@@ -22,23 +22,23 @@ Raw JSON → Sanitize (Tier 1) → Normalize + Auto-fix (Tier 2) → Validate pe
 
 ### Tier 1: Sanitizar Silenciosamente
 
-Manias comuns de LLM que são puro ruído — corrigir sem reportar.
+Manias comuns de LLM que sêo puro ruído — corrigir sem reportar.
 
-| Issue | Correção |
+| Issue | Correçêo |
 |-------|----------|
 | `null` em campos opcionais (`filePath`, `lineRange`, `description`, `languageNotes`) | Converter para `undefined` |
 | Strings de enum com case misto (`"Forward"`, `"SIMPLE"`) | Lowercase antes de casar |
 
-### Tier 2: Auto-correção Com Aviso Informativo
+### Tier 2: Auto-correçêo Com Aviso Informativo
 
 Problemas recuperáveis — aplicar defaults sensatos, rastrear como issues `auto-corrected`.
 
 | Issue | Default | Notas |
 |-------|---------|-------|
-| `complexity` ausente | `"moderate"` | Omissão mais comum do LLM |
+| `complexity` ausente | `"moderate"` | Omissêo mais comum do LLM |
 | `tags` ausente | `[]` | Vazio é válido |
 | `weight` ausente | `0.5` | Meio do range 0–1 |
-| `weight` como string | Coerção para number | ex.: `"0.8"` → `0.8` |
+| `weight` como string | Coerçêo para number | ex.: `"0.8"` → `0.8` |
 | `direction` ausente | `"forward"` | Default seguro |
 | `summary` ausente | Usar `name` do node | Melhor que vazio |
 | `tour: null` / `layers: null` | `[]` | Null vs array vazio |
@@ -50,26 +50,26 @@ Problemas recuperáveis — aplicar defaults sensatos, rastrear como issues `aut
 
 ### Tier 3: Descartar Com Aviso
 
-Não dá pra adivinhar com segurança — remover o item, rastrear como issue `dropped`.
+Nêo dá pra adivinhar com segurança — remover o item, rastrear como issue `dropped`.
 
-| Issue | Ação |
+| Issue | Açêo |
 |-------|------|
 | Edge referencia ID de node inexistente | Descartar edge |
 | Node sem `id` | Descartar node |
 | Node sem `name` | Descartar node |
 | Edge sem `source` ou `target` | Descartar edge |
 | Valor de `type` irreconhecível (fora da lista canônica ou de aliases) | Descartar item |
-| `weight` não coercível para number | Descartar edge |
+| `weight` nêo coercível para number | Descartar edge |
 
 ### Tier 4: Fatal
 
 Grafo irrecuperável — mostrar banner vermelho de erro.
 
-| Condição | Mensagem |
+| Condiçêo | Mensagem |
 |----------|----------|
 | 0 nodes válidos após filtragem | "No valid nodes found in knowledge graph" |
 | Metadados de `project` totalmente ausentes | "Missing project metadata" |
-| Input não é objeto / não é JSON válido | "Invalid input format" |
+| Input nêo é objeto / nêo é JSON válido | "Invalid input format" |
 
 ### Tipo de Retorno
 
@@ -95,10 +95,10 @@ interface ValidationResult {
 
 **Design visual:**
 - **Tema âmbar/dourado** — `bg-amber-900/20`, `border-amber-700`, `text-amber-200`
-- Combina com a estética de accent dourado do dashboard; sinaliza "problema de qualidade na geração", não "crash de sistema"
-- **Colapsado por padrão** — linha de resumo: "Knowledge graph loaded with 5 auto-corrections and 2 dropped items"
+- Combina com a estética de accent dourado do dashboard; sinaliza "problema de qualidade na geraçêo", nêo "crash de sistema"
+- **Colapsado por padrêo** — linha de resumo: "Knowledge graph loaded with 5 auto-corrections and 2 dropped items"
 - **Expansível** — clicar revela a lista de issues categorizada
-- **Botão de copiar** — um clique copia o relatório completo de issues pré-formatado
+- **Botêo de copiar** — um clique copia o relatório completo de issues pré-formatado
 - **Rodapé acionável** — orienta o usuário a copiar as issues e pedir ao agente para corrigir
 
 **Formato de saída para copiar/colar:**
@@ -116,7 +116,7 @@ You can ask your agent to fix these specific issues in the knowledge-graph.json 
 
 **Erros fatais** continuam vermelhos (`bg-red-900/30`) com mensagem: "Knowledge graph is unsalvageable: [reason]. Please re-run `/understand` to generate a new one."
 
-**O banner vermelho existente** para erros de rede/parse JSON permanece como está (esses SÃO problemas de sistema/infra).
+**O banner vermelho existente** para erros de rede/parse JSON permanece como está (esses SêO problemas de sistema/infra).
 
 ### Mudanças em `App.tsx`
 
@@ -130,10 +130,10 @@ Tudo em `packages/core/src/__tests__/schema.test.ts`:
 
 - **Tier 1:** campos opcionais `null` viram `undefined` silenciosamente
 - **Tier 2:** `complexity`/`tags`/`weight`/`direction`/`summary` ausentes recebem defaults; issues rastreadas
-- **Tier 2:** `weight` string é coercido; aliases de complexity/direction são mapeados
-- **Tier 3:** referências de edge pendentes são descartadas; nodes sem `id` descartados; issues registradas
+- **Tier 2:** `weight` string é coercido; aliases de complexity/direction sêo mapeados
+- **Tier 3:** referências de edge pendentes sêo descartadas; nodes sem `id` descartados; issues registradas
 - **Tier 4:** grafo vazio após filtragem → fatal; `project` ausente → fatal
-- **Integração:** grafo com mix de nodes bons/ruins → carrega com count correto e lista correta de issues
+- **Integraçêo:** grafo com mix de nodes bons/ruins → carrega com count correto e lista correta de issues
 
 ### Arquivos Modificados
 
@@ -144,7 +144,7 @@ Tudo em `packages/core/src/__tests__/schema.test.ts`:
 | `packages/dashboard/src/App.tsx` | Conectar issues ao `WarningBanner` |
 | `packages/core/src/__tests__/schema.test.ts` | Testes para todas as tiers |
 
-### Arquivos NÃO Modificados
+### Arquivos NêO Modificados
 
 - Prompts dos agentes (podem ser apertados depois como esforço separado)
 - Lógica do `GraphView` / store (já tratam objetos `KnowledgeGraph` válidos)

@@ -1,6 +1,6 @@
 # Understand Anything — Design da Homepage do Projeto
 
-> 🇬🇧 Versão original em inglês: [2026-03-15-homepage-design.md](./2026-03-15-homepage-design.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-15-homepage-design.md](./2026-03-15-homepage-design.md)
 
 **Data**: 2026-03-15
 **Objetivo**: Atrair novos usuários para o plugin Understand Anything do Claude Code
@@ -23,12 +23,12 @@
 ## Estrutura da Página (ordem de scroll)
 
 ### 1. Nav Bar
-Nav flutuante minimalista. Logo/wordmark à esquerda, botão de star do GitHub + CTA "Get Started" à direita. Transparente, fica sólida ao rolar.
+Nav flutuante minimalista. Logo/wordmark à esquerda, botêo de star do GitHub + CTA "Get Started" à direita. Transparente, fica sólida ao rolar.
 
 ### 2. Hero (viewport inteira)
 - Headline: **"Understand Any Codebase"**
 - Sub-headline: "Turn 200,000 lines of code into an interactive knowledge graph you can explore, search, and learn from — powered by multi-agent AI analysis."
-- CTA: "Get Started" (botão dourado, rola até a seção de install)
+- CTA: "Get Started" (botêo dourado, rola até a seçêo de install)
 - Secundário: "View on GitHub" (link de texto)
 - Fundo: `hero.jpg` com overlay gradiente escuro
 
@@ -38,12 +38,12 @@ Nav flutuante minimalista. Logo/wordmark à esquerda, botão de star do GitHub +
 - Fade-in ao rolar
 
 ### 4. Cards de Features (3 colunas)
-Animação de fade-in escalonada:
+Animaçêo de fade-in escalonada:
 1. **Interactive Knowledge Graph** — "Visualize files, functions, and dependencies as an explorable graph with smart layout."
 2. **Plain-English Summaries** — "Every node explained in language anyone can understand — from junior devs to product managers."
 3. **Guided Tours** — "AI-generated walkthroughs that teach you the codebase step by step."
 
-### 5. CTA de Instalação
+### 5. CTA de Instalaçêo
 - Headline: "Get started in 30 seconds"
 - Bloco de código:
   ```
@@ -80,6 +80,6 @@ Animação de fade-in escalonada:
 - Brilho dourado no frame do screenshot do dashboard (`box-shadow` com dourado em baixa opacidade)
 - Overlay sutil de textura de ruído (SVG, batendo com o dashboard)
 - Animações de fade+slide-up disparadas por scroll (CSS `@keyframes` + `IntersectionObserver`)
-- Botão CTA: fundo dourado com pulso de brilho no hover
+- Botêo CTA: fundo dourado com pulso de brilho no hover
 - Cards: glass-morphism com `backdrop-filter: blur`
 - Responsivo: 768px (tablet), 480px (mobile)

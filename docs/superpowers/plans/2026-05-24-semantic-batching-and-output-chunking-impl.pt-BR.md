@@ -1,8 +1,8 @@
-# Plano de Implementação de Batching Semântico e Output Chunking
+# Plano de Implementaçêo de Batching Semântico e Output Chunking
 
-> 🇬🇧 Versão original em inglês: [2026-05-24-semantic-batching-and-output-chunking-impl.md](./2026-05-24-semantic-batching-and-output-chunking-impl.md)
+> 🇬🇧 Versêo original em inglês: [2026-05-24-semantic-batching-and-output-chunking-impl.md](./2026-05-24-semantic-batching-and-output-chunking-impl.md)
 
-> **Para workers agênticos:** SUB-SKILL OBRIGATÓRIA: Use superpowers:subagent-driven-development (recomendado) ou superpowers:executing-plans para implementar este plano tarefa a tarefa. Os passos usam sintaxe de checkbox (`- [ ]`) para acompanhamento. **Todos os subagents despachados devem usar `model="opus"`** (convenção do projeto).
+> **Para workers agênticos:** SUB-SKILL OBRIGATÓRIA: Use superpowers:subagent-driven-development (recomendado) ou superpowers:executing-plans para implementar este plano tarefa a tarefa. Os passos usam sintaxe de checkbox (`- [ ]`) para acompanhamento. **Todos os subagents despachados devem usar `model="opus"`** (convençêo do projeto).
 
 **Objetivo:** Substituir o batching baseado em contagem do file-analyzer por batching semântico Louvain (Fase 1.5), e adicionar output chunking defensivo no file-analyzer (60 nodes / 120 edges por parte), para que `/understand` pare de bater nos caps de saída do Bedrock OPUS e produza melhor cobertura de edges semânticos cross-batch. Um PR.
 
@@ -562,7 +562,7 @@ git commit -m "feat(compute-batches): split communities > 35 with visible warnin
 
 ---
 
-## Tarefa 5: Extração de exports via TreeSitterPlugin
+## Tarefa 5: Extraçêo de exports via TreeSitterPlugin
 
 **Arquivos:**
 - Modificar: `understand-anything-plugin/skills/understand/compute-batches.mjs`
@@ -742,7 +742,7 @@ git commit -m "feat(compute-batches): extract top-level exports via TreeSitter, 
 
 ---
 
-## Tarefa 6: Batching de não-código (Grupos A-E)
+## Tarefa 6: Batching de nêo-código (Grupos A-E)
 
 **Arquivos:**
 - Modificar: `understand-anything-plugin/skills/understand/compute-batches.mjs`
@@ -1542,7 +1542,7 @@ git commit -m "feat(compute-batches): --changed-files mode for incremental updat
 
 ---
 
-## Tarefa 10: file-analyzer.md — adicionar seção Cross-batch context (neighborMap)
+## Tarefa 10: file-analyzer.md — adicionar seçêo Cross-batch context (neighborMap)
 
 **Arquivos:**
 - Modificar: `understand-anything-plugin/agents/file-analyzer.md`
@@ -2178,7 +2178,7 @@ git commit -m "test(merge-batch-graphs): TestMultiPart for batch-i-part-k handli
 
 ---
 
-## Tarefa 15: Gate de aceitação de integração (manual)
+## Tarefa 15: Gate de aceitaçêo de integraçêo (manual)
 
 This task is a **gated manual checklist** — execute interactively, mark each item, do not auto-merge without all green.
 
@@ -2259,7 +2259,7 @@ This task does not commit anything — it's a verification gate. If Step 3 revea
 
 ---
 
-## Tarefa 16: Bump de versão nos 5 arquivos
+## Tarefa 16: Bump de versêo nos 5 arquivos
 
 Per project CLAUDE.md: when pushing to remote, bump version in **all five** files listed.
 

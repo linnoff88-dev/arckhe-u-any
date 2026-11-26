@@ -1,6 +1,6 @@
-# Plano de Implementação — Atualização de Funcionalidades da Homepage
+# Plano de Implementaçêo — Atualizaçêo de Funcionalidades da Homepage
 
-> 🇬🇧 Versão original em inglês: [2026-03-29-homepage-update-impl.md](./2026-03-29-homepage-update-impl.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-29-homepage-update-impl.md](./2026-03-29-homepage-update-impl.md)
 
 > **Para o Claude:** SUB-SKILL OBRIGATÓRIA: Use superpowers:executing-plans para implementar este plano tarefa a tarefa.
 
@@ -68,7 +68,7 @@ O atual `reveal-delay-${i + 1}` só tem CSS para delays 1–3. Com 6 cards em 2 
 
 **Passo 3: Atualizar o CSS do grid para tratar 2 linhas corretamente**
 
-Sem mudança — `grid-template-columns: repeat(3, 1fr)` já quebra para a segunda linha. O breakpoint mobile `1fr` também funciona. Nenhuma alteração de CSS necessária.
+Sem mudança — `grid-template-columns: repeat(3, 1fr)` já quebra para a segunda linha. O breakpoint mobile `1fr` também funciona. Nenhuma alteraçêo de CSS necessária.
 
 **Passo 4: Verificar build**
 

@@ -1,6 +1,6 @@
-# Plano de Implementação da Homepage
+# Plano de Implementaçêo da Homepage
 
-> 🇬🇧 Versão original em inglês: [2026-03-15-homepage-implementation.md](./2026-03-15-homepage-implementation.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-15-homepage-implementation.md](./2026-03-15-homepage-implementation.md)
 
 > **Para o Claude:** SUB-SKILL OBRIGATÓRIA: Use superpowers:executing-plans para implementar este plano tarefa por tarefa.
 
@@ -270,7 +270,7 @@ git commit -m "feat(homepage): add self-hosted fonts and design token CSS"
 **Arquivos:**
 - Criar: `homepage/src/components/Nav.astro`
 
-**Passo 1: Criar o componente de navegação**
+**Passo 1: Criar o componente de navegaçêo**
 
 Crie `homepage/src/components/Nav.astro`:
 
@@ -420,7 +420,7 @@ git commit -m "feat(homepage): add floating nav bar with scroll effect"
 
 ---
 
-### Tarefa 4: Componente da seção Hero
+### Tarefa 4: Componente da seçêo Hero
 
 **Arquivos:**
 - Criar: `homepage/src/components/Hero.astro`
@@ -801,7 +801,7 @@ git commit -m "feat(homepage): add feature cards with glass-morphism and stagger
 
 ---
 
-### Tarefa 7: Componente de CTA de instalação
+### Tarefa 7: Componente de CTA de instalaçêo
 
 **Arquivos:**
 - Criar: `homepage/src/components/Install.astro`
@@ -1186,7 +1186,7 @@ git commit -m "feat(homepage): add favicon"
 
 ---
 
-### Tarefa 12: Verificação final de build + atualização do README
+### Tarefa 12: Verificaçêo final de build + atualizaçêo do README
 
 **Arquivos:**
 - Modificar: `README.md` (adicionar link da homepage)
@@ -1211,10 +1211,10 @@ pnpm preview
 Verifique no navegador:
 - [ ] A página carrega sem erros
 - [ ] As fontes renderizam (ou caem em fallback graciosamente)
-- [ ] A seção Hero ocupa toda a viewport com imagem de fundo
+- [ ] A seçêo Hero ocupa toda a viewport com imagem de fundo
 - [ ] O screenshot do dashboard aparece na moldura de navegador com brilho dourado
 - [ ] Os feature cards aparecem em 3 colunas (1 coluna no mobile)
-- [ ] O bloco de código de instalação mostra os comandos corretos
+- [ ] O bloco de código de instalaçêo mostra os comandos corretos
 - [ ] Animações de scroll disparam ao rolar
 - [ ] Nav fica sólida ao rolar
 - [ ] Todos os links funcionam (GitHub, Get Started com scroll suave)
@@ -1222,7 +1222,7 @@ Verifique no navegador:
 
 **Passo 3: Adicionar link da homepage ao README.md**
 
-Adicione um link "Homepage" perto do topo do README, após a seção de badges. Adicione uma única linha:
+Adicione um link "Homepage" perto do topo do README, após a seçêo de badges. Adicione uma única linha:
 
 ```markdown
 **[Homepage](https://understand-anything.com)** | **[GitHub](https://github.com/Lum1104/Understand-Anything)**

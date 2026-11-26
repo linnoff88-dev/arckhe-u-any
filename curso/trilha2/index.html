@@ -114,7 +114,7 @@
       <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">TRILHA 2</span>
       <h1 class="text-3xl sm:text-4xl font-bold mb-4">🛠️ Técnico — Como o Understand Anything funciona por dentro</h1>
       <p class="text-lg text-neutral-400 max-w-3xl">
-        Trilha para quem precisa <strong class="text-blue-400">colocar a mão no código</strong>: arquitetura do monorepo, pipeline de agentes,
+        Trilha para quem precisa <strong class="text-blue-400">colocar a mêo no código</strong>: arquitetura do monorepo, pipeline de agentes,
         schema do grafo e o dashboard React. Você sai sabendo onde mexer e por quê.
       </p>
       <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
@@ -128,7 +128,7 @@
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
           <div class="text-xl font-bold text-blue-400">~2h</div>
-          <div class="text-xs text-neutral-400">Duração</div>
+          <div class="text-xs text-neutral-400">Duraçêo</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
           <div class="text-xl font-bold text-blue-400">Intermediário</div>
@@ -218,7 +218,7 @@
           <div class="topic-explanation px-6 pb-4">
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
               <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm"><code>@understand-anything/core</code> reúne types, schema, persistência, tree-sitter (WASM), search, tours e plugins. Usado pelo skill E pelo dashboard.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o "contrato": grafo, tipos, validação. Toda nova feature começa modelando aqui.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o "contrato": grafo, tipos, validaçêo. Toda nova feature começa modelando aqui.</p></div>
               <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Pure TS, sem dependência de Node-only no caminho do dashboard, single source of truth para schema.</p></div>
             </div>
           </div>
@@ -275,7 +275,7 @@
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
               <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm"><code>.claude-plugin/</code>, <code>.cursor-plugin/</code> e <code>.copilot-plugin/</code> — cada um com seu <code>plugin.json</code> versionado em sincronia.</p></div>
               <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Mesma feature, três runtimes. Versionamento desalinhado = marketplace quebrado.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Auto-discovery, marketplace.json (sem version!), 5 arquivos de versão sincronizados.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Auto-discovery, marketplace.json (sem version!), 5 arquivos de versêo sincronizados.</p></div>
             </div>
           </div>
         </div>
@@ -320,7 +320,7 @@
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
               <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Worker que lê 20-30 arquivos por batch, até 5 em paralelo. Produz nós (function, class, file) e arestas (imports, calls).</p></div>
               <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Gargalo de custo/latência. Tuning de batch size = diferença entre 3 e 30 minutos.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Concorrência, deduplicação por fingerprint, output JSON normalizado.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Concorrência, deduplicaçêo por fingerprint, output JSON normalizado.</p></div>
             </div>
           </div>
         </div>
@@ -333,7 +333,7 @@
           <div class="topic-explanation px-6 pb-4">
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
               <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Lê todos os nós e atribui uma <em>layer</em> (API, Service, Data, UI, Utility) usando heurísticas + LLM.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A coloração do grafo no dashboard vem daqui. Camadas erradas confundem o usuário.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A coloraçêo do grafo no dashboard vem daqui. Camadas erradas confundem o usuário.</p></div>
               <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Layer taxonomy, confidence score, fallback rules.</p></div>
             </div>
           </div>
@@ -347,7 +347,7 @@
           <div class="topic-explanation px-6 pb-4">
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
               <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Gera sequências ordenadas por dependência: "comece aqui, depois aqui". Persistidas como <code>tours[]</code>.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Diferencial vs ferramentas de grafo "burras". Ensina o codebase, não só mostra.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Diferencial vs ferramentas de grafo "burras". Ensina o codebase, nêo só mostra.</p></div>
               <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Topological order, narrative voice, stop annotations.</p></div>
             </div>
           </div>
@@ -356,7 +356,7 @@
           <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
             <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
             <span class="text-lg">🔍</span>
-            <div><span class="font-medium">graph-reviewer</span><span class="text-neutral-500 text-sm ml-2">- validação final</span></div>
+            <div><span class="font-medium">graph-reviewer</span><span class="text-neutral-500 text-sm ml-2">- validaçêo final</span></div>
           </button>
           <div class="topic-explanation px-6 pb-4">
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
@@ -421,7 +421,7 @@
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
               <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Endpoint do dev server que serve conteúdo de arquivos, gated por access token + allowlist derivada do grafo.</p></div>
               <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Path traversal seria trivial sem isso. Allowlist evita servir <code>.env</code> por engano.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Defense in depth, derivar permissões do grafo, token rotativo por sessão.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Defense in depth, derivar permissões do grafo, token rotativo por sessêo.</p></div>
             </div>
           </div>
         </div>
@@ -434,7 +434,7 @@
           <div class="topic-explanation px-6 pb-4">
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
               <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Sidebar de 360px com duas abas. Info: ProjectOverview → NodeInfo (quando seleciona) → LearnPanel (persona Learn). Files: FileExplorer derivado do grafo.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Estado composicional. Trocar de aba não pode perder seleção.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Estado composicional. Trocar de aba nêo pode perder seleçêo.</p></div>
               <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Persona-adaptive views, derive tree from graph, composable panels.</p></div>
             </div>
           </div>
@@ -447,8 +447,8 @@
           </button>
           <div class="topic-explanation px-6 pb-4">
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Painel que sobe pela base ao clicar num file node. Botão expande pra modal full-screen. Syntax highlight via prism-react-renderer.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Monaco foi removido. Por quê? Bundle gigante e Monaco trazia features que ninguém usava no contexto "ver, não editar".</p></div>
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Painel que sobe pela base ao clicar num file node. Botêo expande pra modal full-screen. Syntax highlight via prism-react-renderer.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Monaco foi removido. Por quê? Bundle gigante e Monaco trazia features que ninguém usava no contexto "ver, nêo editar".</p></div>
               <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Read-only viewer, slide transition, modal escalation, fetch gated.</p></div>
             </div>
           </div>
@@ -463,7 +463,7 @@
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
               <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Paleta <code>#0a0a0a</code> + acentos gold/amber <code>#d4a574</code>, tipografia DM Serif Display para títulos.</p></div>
               <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Identidade visual coerente diferencia ferramenta de hobby vs produto. Tailwind v4 tokens centralizam isso.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Design tokens, restrição cromática, serif para autoridade, sans para utilidade.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Design tokens, restriçêo cromática, serif para autoridade, sans para utilidade.</p></div>
             </div>
           </div>
         </div>
@@ -476,7 +476,7 @@
           <div class="topic-explanation px-6 pb-4">
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
               <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Ao carregar <code>knowledge-graph.json</code>, valida contra o schema do core. Falha = banner vermelho explicando o quê.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Grafo gerado em versão antiga + dashboard novo é receita de "tela em branco". Banner economiza horas de debug.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Grafo gerado em versêo antiga + dashboard novo é receita de "tela em branco". Banner economiza horas de debug.</p></div>
               <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Zod/Valibot, error boundary, mensagem acionável.</p></div>
             </div>
           </div>
@@ -487,7 +487,7 @@
       </div>
     </div>
 
-    <!-- NAVEGAÇÃO -->
+    <!-- NAVEGAÇêO -->
     <div class="flex flex-col sm:flex-row gap-4 mt-12">
       <a href="../trilha1/index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Trilha 1: Fundamentos</a>
       <a href="../trilha3/index.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Trilha 3: Avançado →</a>

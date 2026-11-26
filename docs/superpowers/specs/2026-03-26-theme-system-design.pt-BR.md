@@ -1,19 +1,19 @@
 # Design do Sistema de Temas
 
-> 🇬🇧 Versão original em inglês: [2026-03-26-theme-system-design.md](./2026-03-26-theme-system-design.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-26-theme-system-design.md](./2026-03-26-theme-system-design.md)
 
-## Visão Geral
+## Visêo Geral
 
-Adicionar um sistema de presets de tema curado com customização de cor de acento ao dashboard. Usuários selecionam entre 5 presets de tema desenhados à mão e, opcionalmente, trocam a cor de acento dentro de cada preset a partir de um conjunto de 8-10 swatches testados.
+Adicionar um sistema de presets de tema curado com customizaçêo de cor de acento ao dashboard. Usuários selecionam entre 5 presets de tema desenhados à mêo e, opcionalmente, trocam a cor de acento dentro de cada preset a partir de um conjunto de 8-10 swatches testados.
 
 ### Objetivos
 - Suportar 5 presets de tema: Dark Gold (atual), Dark Ocean, Dark Forest, Dark Rose, Light Minimal
-- Permitir customização da cor de acento dentro de cada preset (apenas swatches curados, sem picker livre)
+- Permitir customizaçêo da cor de acento dentro de cada preset (apenas swatches curados, sem picker livre)
 - Persistir a preferência de tema tanto no `localStorage` (pessoal) quanto no `meta.json` (nível de projeto)
 - Manter coerência visual — sem combinações de cor que o usuário possa quebrar
-- Troca de tema sem reload via injeção de variável CSS em runtime
+- Troca de tema sem reload via injeçêo de variável CSS em runtime
 
-### Não-Objetivos
+### Nêo-Objetivos
 - Color picker livre (risco de combos feias/ilegíveis)
 - Overrides de cor por componente
 - Múltiplos temas simultâneos
@@ -41,9 +41,9 @@ Cada preset é um mapeamento completo de nomes de variável CSS para valores. Os
 | `--color-border-subtle` | `rgba(212,165,116,0.12)` | `rgba(91,164,207,0.12)` | `rgba(94,166,122,0.12)` | `rgba(207,122,138,0.12)` | `rgba(74,111,165,0.10)` |
 | `--color-border-medium` | `rgba(212,165,116,0.25)` | `rgba(91,164,207,0.25)` | `rgba(94,166,122,0.25)` | `rgba(207,122,138,0.25)` | `rgba(74,111,165,0.18)` |
 
-*\* Os nomes das variáveis CSS permanecem `--color-gold`, `--color-gold-dim`, `--color-gold-bright` mesmo para temas não-dourados. Eles representam "a cor de acento" de forma genérica. Renomeá-los para `--color-accent` é um refactor que podemos fazer, mas não é obrigatório — o nome da variável é um detalhe de implementação invisível ao usuário.*
+*\* Os nomes das variáveis CSS permanecem `--color-gold`, `--color-gold-dim`, `--color-gold-bright` mesmo para temas nêo-dourados. Eles representam "a cor de acento" de forma genérica. Renomeá-los para `--color-accent` é um refactor que podemos fazer, mas nêo é obrigatório — o nome da variável é um detalhe de implementaçêo invisível ao usuário.*
 
-**Decisão: Renomear `--color-gold*` para `--color-accent*`** para evitar confusão. Isso é um find-and-replace pela base de código sem mudança de comportamento.
+**Decisêo: Renomear `--color-gold*` para `--color-accent*`** para evitar confusêo. Isso é um find-and-replace pela base de código sem mudança de comportamento.
 
 ### 1.2 Efeitos de Vidro (Glass)
 
@@ -56,7 +56,7 @@ Efeitos de vidro derivam das cores base e precisam de valores por preset:
 | `--glass-border` | `rgba(accent,0.1)` | `rgba(accent,0.08)` |
 | `--glass-border-heavy` | `rgba(accent,0.15)` | `rgba(accent,0.12)` |
 
-As classes CSS `.glass` e `.glass-heavy` vão referenciar essas variáveis em vez de valores hardcoded.
+As classes CSS `.glass` e `.glass-heavy` vêo referenciar essas variáveis em vez de valores hardcoded.
 
 ### 1.3 Cores de Scrollbar e Glow
 
@@ -66,24 +66,24 @@ Estas também derivam da cor de acento e precisam virar variáveis CSS:
 |-------|---------|
 | `--scrollbar-thumb` | `rgba(accent, 0.2)` |
 | `--scrollbar-thumb-hover` | `rgba(accent, 0.35)` |
-| `--glow-color` | `rgba(accent, 0.4)` para glow de seleção de nó |
+| `--glow-color` | `rgba(accent, 0.4)` para glow de seleçêo de nó |
 | `--glow-pulse` | `rgba(accent, 0.6)` para pulso de destaque no tour |
 
 ### 1.4 Cores de Tipo de Nó e de Diff
 
-Estas são **semânticas** e ficam fixas em todos os temas escuros:
+Estas sêo **semânticas** e ficam fixas em todos os temas escuros:
 
 | Variável | Valor | Propósito |
 |----------|-------|---------|
 | `--color-node-file` | `#4a7c9b` | Nós de arquivo |
-| `--color-node-function` | `#5a9e6f` | Nós de função |
+| `--color-node-function` | `#5a9e6f` | Nós de funçêo |
 | `--color-node-class` | `#8b6fb0` | Nós de classe |
 | `--color-node-module` | `#c9a06c` | Nós de módulo |
 | `--color-node-concept` | `#b07a8a` | Nós de conceito |
 | `--color-diff-changed` | `#e05252` | Nós alterados |
 | `--color-diff-affected` | `#d4a030` | Nós afetados |
 
-Para **Light Minimal apenas**, estes são levemente dessaturados/escurecidos para manter legibilidade em fundos claros:
+Para **Light Minimal apenas**, estes sêo levemente dessaturados/escurecidos para manter legibilidade em fundos claros:
 
 | Variável | Valor Light Minimal |
 |----------|-------------------|
@@ -123,9 +123,9 @@ Cada preset oferece 8 opções de cor de acento. A primeira é o default "nativo
 | Teal | `#2e8a7a` | `#267a6c` | `#45a595` |
 | Slate | `#5a6570` | `#4e5860` | `#6e7a85` |
 
-### 1.6 Derivação de Borda e Glass
+### 1.6 Derivaçêo de Borda e Glass
 
-Quando um swatch de acento é selecionado, bordas e efeitos de glass são auto-derivados:
+Quando um swatch de acento é selecionado, bordas e efeitos de glass sêo auto-derivados:
 
 ```typescript
 function deriveFromAccent(accentHex: string, isDark: boolean) {
@@ -191,7 +191,7 @@ export interface ThemeConfig {
 
 ### 2.3 Theme Engine
 
-O theme engine é uma camada de função pura (sem dependência de React):
+O theme engine é uma camada de funçêo pura (sem dependência de React):
 
 ```typescript
 // themes/theme-engine.ts
@@ -238,30 +238,30 @@ O provider:
 1. Ao montar: resolve o tema a partir de `localStorage` > campo `meta.json` no grafo carregado > default (`dark-gold`)
 2. Chama `applyTheme()` em toda mudança de config
 3. Persiste em `localStorage` a cada mudança
-4. NÃO escreve em `meta.json` a partir do dashboard (o dashboard é somente leitura para `meta.json`; `meta.json` é escrito pelo lado do CLI/plugin)
+4. NêO escreve em `meta.json` a partir do dashboard (o dashboard é somente leitura para `meta.json`; `meta.json` é escrito pelo lado do CLI/plugin)
 
-### 2.5 Integração com Zustand Store
+### 2.5 Integraçêo com Zustand Store
 
 O sistema de temas é **separado da Zustand store** — usa seu próprio contexto React. Justificativa:
 - Estado de tema é ortogonal ao estado de grafo/UI
 - Tema precisa ser aplicado antes do grafo carregar (evita flash de tema errado)
-- Mantém a store focada em interação com o grafo
+- Mantém a store focada em interaçêo com o grafo
 
-A store NÃO ganha nenhum campo relacionado a tema.
+A store NêO ganha nenhum campo relacionado a tema.
 
 ---
 
 ## 3. Componentes de UI
 
-### 3.1 Botão de Theme Picker (Header)
+### 3.1 Botêo de Theme Picker (Header)
 
-Um pequeno botão com ícone de paleta na barra superior, posicionado depois dos controles existentes (PersonaSelector, DiffToggle, etc.).
+Um pequeno botêo com ícone de paleta na barra superior, posicionado depois dos controles existentes (PersonaSelector, DiffToggle, etc.).
 
 - Clique abre um popover/dropdown
 - O popover tem duas seções:
   - **Presets**: 5 cards/botões mostrando nome do preset + pequenos círculos de preview de cor
   - **Cores de Acento**: linha de 8 círculos de cor para o preset ativo
-- Preset e acento ativos são destacados com um ring/check
+- Preset e acento ativos sêo destacados com um ring/check
 - Selecionar um preset aplica instantaneamente; selecionar um acento aplica instantaneamente
 - Clicar fora ou apertar Escape fecha o popover
 
@@ -281,13 +281,13 @@ Cada card de preset mostra:
 ### 3.4 Transições
 
 Ao trocar de tema:
-- Variáveis CSS atualizam instantaneamente (sem transição necessária para a maioria das propriedades)
-- Opcionalmente adicionar um `transition: background-color 0.2s, color 0.2s` sutil em `html` para uma sensação suave
+- Variáveis CSS atualizam instantaneamente (sem transiçêo necessária para a maioria das propriedades)
+- Opcionalmente adicionar um `transition: background-color 0.2s, color 0.2s` sutil em `html` para uma sensaçêo suave
 - Sem reload de página
 
 ---
 
-## 4. Persistência e Resolução
+## 4. Persistência e Resoluçêo
 
 ### 4.1 Locais de Armazenamento
 
@@ -296,7 +296,7 @@ Ao trocar de tema:
 | chave `localStorage`: `ua-theme` | `JSON.stringify(ThemeConfig)` | Dashboard (a cada mudança) | Dashboard (ao montar) |
 | `.understand-anything/meta.json` | `{ ..., theme?: ThemeConfig }` | CLI/plugin (durante análise ou set explícito) | Dashboard (ao montar, como fallback) |
 
-### 4.2 Ordem de Resolução
+### 4.2 Ordem de Resoluçêo
 
 ```
 1. localStorage('ua-theme')     → user's personal preference (wins)
@@ -304,7 +304,7 @@ Ao trocar de tema:
 3. { presetId: 'dark-gold', accentId: 'gold' }  → hard default
 ```
 
-### 4.3 Extensão do Esquema do meta.json
+### 4.3 Extensêo do Esquema do meta.json
 
 Estender `AnalysisMeta` em `packages/core/src/types.ts`:
 
@@ -322,11 +322,11 @@ export interface AnalysisMeta {
 
 O dashboard atualmente carrega `/knowledge-graph.json` ao montar. Ele também precisa carregar `/meta.json` (ou o campo de tema pode ser embutido em `knowledge-graph.json`).
 
-**Decisão:** Carregar `/meta.json` separadamente — é um arquivo pequeno e mantém as preocupações separadas. O dashboard busca `/meta.json` ao montar, extrai o campo `theme` se presente, e o usa como fallback quando `localStorage` não tem tema.
+**Decisêo:** Carregar `/meta.json` separadamente — é um arquivo pequeno e mantém as preocupações separadas. O dashboard busca `/meta.json` ao montar, extrai o campo `theme` se presente, e o usa como fallback quando `localStorage` nêo tem tema.
 
 ---
 
-## 5. Consolidação de Cores Hardcoded
+## 5. Consolidaçêo de Cores Hardcoded
 
 ### 5.1 Problema
 
@@ -335,9 +335,9 @@ Muitos componentes usam valores RGBA hardcoded em vez de variáveis CSS:
 - `rgba(20,20,20,0.8)` em efeitos de glass
 - `rgba(224,82,82,0.25)` em overlays de diff
 
-Esses não vão responder a mudanças de tema.
+Esses nêo vêo responder a mudanças de tema.
 
-### 5.2 Solução
+### 5.2 Soluçêo
 
 Antes de implementar a troca de tema, consolidar todas as referências de cor hardcoded:
 
@@ -369,25 +369,25 @@ Renomear pela base de código:
 
 ## 6. Considerações para o Tema Light
 
-O tema Light Minimal requer atenção especial:
+O tema Light Minimal requer atençêo especial:
 
 ### 6.1 Contraste Invertido
 
-- Texto é escuro sobre fundos claros (invertido em relação aos temas escuros)
-- Bordas precisam de opacidade menor para não parecerem duras
+- Texto é escuro sobre fundos claros (invertido em relaçêo aos temas escuros)
+- Bordas precisam de opacidade menor para nêo parecerem duras
 - Efeitos de glass usam rgba baseado em branco em vez de preto
 
 ### 6.2 Cores de Nó
 
-Variantes levemente mais escuras/dessaturadas para legibilidade em fundos claros (ver Seção 1.4).
+Variantes levemente mais escuras/dessaturadas para legibilidade em fundos claros (ver Seçêo 1.4).
 
 ### 6.3 Atributo data-theme
 
-Setar `data-theme="light"` em `<html>` para quaisquer estilos que não dão para tratar puramente com variáveis CSS (ex.: overrides de componente de terceiros, direções de box-shadow).
+Setar `data-theme="light"` em `<html>` para quaisquer estilos que nêo dêo para tratar puramente com variáveis CSS (ex.: overrides de componente de terceiros, direções de box-shadow).
 
 ### 6.4 React Flow
 
-Cores de fundo, minimap e arestas do React Flow precisam respeitar o tema. O override existente com `!important` em `.react-flow__background` já usa `var(--color-root)`, o que é bom. Cores do MiniMap em `GraphView.tsx` estão atualmente hardcoded e precisam ser atualizadas.
+Cores de fundo, minimap e arestas do React Flow precisam respeitar o tema. O override existente com `!important` em `.react-flow__background` já usa `var(--color-root)`, o que é bom. Cores do MiniMap em `GraphView.tsx` estêo atualmente hardcoded e precisam ser atualizadas.
 
 ---
 
@@ -411,7 +411,7 @@ Cores de fundo, minimap e arestas do React Flow precisam respeitar o tema. O ove
 ## 8. Fora de Escopo
 
 - Import/export de tema
-- UI de criação de tema customizado
-- Customização de cor por nó
+- UI de criaçêo de tema customizado
+- Customizaçêo de cor por nó
 - Transições animadas de tema além de transições CSS simples
-- Sincronização de tema entre abas do navegador (nice-to-have para depois)
+- Sincronizaçêo de tema entre abas do navegador (nice-to-have para depois)

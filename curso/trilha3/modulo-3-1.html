@@ -103,7 +103,7 @@
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
         <h2 class="text-2xl font-bold">🏗️ Arquitetura de plugins: LanguageConfig e PluginRegistry</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">A arquitetura do Understand Anything é <strong class="text-purple-400">language-neutral por design</strong>. Toda lógica específica de linguagem vive em <code>packages/core/src/languages/</code> como configs — não código forkado. O <code>PluginRegistry</code> mapeia extensões para configs e o resto do pipeline trata todas as linguagens igualmente.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A arquitetura do Understand Anything é <strong class="text-purple-400">language-neutral por design</strong>. Toda lógica específica de linguagem vive em <code>packages/core/src/languages/</code> como configs — nêo código forkado. O <code>PluginRegistry</code> mapeia extensões para configs e o resto do pipeline trata todas as linguagens igualmente.</p>
 
       <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center"><span class="mr-2">🧠</span> Conceito principal</h3>
@@ -138,7 +138,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
-        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 text-sm font-semibold mb-1">Detecção</div><div class="text-xs text-neutral-400">Por extensão de arquivo</div></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 text-sm font-semibold mb-1">Detecçêo</div><div class="text-xs text-neutral-400">Por extensêo de arquivo</div></div>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 text-sm font-semibold mb-1">Registry</div><div class="text-xs text-neutral-400">Map id → config</div></div>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 text-sm font-semibold mb-1">Snippet</div><div class="text-xs text-neutral-400">Markdown por linguagem</div></div>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 text-sm font-semibold mb-1">Escape hatch</div><div class="text-xs text-neutral-400">customAnalyzer opcional</div></div>
@@ -151,14 +151,14 @@
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
         <h2 class="text-2xl font-bold">🌳 Gramáticas tree-sitter em WASM</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">O Understand Anything usa <strong class="text-purple-400">web-tree-sitter (WASM)</strong> em vez do binding nativo. Razão registrada no CLAUDE.md: <em>native bindings fail on darwin/arm64 + Node 24</em>. Toda gramática nova precisa estar disponível como WASM.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O Understand Anything usa <strong class="text-purple-400">web-tree-sitter (WASM)</strong> em vez do binding nativo. Razêo registrada no CLAUDE.md: <em>native bindings fail on darwin/arm64 + Node 24</em>. Toda gramática nova precisa estar disponível como WASM.</p>
 
       <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">📊</span> Por que WASM</h3>
         <ul class="space-y-2 text-neutral-300">
           <li><strong>Portabilidade:</strong> mesma gramática roda em CLI, dashboard browser e CI</li>
           <li><strong>Sem build nativo:</strong> nada de node-gyp, libtree-sitter, toolchain por plataforma</li>
-          <li><strong>Determinístico:</strong> versão pinned no package.json = parsing reprodutível</li>
+          <li><strong>Determinístico:</strong> versêo pinned no package.json = parsing reprodutível</li>
         </ul>
       </div>
 
@@ -167,7 +167,7 @@
           <h4 class="font-bold text-emerald-400 mb-4">✓ FAZER</h4>
           <ul class="space-y-3 text-neutral-300">
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Usar pacotes <code>tree-sitter-X</code> oficiais que distribuem .wasm</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Pinar versão exata (sem ^ ou ~)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Pinar versêo exata (sem ^ ou ~)</span></li>
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Validar com <code>Parser.Language.load()</code> antes de registrar</span></li>
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Mapear nodeTypes lendo o <code>grammar.js</code> ou node-types.json oficial</span></li>
           </ul>
@@ -175,7 +175,7 @@
         <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
           <h4 class="font-bold text-red-400 mb-4">✗ EVITAR</h4>
           <ul class="space-y-3 text-neutral-300">
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Compilar gramática à mão se há pacote oficial</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Compilar gramática à mêo se há pacote oficial</span></li>
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Usar <code>tree-sitter</code> nativo no dashboard (quebra browser)</span></li>
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Adivinhar nodeTypes — sempre conferir AST de um snippet</span></li>
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Aceitar gramática experimental sem testar fixture</span></li>
@@ -185,14 +185,14 @@
 
       <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
-        <p class="text-neutral-300">Antes de registrar uma linguagem, use o playground oficial do tree-sitter (<code>tree-sitter.github.io/tree-sitter/playground</code>) com um snippet representativo. Os node types visíveis ali são os mesmos que você deve colocar em <code>nodeTypes</code>.</p>
+        <p class="text-neutral-300">Antes de registrar uma linguagem, use o playground oficial do tree-sitter (<code>tree-sitter.github.io/tree-sitter/playground</code>) com um snippet representativo. Os node types visíveis ali sêo os mesmos que você deve colocar em <code>nodeTypes</code>.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 text-sm font-semibold mb-1">Format</div><div class="text-xs text-neutral-400">.wasm</div></div>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 text-sm font-semibold mb-1">Loader</div><div class="text-xs text-neutral-400">web-tree-sitter</div></div>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 text-sm font-semibold mb-1">Source</div><div class="text-xs text-neutral-400">npm package</div></div>
-        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 text-sm font-semibold mb-1">Validação</div><div class="text-xs text-neutral-400">Fixture mínima</div></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 text-sm font-semibold mb-1">Validaçêo</div><div class="text-xs text-neutral-400">Fixture mínima</div></div>
       </div>
     </section>
 
@@ -226,7 +226,7 @@
           <li><strong>Idioms:</strong> 5-10 conceitos que aparecem em todo código real da linguagem</li>
           <li><strong>File roles:</strong> nomes de arquivo que carregam semântica especial</li>
           <li><strong>Pitfalls:</strong> armadilhas comuns que o LLM costuma confundir</li>
-          <li><strong>NÃO incluir:</strong> documentação genérica da sintaxe (o LLM já sabe)</li>
+          <li><strong>NêO incluir:</strong> documentaçêo genérica da sintaxe (o LLM já sabe)</li>
         </ul>
       </div>
 
@@ -262,8 +262,8 @@ Output: write findings to
       </div>
 
       <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Atenção — campo model</h3>
-        <p class="text-neutral-300">NÃO incluir <code>model: inherit</code> no frontmatter. Foi removido na issue <a href="https://github.com/inematds/u-any/issues/167" class="text-purple-400 hover:underline" target="_blank">#167</a> porque opencode (e ferramentas não-Claude) tratam "inherit" como id literal de modelo e quebram com <code>ProviderModelNotFoundError</code>. Omita o campo — cada plataforma usa seu default.</p>
+        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Atençêo — campo model</h3>
+        <p class="text-neutral-300">NêO incluir <code>model: inherit</code> no frontmatter. Foi removido na issue <a href="https://github.com/inematds/u-any/issues/167" class="text-purple-400 hover:underline" target="_blank">#167</a> porque opencode (e ferramentas nêo-Claude) tratam "inherit" como id literal de modelo e quebram com <code>ProviderModelNotFoundError</code>. Omita o campo — cada plataforma usa seu default.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -347,7 +347,7 @@ Output: write findings to
           <g stroke="#c084fc" stroke-width="1.5" stroke-dasharray="3 3" fill="none" marker-end="url(#arrow31)">
             <line x1="385" y1="170" x2="385" y2="110"/>
           </g>
-          <text x="395" y="148" font-family="ui-sans-serif, system-ui" font-size="10" fill="#c084fc">ponto de inserção #1</text>
+          <text x="395" y="148" font-family="ui-sans-serif, system-ui" font-size="10" fill="#c084fc">ponto de inserçêo #1</text>
 
           <!-- Custom agent block (plugs between Phase 3 and Phase 4) -->
           <g font-family="ui-sans-serif, system-ui" font-size="12">
@@ -360,7 +360,7 @@ Output: write findings to
           <g stroke="#c084fc" stroke-width="1.5" stroke-dasharray="3 3" fill="none" marker-end="url(#arrow31)">
             <line x1="580" y1="170" x2="580" y2="110"/>
           </g>
-          <text x="590" y="148" font-family="ui-sans-serif, system-ui" font-size="10" fill="#c084fc">ponto de inserção #2</text>
+          <text x="590" y="148" font-family="ui-sans-serif, system-ui" font-size="10" fill="#c084fc">ponto de inserçêo #2</text>
 
           <!-- intermediate/ shared filesystem -->
           <g font-family="ui-sans-serif, system-ui" font-size="12">
@@ -378,7 +378,7 @@ Output: write findings to
           </g>
         </svg>
         <figcaption class="mt-3 text-sm text-neutral-400">
-          <span class="text-purple-400 font-semibold">Pontos de inserção do pipeline:</span> uma nova gramática (ex.: <code>tree-sitter-rust</code>) entra via <code>PluginRegistry</code> e é consumida pelo <code>file-analyzer</code>. Um agente customizado pluga depois do merge, lendo <code>assembled-graph.json</code> e gravando JSON enriquecido em <code>intermediate/</code>.
+          <span class="text-purple-400 font-semibold">Pontos de inserçêo do pipeline:</span> uma nova gramática (ex.: <code>tree-sitter-rust</code>) entra via <code>PluginRegistry</code> e é consumida pelo <code>file-analyzer</code>. Um agente customizado pluga depois do merge, lendo <code>assembled-graph.json</code> e gravando JSON enriquecido em <code>intermediate/</code>.
         </figcaption>
       </figure>
 
@@ -435,9 +435,9 @@ Output: write findings to
     <section id="topico-6" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
-        <h2 class="text-2xl font-bold">🧪 Validação, schema e testes</h2>
+        <h2 class="text-2xl font-bold">🧪 Validaçêo, schema e testes</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">Toda extensão precisa de <strong class="text-purple-400">fixture mínima</strong>, <strong class="text-purple-400">schema validation</strong> e <strong class="text-purple-400">snapshot vitest</strong>. Sem isso, regressões aparecem só quando um usuário tropeça no schema validator banner do dashboard.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Toda extensêo precisa de <strong class="text-purple-400">fixture mínima</strong>, <strong class="text-purple-400">schema validation</strong> e <strong class="text-purple-400">snapshot vitest</strong>. Sem isso, regressões aparecem só quando um usuário tropeça no schema validator banner do dashboard.</p>
 
       <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center"><span class="mr-2">🛡️</span> Estratégia de teste em 3 camadas</h3>
@@ -451,7 +451,7 @@ Output: write findings to
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
         <h3 class="text-lg font-semibold text-purple-400 mb-3">📄 Fixture típica</h3>
         <pre class="font-mono text-sm text-neutral-300 bg-dark-900 p-4 rounded-lg overflow-x-auto"><code>tests/fixtures/python/
-├── simple_module.py          # 1 função + 1 import
+├── simple_module.py          # 1 funçêo + 1 import
 ├── class_with_methods.py     # 1 classe + 3 métodos
 ├── decorators_demo.py        # decorators e dunder
 └── expected/
@@ -461,7 +461,7 @@ Output: write findings to
 
       <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
-        <p class="text-neutral-300">Antes de abrir PR, copie sua versão modificada para <code>~/.claude/plugins/cache/understand-anything/.../&lt;VERSION&gt;</code> e rode <code>/understand --full</code> em um projeto Python real. O dogfood pega o que o teste não pega.</p>
+        <p class="text-neutral-300">Antes de abrir PR, copie sua versêo modificada para <code>~/.claude/plugins/cache/understand-anything/.../&lt;VERSION&gt;</code> e rode <code>/understand --full</code> em um projeto Python real. O dogfood pega o que o teste nêo pega.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-3">

@@ -1,12 +1,12 @@
-# Plano de Implementação da Robustez do Dashboard
+# Plano de Implementaçêo da Robustez do Dashboard
 
-> 🇬🇧 Versão original em inglês: [2026-03-25-dashboard-robustness-impl.md](./2026-03-25-dashboard-robustness-impl.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-25-dashboard-robustness-impl.md](./2026-03-25-dashboard-robustness-impl.md)
 
 > **Para o Claude:** SUB-SKILL OBRIGATÓRIA: Use superpowers:executing-plans para implementar este plano tarefa a tarefa.
 
 **Objetivo:** Tornar o dashboard resiliente a grafos de conhecimento imperfeitos gerados por LLM, auto-corrigindo issues recuperáveis, descartando itens quebrados e mostrando warnings amber amigáveis com relatórios de erro fáceis de copiar e colar.
 
-**Arquitetura:** Pipeline de três camadas em `schema.ts`: sanitize (Tier 1 silencioso) → auto-fix (Tier 2 rastreado) → validate por-item (Tier 3 drop) → fatal gate (Tier 4). Novo componente `WarningBanner` no dashboard exibe issues categorizadas com botão de copy.
+**Arquitetura:** Pipeline de três camadas em `schema.ts`: sanitize (Tier 1 silencioso) → auto-fix (Tier 2 rastreado) → validate por-item (Tier 3 drop) → fatal gate (Tier 4). Novo componente `WarningBanner` no dashboard exibe issues categorizadas com botêo de copy.
 
 **Stack Técnico:** Zod (validation), React + TailwindCSS (UI do dashboard), Vitest (testing)
 
@@ -91,7 +91,7 @@ describe("sanitizeGraph", () => {
 **Passo 2: Rodar os testes para confirmar que falham**
 
 Rodar: `pnpm --filter @understand-anything/core test`
-Esperado: FAIL — `sanitizeGraph` não está exportado
+Esperado: FAIL — `sanitizeGraph` nêo está exportado
 
 **Passo 3: Adicionar tipo GraphIssue e atualizar ValidationResult**
 
@@ -356,7 +356,7 @@ describe("autoFixGraph", () => {
 **Passo 2: Rodar os testes para confirmar que falham**
 
 Rodar: `pnpm --filter @understand-anything/core test`
-Esperado: FAIL — `autoFixGraph` não está exportado
+Esperado: FAIL — `autoFixGraph` nêo está exportado
 
 **Passo 3: Implementar mapas de alias e autoFixGraph**
 
@@ -383,7 +383,7 @@ export const DIRECTION_ALIASES: Record<string, string> = {
 };
 ```
 
-Adicionar a função `autoFixGraph` após `sanitizeGraph`:
+Adicionar a funçêo `autoFixGraph` após `sanitizeGraph`:
 
 ```typescript
 export function autoFixGraph(data: Record<string, unknown>): {
@@ -568,7 +568,7 @@ git commit -m "feat(core): add autoFixGraph with complexity/direction aliases an
 - Modificar: `understand-anything-plugin/packages/core/src/schema.ts:138-151`
 - Teste: `understand-anything-plugin/packages/core/src/__tests__/schema.test.ts`
 
-**Passo 1: Escrever os testes que falham para validação permissiva**
+**Passo 1: Escrever os testes que falham para validaçêo permissiva**
 
 Adicionar a `schema.test.ts`:
 
@@ -701,11 +701,11 @@ describe("permissive validation", () => {
 **Passo 2: Rodar os testes para confirmar que falham**
 
 Rodar: `pnpm --filter @understand-anything/core test`
-Esperado: FAIL — `validateGraph` não retorna `issues` nem `fatal`
+Esperado: FAIL — `validateGraph` nêo retorna `issues` nem `fatal`
 
 **Passo 3: Reescrever validateGraph**
 
-Substituir a função `validateGraph` existente em `schema.ts` (linhas 138-151) por:
+Substituir a funçêo `validateGraph` existente em `schema.ts` (linhas 138-151) por:
 
 ```typescript
 export function validateGraph(data: unknown): ValidationResult {
@@ -878,7 +878,7 @@ git commit -m "feat(core): rewrite validateGraph for permissive per-item validat
 **Arquivos:**
 - Modificar: `understand-anything-plugin/packages/core/src/__tests__/schema.test.ts`
 
-A nova validação permissiva muda o comportamento de vários testes existentes. Veja o que muda:
+A nova validaçêo permissiva muda o comportamento de vários testes existentes. Veja o que muda:
 
 | Teste | Comportamento antigo | Novo comportamento |
 |------|-------------|-------------|
@@ -1160,7 +1160,7 @@ export default function WarningBanner({ issues }: WarningBannerProps) {
 **Passo 3: Verificar que o dashboard buila**
 
 Rodar: `pnpm --filter @understand-anything/dashboard build`
-Esperado: Build conclui (componente ainda não conectado, mas deve compilar)
+Esperado: Build conclui (componente ainda nêo conectado, mas deve compilar)
 
 **Passo 4: Commit**
 
@@ -1224,7 +1224,7 @@ useEffect(() => {
 }, [setGraph]);
 ```
 
-Substituir a seção do banner de erro (linhas 213-218) por:
+Substituir a seçêo do banner de erro (linhas 213-218) por:
 
 ```tsx
 {/* Warning banner for graph issues */}
@@ -1254,7 +1254,7 @@ git commit -m "feat(dashboard): wire WarningBanner to display graph validation i
 
 ---
 
-### Tarefa 7: Verificação final
+### Tarefa 7: Verificaçêo final
 
 **Passo 1: Rodar todos os testes do core**
 

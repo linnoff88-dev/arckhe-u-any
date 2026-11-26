@@ -97,16 +97,16 @@
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <!-- DEMO VISUAL: camada de domain em ação -->
+    <!-- DEMO VISUAL: camada de domain em açêo -->
     <section class="mb-12">
       <figure class="bg-dark-800 rounded-xl border border-purple-500/30 overflow-hidden">
         <img
           src="../assets/overview-domain.gif"
-          alt="Dashboard alternando entre visão estrutural e camada de domain knowledge: nós ganham anotações de negócio como Order Management, Auth, Payment Flow sobrepostas ao grafo de arquivos."
+          alt="Dashboard alternando entre visêo estrutural e camada de domain knowledge: nós ganham anotações de negócio como Order Management, Auth, Payment Flow sobrepostas ao grafo de arquivos."
           loading="lazy"
           class="w-full h-auto block" />
         <figcaption class="px-5 py-3 text-sm text-neutral-400 border-t border-dark-600">
-          <span class="text-purple-400 font-semibold">A camada de domínio em ação:</span> o mesmo grafo estrutural é re-anotado com nós de <code>domain</code>, <code>flow</code> e <code>step</code> + edges <code>implements</code>. É o que este módulo ensina a gerar com <code>/understand-domain</code> e <code>domain-graph.json</code>.
+          <span class="text-purple-400 font-semibold">A camada de domínio em açêo:</span> o mesmo grafo estrutural é re-anotado com nós de <code>domain</code>, <code>flow</code> e <code>step</code> + edges <code>implements</code>. É o que este módulo ensina a gerar com <code>/understand-domain</code> e <code>domain-graph.json</code>.
         </figcaption>
       </figure>
     </section>
@@ -117,7 +117,7 @@
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
         <h2 class="text-2xl font-bold">🏛️ Hierarquia domain → flow → step</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">Edges de import só repetem o que a IDE já mostra. <strong class="text-purple-400">Knowledge graph estrutural não responde "o que esse código faz"</strong> — só "como ele se conecta". A camada de domínio resolve isso anotando 3 níveis hierárquicos sobre o grafo.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Edges de import só repetem o que a IDE já mostra. <strong class="text-purple-400">Knowledge graph estrutural nêo responde "o que esse código faz"</strong> — só "como ele se conecta". A camada de domínio resolve isso anotando 3 níveis hierárquicos sobre o grafo.</p>
 
       <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center"><span class="mr-2">🧠</span> Três níveis</h3>
@@ -174,8 +174,8 @@
         <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
           <h4 class="font-bold text-red-400 mb-4">✗ Alternativas rejeitadas</h4>
           <ul class="space-y-3 text-neutral-300">
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Arquivo único: poluição, dificil iterar</span></li>
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Schema totalmente novo: quebra search e validação existentes</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Arquivo único: poluiçêo, dificil iterar</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Schema totalmente novo: quebra search e validaçêo existentes</span></li>
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Anotar nodes estruturais com domain field: mistura camadas</span></li>
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Backend separado: complexidade open-source desnecessária</span></li>
           </ul>
@@ -189,7 +189,7 @@
 └── domain-graph.json      ← camada de domínio (opcional)
 
 Dashboard detecta ambos:
-  - Se só estrutural: mostra view padrão
+  - Se só estrutural: mostra view padrêo
   - Se ambos: toggle "Domain ↔ Structural" no canto sup. dir.
   - Domain view = default quando disponível</code></pre>
       </div>
@@ -248,7 +248,7 @@ React Flow render (parentId)</code></pre>
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
         <h2 class="text-2xl font-bold">📦 Containers: folder strategy + community fallback</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">Sem containers, 100+ nós soltos não têm âncora visual. A layer-detail ganha <strong class="text-purple-400">containers derivados de pasta</strong> (default) com fallback para community detection quando a estrutura de pasta é rasa demais.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Sem containers, 100+ nós soltos nêo têm âncora visual. A layer-detail ganha <strong class="text-purple-400">containers derivados de pasta</strong> (default) com fallback para community detection quando a estrutura de pasta é rasa demais.</p>
 
       <div class="space-y-4 mb-6">
         <div class="flex items-start space-x-4">
@@ -263,7 +263,7 @@ React Flow render (parentId)</code></pre>
           <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">2</span></div>
           <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
             <h4 class="font-semibold mb-2">Community fallback</h4>
-            <p class="text-sm text-neutral-400 mb-2">Quando todos os arquivos estão na mesma pasta</p>
+            <p class="text-sm text-neutral-400 mb-2">Quando todos os arquivos estêo na mesma pasta</p>
             <p class="text-neutral-300 text-sm">Roda community detection (Louvain ou similar) nos edges do layer. Forma containers sintéticos com label gerado.</p>
           </div>
         </div>
@@ -272,7 +272,7 @@ React Flow render (parentId)</code></pre>
           <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
             <h4 class="font-semibold mb-2">Edge aggregation</h4>
             <p class="text-sm text-neutral-400 mb-2">Cross-container default, intra-container surface on demand</p>
-            <p class="text-neutral-300 text-sm">Por padrão, edges entre containers são agregadas (uma linha grossa em vez de N). Click no container expande os edges individuais.</p>
+            <p class="text-neutral-300 text-sm">Por padrêo, edges entre containers sêo agregadas (uma linha grossa em vez de N). Click no container expande os edges individuais.</p>
           </div>
         </div>
         <div class="flex items-start space-x-4">
@@ -280,7 +280,7 @@ React Flow render (parentId)</code></pre>
           <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
             <h4 class="font-semibold mb-2">Single depth (v1)</h4>
             <p class="text-sm text-neutral-400 mb-2">Sem nesting multi-nível</p>
-            <p class="text-neutral-300 text-sm">v1 explicitamente NÃO suporta containers dentro de containers. Mantém o React Flow parentId simples e o layout previsível.</p>
+            <p class="text-neutral-300 text-sm">v1 explicitamente NêO suporta containers dentro de containers. Mantém o React Flow parentId simples e o layout previsível.</p>
           </div>
         </div>
       </div>
@@ -295,7 +295,7 @@ React Flow render (parentId)</code></pre>
     <figure class="bg-dark-800 rounded-xl border border-purple-500/30 p-5 mb-12">
       <svg viewBox="0 0 800 540" role="img" aria-labelledby="svg33-title svg33-desc" class="w-full h-auto" style="color:#c084fc">
         <title id="svg33-title">Grafo em duas camadas (estrutural + domínio) e estratégia de escala visual</title>
-        <desc id="svg33-desc">Diagrama mostrando uma camada estrutural de nós e edges, com uma camada de domain knowledge sobreposta com badges; embaixo, comparação entre 100 nós com layout direto e 5000 nós com clustering aplicado.</desc>
+        <desc id="svg33-desc">Diagrama mostrando uma camada estrutural de nós e edges, com uma camada de domain knowledge sobreposta com badges; embaixo, comparaçêo entre 100 nós com layout direto e 5000 nós com clustering aplicado.</desc>
         <defs>
           <marker id="arrow33" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0,0 L10,5 L0,10 z" fill="#c084fc"/>
@@ -464,7 +464,7 @@ React Flow render (parentId)</code></pre>
         </g>
       </svg>
       <figcaption class="mt-3 text-sm text-neutral-400">
-        <span class="text-purple-400 font-semibold">Estrutural + domínio + clustering:</span> a camada de domain knowledge (badges roxos) é sobreposta ao grafo estrutural via edges <code>implements</code>. Para escalar até milhares de nós, o layer-detail troca renderização direta por <strong>containers folder/community</strong> e <strong>lazy two-stage layout</strong> (stage 1 = só containers, stage 2 = filhos sob demanda).
+        <span class="text-purple-400 font-semibold">Estrutural + domínio + clustering:</span> a camada de domain knowledge (badges roxos) é sobreposta ao grafo estrutural via edges <code>implements</code>. Para escalar até milhares de nós, o layer-detail troca renderizaçêo direta por <strong>containers folder/community</strong> e <strong>lazy two-stage layout</strong> (stage 1 = só containers, stage 2 = filhos sob demanda).
       </figcaption>
     </figure>
 
@@ -481,7 +481,7 @@ React Flow render (parentId)</code></pre>
         <ul class="space-y-3 text-neutral-300">
           <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><div><strong>Stage 1 — Containers only</strong>: ELK roda só nos containers e edges agregadas. Usuário já vê estrutura.</div></li>
           <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><div><strong>Stage 2 — Children on demand</strong>: ELK roda nos filhos de UM container quando o usuário clica, dá zoom &gt; 1.0, busca, focus ou tour hit.</div></li>
-          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><div><strong>Size memory</strong>: tamanhos de containers calculados em Stage 1 são memorizados para Stage 2 não realocar.</div></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><div><strong>Size memory</strong>: tamanhos de containers calculados em Stage 1 sêo memorizados para Stage 2 nêo realocar.</div></li>
         </ul>
       </div>
 
@@ -489,7 +489,7 @@ React Flow render (parentId)</code></pre>
         <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">📊</span> Invariantes preservadas</h3>
         <ul class="space-y-2 text-neutral-300">
           <li><strong>1. Layout pure & memoized:</strong> só recomputa quando topologia / persona / diff / focus / nodeTypeFilters mudam</li>
-          <li><strong>2. Visual state é overlay O(n) separado:</strong> selection, search highlight, tour highlight, hover NÃO triggam relayout</li>
+          <li><strong>2. Visual state é overlay O(n) separado:</strong> selection, search highlight, tour highlight, hover NêO triggam relayout</li>
         </ul>
       </div>
 
@@ -522,11 +522,11 @@ function triggerStage2(containerId) {
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
         <h2 class="text-2xl font-bold">⚠️ GraphIssue: falhas com mensagem, nunca tela em branco</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">Falhas de layout (ELK timeout, container vazio, edge inválida) são modeladas como <strong class="text-purple-400">GraphIssue</strong> — o mesmo tipo já usado pelo schema validator. Renderizam no banner do dashboard com mensagem actionable.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Falhas de layout (ELK timeout, container vazio, edge inválida) sêo modeladas como <strong class="text-purple-400">GraphIssue</strong> — o mesmo tipo já usado pelo schema validator. Renderizam no banner do dashboard com mensagem actionable.</p>
 
       <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">🚨</span> Anti-pattern: tela branca</h3>
-        <p class="text-neutral-300">Sem GraphIssue, ELK falha e o dashboard mostra nada. Usuário não sabe se o pipeline gerou grafo, se o schema falhou, ou se o layout deu pau. <strong>Mensagem clara &gt; silêncio sempre.</strong></p>
+        <p class="text-neutral-300">Sem GraphIssue, ELK falha e o dashboard mostra nada. Usuário nêo sabe se o pipeline gerou grafo, se o schema falhou, ou se o layout deu pau. <strong>Mensagem clara &gt; silêncio sempre.</strong></p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -534,7 +534,7 @@ function triggerStage2(containerId) {
           <h4 class="font-bold text-emerald-400 mb-4">✓ FAZER</h4>
           <ul class="space-y-3 text-neutral-300">
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>try/catch ao redor de cada ELK call</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Mensagem com container affected + sugestão</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Mensagem com container affected + sugestêo</span></li>
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Fallback para grafo flat se container falhar</span></li>
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Banner usa o mesmo componente do schema validator</span></li>
           </ul>
@@ -543,7 +543,7 @@ function triggerStage2(containerId) {
           <h4 class="font-bold text-red-400 mb-4">✗ EVITAR</h4>
           <ul class="space-y-3 text-neutral-300">
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>console.error e seguir como se nada → tela em branco</span></li>
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Telemetria remota (Sentry) — não-goal open-source</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Telemetria remota (Sentry) — nêo-goal open-source</span></li>
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Mensagens genéricas tipo "Erro" sem contexto</span></li>
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Crash do React por uncaught promise rejection</span></li>
           </ul>
@@ -572,7 +572,7 @@ function triggerStage2(containerId) {
 
       <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
-        <p class="text-neutral-300">Sem telemetria remota é decisão consciente — projeto open-source não envia dados de usuário por padrão. Usuários reportam via GitHub issue com o conteúdo do banner. Banner com <code>suggestion</code> = issue de qualidade.</p>
+        <p class="text-neutral-300">Sem telemetria remota é decisêo consciente — projeto open-source nêo envia dados de usuário por padrêo. Usuários reportam via GitHub issue com o conteúdo do banner. Banner com <code>suggestion</code> = issue de qualidade.</p>
       </div>
     </section>
 
@@ -581,7 +581,7 @@ function triggerStage2(containerId) {
       <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
         <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">🎓</span> Resumo do módulo (e da trilha)</h2>
         <div class="space-y-4 mb-8">
-          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">domain → flow → step</strong><span class="text-neutral-400"> — responde "o que faz", não só "como conecta"</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">domain → flow → step</strong><span class="text-neutral-400"> — responde "o que faz", nêo só "como conecta"</span></div></div>
           <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">domain-graph.json separado</strong><span class="text-neutral-400"> — schema compartilhado, toggle no dashboard</span></div></div>
           <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Dagre → ELK</strong><span class="text-neutral-400"> — em todas views structural-style</span></div></div>
           <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Folder containers + community fallback</strong><span class="text-neutral-400"> — âncora visual em 100+ nós</span></div></div>
@@ -590,7 +590,7 @@ function triggerStage2(containerId) {
         </div>
         <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
           <h3 class="font-semibold text-purple-400 mb-2">Você concluiu a Trilha 3 — Avançado 🚀</h3>
-          <p class="text-neutral-300">Agora você sabe estender, escalar e visualizar o Understand Anything em produção. Próximo passo: contribuir no <a href="https://github.com/inematds/u-any" target="_blank" class="text-purple-400 hover:underline">repositório no GitHub</a>.</p>
+          <p class="text-neutral-300">Agora você sabe estender, escalar e visualizar o Understand Anything em produçêo. Próximo passo: contribuir no <a href="https://github.com/inematds/u-any" target="_blank" class="text-purple-400 hover:underline">repositório no GitHub</a>.</p>
         </div>
         <div class="flex flex-col sm:flex-row gap-4">
           <a href="modulo-3-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo anterior</a>

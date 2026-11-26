@@ -1,12 +1,12 @@
 # /understand-knowledge — Design do Plugin de Base de Conhecimento Pessoal
 
-> 🇬🇧 Versão original em inglês: [2026-04-09-understand-knowledge-design.md](./2026-04-09-understand-knowledge-design.md)
+> 🇬🇧 Versêo original em inglês: [2026-04-09-understand-knowledge-design.md](./2026-04-09-understand-knowledge-design.md)
 
-## Visão Geral
+## Visêo Geral
 
 Uma nova skill `/understand-knowledge` dentro do plugin Understand Anything existente que recebe qualquer pasta de notas em markdown e produz um grafo de conhecimento interativo visualizado no dashboard existente.
 
-Inspirada no padrão LLM Wiki de Andrej Karpathy — onde um LLM compila e mantém uma wiki estruturada a partir de fontes brutas — esse plugin vai além adicionando descoberta de relações tipadas e visualização interativa de grafo que ferramentas como Obsidian e Logseq não fornecem.
+Inspirada no padrêo LLM Wiki de Andrej Karpathy — onde um LLM compila e mantém uma wiki estruturada a partir de fontes brutas — esse plugin vai além adicionando descoberta de relações tipadas e visualizaçêo interativa de grafo que ferramentas como Obsidian e Logseq nêo fornecem.
 
 ### Objetivos
 
@@ -16,11 +16,11 @@ Inspirada no padrão LLM Wiki de Andrej Karpathy — onde um LLM compila e mant�
 - Produzir um grafo de conhecimento com nós e arestas tipados
 - Visualizar no dashboard existente com layout, sidebar e reading mode específicos para conhecimento
 
-### Não-Objetivos
+### Nêo-Objetivos
 
-- Sincronização em tempo real com a ferramenta de base de conhecimento (Obsidian, Logseq, etc.)
-- Substituir a ferramenta PKM existente do usuário — isso é uma camada de visualização/análise sobre ela
-- Suportar formatos não-markdown (PDFs, bookmarks) no v1
+- Sincronizaçêo em tempo real com a ferramenta de base de conhecimento (Obsidian, Logseq, etc.)
+- Substituir a ferramenta PKM existente do usuário — isso é uma camada de visualizaçêo/análise sobre ela
+- Suportar formatos nêo-markdown (PDFs, bookmarks) no v1
 
 ---
 
@@ -28,7 +28,7 @@ Inspirada no padrão LLM Wiki de Andrej Karpathy — onde um LLM compila e mant�
 
 ### Novos Tipos de Nó (5)
 
-Adicionados à união `NodeType` existente (atualmente 16 tipos):
+Adicionados à uniêo `NodeType` existente (atualmente 16 tipos):
 
 ```typescript
 export type NodeType =
@@ -46,12 +46,12 @@ export type NodeType =
 | `article` | Uma página de wiki/nota — a unidade primária de conteúdo | "LLM Knowledge Bases.md" |
 | `entity` | Uma coisa nomeada: pessoa, ferramenta, paper, org, projeto | "Andrej Karpathy", "Obsidian" |
 | `topic` | Um cluster temático agrupando artigos relacionados | "Personal Knowledge Management" |
-| `claim` | Uma asserção específica, insight ou conclusão | "RAG loses context at chunk boundaries" |
-| `source` | Material raw/de referência do qual artigos são compilados | URL de um paper, referência de PDF raw |
+| `claim` | Uma asserçêo específica, insight ou conclusêo | "RAG loses context at chunk boundaries" |
+| `source` | Material raw/de referência do qual artigos sêo compilados | URL de um paper, referência de PDF raw |
 
 ### Novos Tipos de Aresta (6)
 
-Adicionados à união `EdgeType` existente (atualmente 29 tipos):
+Adicionados à uniêo `EdgeType` existente (atualmente 29 tipos):
 
 ```typescript
 export type EdgeType =
@@ -62,7 +62,7 @@ export type EdgeType =
   | "exemplifies" | "categorized_under" | "authored_by";
 ```
 
-| Tipo | Direção | Significado |
+| Tipo | Direçêo | Significado |
 |------|-----------|---------|
 | `cites` | article → source | Referencia ou se baseia em |
 | `contradicts` | claim → claim | Entra em conflito ou discorda |
@@ -107,13 +107,13 @@ export interface KnowledgeGraph {
 }
 ```
 
-O campo `kind` diz ao dashboard qual layout, sidebar e estilização visual usar. Para compatibilidade retroativa, grafos sem campo `kind` defaultam para `"codebase"`.
+O campo `kind` diz ao dashboard qual layout, sidebar e estilizaçêo visual usar. Para compatibilidade retroativa, grafos sem campo `kind` defaultam para `"codebase"`.
 
 ---
 
-## Detecção de Formato e Guias de Formato
+## Detecçêo de Formato e Guias de Formato
 
-### Lógica de Auto-Detecção
+### Lógica de Auto-Detecçêo
 
 Escaneia o diretório alvo por arquivos/padrões de assinatura. Ordem de prioridade (primeiro match vence):
 
@@ -163,10 +163,10 @@ Cada guia de formato cobre:
 
 ### Processo de Autoria dos Guias de Formato
 
-Guias de formato devem ser pesquisa-embasados. Durante a implementação, o agente que constrói cada guia deve:
-1. Ler a documentação oficial daquele formato (Obsidian Help, Logseq docs, Dendron wiki, Foam docs, etc.)
+Guias de formato devem ser pesquisa-embasados. Durante a implementaçêo, o agente que constrói cada guia deve:
+1. Ler a documentaçêo oficial daquele formato (Obsidian Help, Logseq docs, Dendron wiki, Foam docs, etc.)
 2. Estudar exemplos reais da estrutura daquele formato
-3. Escrever o guia com base em comportamento verificado, não em suposições
+3. Escrever o guia com base em comportamento verificado, nêo em suposições
 
 ---
 
@@ -184,19 +184,19 @@ knowledge-scanner → format-detector → article-analyzer → relationship-buil
 | `format-detector` | Manifest de arquivos + estrutura de diretório | Formato detectado + hints de parsing específicos do formato | `inherit` |
 | `article-analyzer` | Arquivo `.md` individual + guia de formato | Nós por arquivo (article, entities, claims) + arestas explícitas (wikilinks, tags) | `inherit` |
 | `relationship-builder` | Todos os resultados por arquivo | Arestas implícitas cross-file (builds_on, contradicts, categorized_under) + agrupamento de tópicos + camadas | `inherit` |
-| `graph-reviewer` | Grafo montado | Grafo validado — entidades dedup-ed, pesos de aresta consistentes, detecção de órfãos | `inherit` |
+| `graph-reviewer` | Grafo montado | Grafo validado — entidades dedup-ed, pesos de aresta consistentes, detecçêo de órfêos | `inherit` |
 
 ### Diferenças-Chave do Pipeline de Codebase
 
-- **Sem tree-sitter** — parsing de markdown é mais simples, principalmente regex + interpretação por LLM
-- **format-detector** substitui detecção de framework — escolhe o guia de formato correto
+- **Sem tree-sitter** — parsing de markdown é mais simples, principalmente regex + interpretaçêo por LLM
+- **format-detector** substitui detecçêo de framework — escolhe o guia de formato correto
 - **article-analyzer** substitui file-analyzer — extrai conceitos de conhecimento em vez de estrutura de código
 - **relationship-builder** é o passo LLM pesado — descobre conexões implícitas cross-file que links explícitos perdem
 - **graph-reviewer** permanece similar — valida o grafo montado por consistência
 
 ### Arquivos Intermediários
 
-Mesmo padrão da análise de codebase:
+Mesmo padrêo da análise de codebase:
 
 ```
 .understand-anything/intermediate/
@@ -207,7 +207,7 @@ Mesmo padrão da análise de codebase:
   knowledge-graph.json         — final assembled graph
 ```
 
-Arquivos intermediários são limpos após a montagem do grafo (igual ao fluxo de codebase).
+Arquivos intermediários sêo limpos após a montagem do grafo (igual ao fluxo de codebase).
 
 ### Modo Incremental (`--ingest`)
 
@@ -219,17 +219,17 @@ Quando o usuário roda `/understand-knowledge --ingest path/to/new-source.md`:
 4. **relationship-builder** — roda em novos nós contra o grafo existente, encontra conexões com o que já está lá
 5. **graph-reviewer** — valida o resultado mesclado
 
-Nós existentes são preservados; apenas novos nós/arestas são adicionados ou atualizados.
+Nós existentes sêo preservados; apenas novos nós/arestas sêo adicionados ou atualizados.
 
 ---
 
 ## Mudanças no Dashboard
 
-Todas as mudanças são escopadas a grafos com `"kind": "knowledge"`.
+Todas as mudanças sêo escopadas a grafos com `"kind": "knowledge"`.
 
 ### Layout de Fluxo Vertical
 
-- Default para layout vertical top-down (como a visualização atual de fluxo domain/business)
+- Default para layout vertical top-down (como a visualizaçêo atual de fluxo domain/business)
 - Tópicos no topo → artigos no meio → entities/claims/sources embaixo
 - Lê-se como uma hierarquia de conhecimento: temas amplos fluem para baixo até as especificidades
 - Usuário ainda pode trocar para layout horizontal ou force-directed via controles
@@ -238,23 +238,23 @@ Todas as mudanças são escopadas a grafos com `"kind": "knowledge"`.
 
 Substitui o NodeInfo quando um grafo de conhecimento é carregado:
 
-| Seleção | Sidebar Mostra |
+| Seleçêo | Sidebar Mostra |
 |-----------|---------------|
 | Nada selecionado | ProjectOverview: formato detectado, total de articles/entities/topics/claims/sources |
 | Nó article | Título, summary, tags, metadados de frontmatter, lista de backlinks (clicáveis), links de saída, tópicos relacionados |
 | Nó entity | Nome, tipo (person/tool/paper/org), artigos que mencionam, relações com outras entities |
-| Nó topic | Descrição, artigos filhos, entities filhas, conexões cross-topic |
-| Nó claim | Texto da asserção, artigos que sustentam, claims contradizentes (se houver), score de confiança |
-| Nó source | URL/path original, artigos que citam, data de ingestão |
+| Nó topic | Descriçêo, artigos filhos, entities filhas, conexões cross-topic |
+| Nó claim | Texto da asserçêo, artigos que sustentam, claims contradizentes (se houver), score de confiança |
+| Nó source | URL/path original, artigos que citam, data de ingestêo |
 
 ### Reading Mode
 
-- Clicar em um nó article dispara um painel de leitura que desliza de baixo (mesmo padrão do overlay atual de visualizador de código)
+- Clicar em um nó article dispara um painel de leitura que desliza de baixo (mesmo padrêo do overlay atual de visualizador de código)
 - Mostra o markdown completo compilado renderizado como HTML
 - Inclui uma mini sidebar de backlinks dentro do painel
 - Clicar em um `[[wikilink]]` ou referência de entity no painel de leitura navega o grafo até aquele nó
 
-### Estilização Visual de Nó
+### Estilizaçêo Visual de Nó
 
 | Tipo de Nó | Forma | Acento de Cor |
 |-----------|-------|-------------|
@@ -264,7 +264,7 @@ Substitui o NodeInfo quando um grafo de conhecimento é carregado:
 | `claim` | Diamante | Verde/vermelho dependendo de contradições |
 | `source` | Quadrado pequeno | Cinza |
 
-### Estilização Visual de Aresta
+### Estilizaçêo Visual de Aresta
 
 | Tipo de Aresta | Estilo |
 |-----------|-------|
@@ -328,10 +328,10 @@ skills/understand-knowledge/
 
 ## O Que Isso Habilita Que Nada Mais Faz
 
-| Ferramentas Existentes | Limitação | Nossa Vantagem |
+| Ferramentas Existentes | Limitaçêo | Nossa Vantagem |
 |---------------|-----------|---------------|
 | Graph view do Obsidian | Arestas sem tipo — todos os links parecem iguais | Arestas tipadas: cites, contradicts, builds_on |
 | Graph do Logseq | Só mostra links explícitos | LLM descobre relações implícitas |
-| Todas as ferramentas PKM | Suportam só um formato | Suporte cross-format com auto-detecção |
-| LLM Wiki do Karpathy | Wiki plana de texto, sem visualização | Dashboard de grafo interativo com tours guiados |
+| Todas as ferramentas PKM | Suportam só um formato | Suporte cross-format com auto-detecçêo |
+| LLM Wiki do Karpathy | Wiki plana de texto, sem visualizaçêo | Dashboard de grafo interativo com tours guiados |
 | Nenhuma | Sem tours de grafo de conhecimento | Modo tour percorre uma base de conhecimento passo a passo |

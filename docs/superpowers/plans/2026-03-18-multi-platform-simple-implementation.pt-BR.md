@@ -1,14 +1,14 @@
-# Plano de Implementação Multi-Plataforma Simples
+# Plano de Implementaçêo Multi-Plataforma Simples
 
-> 🇬🇧 Versão original em inglês: [2026-03-18-multi-platform-simple-implementation.md](./2026-03-18-multi-platform-simple-implementation.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-18-multi-platform-simple-implementation.md](./2026-03-18-multi-platform-simple-implementation.md)
 
 > **Para o Claude:** SUB-SKILL OBRIGATÓRIA: Use superpowers:executing-plans para implementar este plano tarefa por tarefa.
 
 **Objetivo:** Fazer as skills do Understand-Anything funcionarem em Codex, OpenClaw, OpenCode e Cursor — os mesmos arquivos em todo lugar, sem etapa de build.
 
-**Arquitetura:** Mover 5 agents de pipeline para `skills/understand/` como templates de prompt. Criar um agent reutilizável `knowledge-graph-guide`. Mover diretórios de configuração específicos de cada plataforma para a raiz do repositório, para auto-descoberta. Adicionar descritores de plugin para Cursor e Claude.
+**Arquitetura:** Mover 5 agents de pipeline para `skills/understand/` como templates de prompt. Criar um agent reutilizável `knowledge-graph-guide`. Mover diretórios de configuraçêo específicos de cada plataforma para a raiz do repositório, para auto-descoberta. Adicionar descritores de plugin para Cursor e Claude.
 
-**Tech Stack:** Markdown (SKILL.md, INSTALL.md), frontmatter YAML, JSON (descritores de plugin), Bash (comandos de symlink/clone nos docs de instalação).
+**Tech Stack:** Markdown (SKILL.md, INSTALL.md), frontmatter YAML, JSON (descritores de plugin), Bash (comandos de symlink/clone nos docs de instalaçêo).
 
 **Documento de Design:** `docs/plans/2026-03-18-multi-platform-simple-design.md`
 
@@ -23,7 +23,7 @@
 - Mover: `understand-anything-plugin/agents/tour-builder.md` → `understand-anything-plugin/skills/understand/tour-builder-prompt.md`
 - Mover: `understand-anything-plugin/agents/graph-reviewer.md` → `understand-anything-plugin/skills/understand/graph-reviewer-prompt.md`
 
-**Passo 1: Copiar cada arquivo de agent para a nova localização**
+**Passo 1: Copiar cada arquivo de agent para a nova localizaçêo**
 
 Para cada um dos 5 arquivos, copie de `agents/` para `skills/understand/` com o novo nome.
 
@@ -54,14 +54,14 @@ Para:
 You are a meticulous project inventory specialist...
 ```
 
-Aplique este padrão aos 5 arquivos:
+Aplique este padrêo aos 5 arquivos:
 - `project-scanner-prompt.md` — "Used by `/understand` Phase 1"
 - `file-analyzer-prompt.md` — "Used by `/understand` Phase 2"
 - `architecture-analyzer-prompt.md` — "Used by `/understand` Phase 4"
 - `tour-builder-prompt.md` — "Used by `/understand` Phase 5"
 - `graph-reviewer-prompt.md` — "Used by `/understand` Phase 6"
 
-Mantenha o restante do conteúdo do arquivo (as instruções do corpo) exatamente como estão.
+Mantenha o restante do conteúdo do arquivo (as instruções do corpo) exatamente como estêo.
 
 **Passo 3: Deletar os arquivos de agent originais**
 
@@ -70,7 +70,7 @@ cd understand-anything-plugin
 rm agents/project-scanner.md agents/file-analyzer.md agents/architecture-analyzer.md agents/tour-builder.md agents/graph-reviewer.md
 ```
 
-**Passo 4: Verificar que os arquivos existem na nova localização**
+**Passo 4: Verificar que os arquivos existem na nova localizaçêo**
 
 ```bash
 ls understand-anything-plugin/skills/understand/
@@ -87,7 +87,7 @@ git commit -m "refactor: move pipeline agents into skills/understand/ as prompt 
 
 ---
 
-### Tarefa 2: Atualizar referências de dispatch no SKILL.md com injeção de contexto
+### Tarefa 2: Atualizar referências de dispatch no SKILL.md com injeçêo de contexto
 
 **Arquivos:**
 - Modificar: `understand-anything-plugin/skills/understand/SKILL.md`
@@ -98,7 +98,7 @@ Leia `understand-anything-plugin/skills/understand/SKILL.md` na íntegra.
 
 **Passo 2: Atualizar Fase 0 — adicionar coleta de contexto**
 
-Após a tabela de lógica de decisão (linha ~47), adicione uma nova seção para coletar contexto do projeto que será injetado nas fases seguintes:
+Após a tabela de lógica de decisêo (linha ~47), adicione uma nova seçêo para coletar contexto do projeto que será injetado nas fases seguintes:
 
 ```markdown
 7. **Collect project context for subagent injection:**
@@ -236,7 +236,7 @@ Dispatch a subagent using the prompt template at `./tour-builder-prompt.md`. Rea
 Pass these parameters in the dispatch prompt:
 ```
 
-**Passo 7: Atualizar dispatch da Fase 6 — injetar resultados do scan para validação cruzada**
+**Passo 7: Atualizar dispatch da Fase 6 — injetar resultados do scan para validaçêo cruzada**
 
 Substitua a linha de dispatch da Fase 6:
 ```
@@ -262,7 +262,7 @@ Por:
 Pass these parameters in the dispatch prompt:
 ```
 
-**Passo 8: Atualizar a seção de Error Handling**
+**Passo 8: Atualizar a seçêo de Error Handling**
 
 Mude:
 ```
@@ -277,7 +277,7 @@ Para:
 
 **Passo 9: Verificar que nenhuma referência a dispatch de agent nomeado permaneceu**
 
-Busque por "Dispatch the **" no arquivo — não deve encontrar nenhum resultado.
+Busque por "Dispatch the **" no arquivo — nêo deve encontrar nenhum resultado.
 
 **Passo 10: Commit**
 
@@ -293,7 +293,7 @@ git commit -m "refactor: update SKILL.md to dispatch subagents with context inje
 **Arquivos:**
 - Criar: `understand-anything-plugin/agents/knowledge-graph-guide.md`
 
-**Passo 1: Escrever a definição do agent**
+**Passo 1: Escrever a definiçêo do agent**
 
 Crie `understand-anything-plugin/agents/knowledge-graph-guide.md`:
 
@@ -401,7 +401,7 @@ git mv understand-anything-plugin/.openclaw ./.openclaw
 git rm -r understand-anything-plugin/.cursor/
 ```
 
-**Passo 3: Verificar que os caminhos dos symlinks estão corretos**
+**Passo 3: Verificar que os caminhos dos symlinks estêo corretos**
 
 Leia cada INSTALL.md. Os caminhos dos symlinks devem apontar para `understand-anything-plugin/skills` — isso continua correto, já que o diretório de skills permanece dentro do wrapper do plugin.
 
@@ -488,9 +488,9 @@ OLD: .../refs/heads/main/understand-anything-plugin/.opencode/INSTALL.md
 NEW: .../refs/heads/main/.opencode/INSTALL.md
 ```
 
-**Passo 3: Substituir a seção do Cursor**
+**Passo 3: Substituir a seçêo do Cursor**
 
-Substitua a seção de instalação dirigida por IA do Cursor por:
+Substitua a seçêo de instalaçêo dirigida por IA do Cursor por:
 
 ```markdown
 ### Cursor
@@ -543,7 +543,7 @@ ls understand-anything-plugin/.openclaw/ 2>/dev/null # should fail
 pnpm --filter @understand-anything/core build && pnpm --filter @understand-anything/core test
 ```
 
-Todos os testes devem passar — só arquivos de config foram movidos, não código-fonte.
+Todos os testes devem passar — só arquivos de config foram movidos, nêo código-fonte.
 
 **Passo 5: Verificar que o marketplace.json está inalterado**
 
@@ -553,7 +553,7 @@ cat .claude-plugin/marketplace.json | grep source
 
 Esperado: `"source": "./understand-anything-plugin"` — inalterado, ainda correto.
 
-**Passo 6: Verificar que não há URLs raw do GitHub obsoletas**
+**Passo 6: Verificar que nêo há URLs raw do GitHub obsoletas**
 
 ```bash
 grep -r "understand-anything-plugin/\." README.md

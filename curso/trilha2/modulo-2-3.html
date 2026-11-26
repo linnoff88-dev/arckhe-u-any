@@ -93,7 +93,7 @@
       <h1 class="text-3xl sm:text-4xl font-bold mb-4">🎨 O dashboard: React Flow, Zustand, sidebar e code viewer</h1>
       <p class="text-lg text-neutral-400 max-w-3xl">
         O front-end é onde o usuário <strong class="text-blue-400">vive</strong>. Como o grafo renderiza, como o estado é organizado,
-        como arquivos são servidos com segurança e como o viewer slide-up vira modal full-screen — sem Monaco, sem ChatPanel.
+        como arquivos sêo servidos com segurança e como o viewer slide-up vira modal full-screen — sem Monaco, sem ChatPanel.
       </p>
       <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
@@ -106,15 +106,15 @@
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <!-- GIF: dashboard em ação -->
+    <!-- GIF: dashboard em açêo -->
     <figure class="mb-10">
       <div class="rounded-xl overflow-hidden border border-blue-500/30 bg-dark-800">
         <img src="../assets/overview-structural.gif" loading="lazy"
-             alt="Animação do dashboard mostrando o grafo estrutural sendo navegado: pan, zoom, seleção de nós e sidebar reagindo"
+             alt="Animaçêo do dashboard mostrando o grafo estrutural sendo navegado: pan, zoom, seleçêo de nós e sidebar reagindo"
              class="w-full h-auto block">
       </div>
       <figcaption class="text-center text-sm text-neutral-400 mt-3">
-        O dashboard em ação: navegação no grafo estrutural, seleção de nós e a sidebar reagindo em tempo real. É exatamente o que você vai destrinchar abaixo.
+        O dashboard em açêo: navegaçêo no grafo estrutural, seleçêo de nós e a sidebar reagindo em tempo real. É exatamente o que você vai destrinchar abaixo.
       </figcaption>
     </figure>
 
@@ -143,7 +143,7 @@
           <line x1="358" y1="186" x2="430" y2="246"/>
           <line x1="438" y1="262" x2="408" y2="282"/>
         </g>
-        <text x="285" y="325" text-anchor="middle" fill="#6b7280" font-size="10">pan · zoom · seleção · layout pluggable</text>
+        <text x="285" y="325" text-anchor="middle" fill="#6b7280" font-size="10">pan · zoom · seleçêo · layout pluggable</text>
         <!-- sidebar 360px à direita -->
         <rect x="550" y="80" width="220" height="260" rx="6" fill="none" stroke="currentColor" stroke-width="2"/>
         <text x="660" y="105" text-anchor="middle" fill="currentColor" font-size="13" font-weight="700">Sidebar 360px</text>
@@ -161,11 +161,11 @@
         <text x="570" y="258" fill="#bfdbfe" font-size="11" font-weight="600">LearnPanel (persona Learn)</text>
         <rect x="570" y="270" width="180" height="55" rx="4" fill="none" stroke="#6b7280" stroke-width="1" stroke-dasharray="3 3"/>
         <text x="660" y="293" text-anchor="middle" fill="#6b7280" font-size="10">tour ativo · próximo stop</text>
-        <text x="660" y="310" text-anchor="middle" fill="#6b7280" font-size="10">explicação contextual</text>
+        <text x="660" y="310" text-anchor="middle" fill="#6b7280" font-size="10">explicaçêo contextual</text>
         <!-- code viewer slide-up -->
         <rect x="30" y="350" width="510" height="50" rx="6" fill="#1e3a8a" stroke="currentColor" stroke-width="2"/>
         <text x="285" y="372" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Code viewer (prism-react-renderer) ⬆</text>
-        <text x="285" y="390" text-anchor="middle" fill="#bfdbfe" font-size="10">slide-up ao clicar em file node · botão expande para modal full-screen</text>
+        <text x="285" y="390" text-anchor="middle" fill="#bfdbfe" font-size="10">slide-up ao clicar em file node · botêo expande para modal full-screen</text>
         <!-- seta indicando slide-up -->
         <text x="285" y="345" text-anchor="middle" fill="#6b7280" font-size="10">▲ sobe pela base</text>
         <!-- legenda dimensoes -->
@@ -192,8 +192,8 @@
         <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">🎯</span> Anatomia do store</h3>
         <p class="text-neutral-300 mb-4">Slices independentes que se compõem num único store:</p>
         <ul class="space-y-2 text-neutral-300">
-          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><code>graphSlice</code> — nós, arestas, validação</span></li>
-          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><code>selectionSlice</code> — nó selecionado, histórico de navegação</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><code>graphSlice</code> — nós, arestas, validaçêo</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><code>selectionSlice</code> — nó selecionado, histórico de navegaçêo</span></li>
           <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><code>viewerSlice</code> — aberto/fechado, expandido (modal), arquivo atual</span></li>
           <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><code>personaSlice</code> — Explore, Learn, Compose</span></li>
           <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><code>searchSlice</code> — query, resultados, índices</span></li>
@@ -227,12 +227,12 @@
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
         O dev server expõe um único endpoint: <code class="text-blue-400">/file-content.json?path=...</code>. Ele retorna o conteúdo do arquivo
-        — mas <strong>com duas camadas de defesa</strong>: <strong class="text-blue-400">access token</strong> de sessão + <strong class="text-blue-400">path allowlist</strong>
+        — mas <strong>com duas camadas de defesa</strong>: <strong class="text-blue-400">access token</strong> de sessêo + <strong class="text-blue-400">path allowlist</strong>
         derivada do grafo. Sem token = 401. Path fora da allowlist = 403.
       </p>
 
       <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">🚨</span> Por que NÃO confiar só no path?</h3>
+        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">🚨</span> Por que NêO confiar só no path?</h3>
         <p class="text-neutral-300 mb-3">Sem allowlist, qualquer um com acesso ao server pode fazer <code>?path=../../../etc/passwd</code>. Validar "começa com cwd" é frágil — symlinks, caminhos canônicos, edge cases sem fim.</p>
         <p class="text-neutral-300">A allowlist <strong>derivada do grafo</strong> resolve: só serve o que aparece como nó <code>file</code> no <code>knowledge-graph.json</code>. Defense in depth.</p>
       </div>
@@ -243,7 +243,7 @@
           <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
             <h4 class="font-semibold mb-2">Token gerado no boot</h4>
             <p class="text-sm text-neutral-400 mb-3">Random 32 bytes</p>
-            <p class="text-neutral-300 text-sm">Quando <code>/understand-dashboard</code> roda, gera um token único por sessão e injeta no HTML inicial. Browser usa em todas as fetches.</p>
+            <p class="text-neutral-300 text-sm">Quando <code>/understand-dashboard</code> roda, gera um token único por sessêo e injeta no HTML inicial. Browser usa em todas as fetches.</p>
           </div>
         </div>
         <div class="flex items-start space-x-4">
@@ -265,7 +265,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Access token</h4><p class="text-xs text-neutral-400">Por sessão</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Access token</h4><p class="text-xs text-neutral-400">Por sessêo</p></div>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Path allowlist</h4><p class="text-xs text-neutral-400">Derivada do grafo</p></div>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Defense in depth</h4><p class="text-xs text-neutral-400">Duas camadas</p></div>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Canonical paths</h4><p class="text-xs text-neutral-400">Mata symlink trick</p></div>
@@ -303,7 +303,7 @@
 
       <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
-        <p class="text-neutral-300">Trocar de aba <strong>não perde a seleção</strong>. NodeInfo continua mostrando o nó selecionado mesmo se você for até Files e voltar. Isso é decisão consciente: persona Learn precisa transitar entre os dois sem reset.</p>
+        <p class="text-neutral-300">Trocar de aba <strong>nêo perde a seleçêo</strong>. NodeInfo continua mostrando o nó selecionado mesmo se você for até Files e voltar. Isso é decisêo consciente: persona Learn precisa transitar entre os dois sem reset.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -321,9 +321,9 @@
         <h2 class="text-2xl font-bold">📖 Code viewer: slide-up, prism, modal opcional</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
-        Clicou num nó tipo <code>file</code>? Um painel sobe pela base da tela. Quer ver fullscreen? Botão de expand promove pra modal.
+        Clicou num nó tipo <code>file</code>? Um painel sobe pela base da tela. Quer ver fullscreen? Botêo de expand promove pra modal.
         Por dentro: <strong class="text-blue-400">prism-react-renderer</strong> faz syntax highlight leve, conteúdo vem via <code>/file-content.json</code>.
-        Sem Monaco, sem 2 MB de bundle extra, sem features de IDE que ninguém usa em "ler-não-editar".
+        Sem Monaco, sem 2 MB de bundle extra, sem features de IDE que ninguém usa em "ler-nêo-editar".
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -332,15 +332,15 @@
           <ul class="space-y-2 text-neutral-300 text-sm">
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Syntax highlight (prism, ~30kb)</span></li>
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Slide-up transition (CSS, sem libs)</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Botão expand → modal full-screen</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Botêo expand → modal full-screen</span></li>
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Line numbers + highlight do range relevante</span></li>
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Fetch gated com access token</span></li>
           </ul>
         </div>
         <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
-          <h4 class="font-bold text-red-400 mb-4">✗ O que NÃO tem</h4>
+          <h4 class="font-bold text-red-400 mb-4">✗ O que NêO tem</h4>
           <ul class="space-y-2 text-neutral-300 text-sm">
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Edição (read-only por design)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Ediçêo (read-only por design)</span></li>
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Monaco / VS Code semantics</span></li>
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>LSP / IntelliSense</span></li>
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Múltiplas tabs/buffers</span></li>
@@ -353,15 +353,15 @@
         <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">📊</span> Por que Monaco saiu</h3>
         <ul class="space-y-2 text-neutral-300">
           <li><strong>Bundle:</strong> Monaco ~2 MB gzipped; prism-react-renderer ~30 KB</li>
-          <li><strong>Contexto:</strong> usuário quer entender, não editar — features de IDE atrapalham</li>
-          <li><strong>Manutenção:</strong> theme tokens duplos (Monaco + Tailwind) viram fonte de bugs</li>
+          <li><strong>Contexto:</strong> usuário quer entender, nêo editar — features de IDE atrapalham</li>
+          <li><strong>Manutençêo:</strong> theme tokens duplos (Monaco + Tailwind) viram fonte de bugs</li>
           <li><strong>Performance:</strong> Monaco demora pra montar em arquivos pequenos — overhead inútil</li>
         </ul>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">prism</h4><p class="text-xs text-neutral-400">Highlight leve</p></div>
-        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Slide-up</h4><p class="text-xs text-neutral-400">Transição CSS</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Slide-up</h4><p class="text-xs text-neutral-400">Transiçêo CSS</p></div>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Modal escalation</h4><p class="text-xs text-neutral-400">Mesmo componente</p></div>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Read-only</h4><p class="text-xs text-neutral-400">Por design</p></div>
       </div>
@@ -374,7 +374,7 @@
         <h2 class="text-2xl font-bold">🎭 Dark luxury: preto profundo, ouro contido</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
-        Identidade visual não é decoração. <strong class="text-blue-400">Preto <code>#0a0a0a</code></strong> faz o grafo brilhar.
+        Identidade visual nêo é decoraçêo. <strong class="text-blue-400">Preto <code>#0a0a0a</code></strong> faz o grafo brilhar.
         <strong class="text-blue-400">Acento gold <code>#d4a574</code></strong> marca o que importa sem gritar. <strong class="text-blue-400">DM Serif Display</strong>
         nos títulos sinaliza autoridade; Inter no resto entrega utilidade.
       </p>
@@ -392,7 +392,7 @@
 
       <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
-        <p class="text-neutral-300">Tailwind v4 deixa você definir tokens direto no CSS sem <code>tailwind.config.js</code>. Centralizou? Trocar a paleta inteira é uma única alteração em <code>styles/theme.css</code>. Evita o pesadelo de "achar todos os hex hard-coded".</p>
+        <p class="text-neutral-300">Tailwind v4 deixa você definir tokens direto no CSS sem <code>tailwind.config.js</code>. Centralizou? Trocar a paleta inteira é uma única alteraçêo em <code>styles/theme.css</code>. Evita o pesadelo de "achar todos os hex hard-coded".</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -417,10 +417,10 @@
       <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">🚨</span> Cenários típicos</h3>
         <ul class="space-y-2 text-neutral-300">
-          <li><strong>Versão do schema avançou:</strong> grafo antigo + dashboard novo. Banner: "regenere com <code>/understand</code>".</li>
-          <li><strong>Edição manual quebrada:</strong> alguém abriu o JSON pra "ajustar" e errou um campo.</li>
+          <li><strong>Versêo do schema avançou:</strong> grafo antigo + dashboard novo. Banner: "regenere com <code>/understand</code>".</li>
+          <li><strong>Ediçêo manual quebrada:</strong> alguém abriu o JSON pra "ajustar" e errou um campo.</li>
           <li><strong>Merge conflict mal resolvido:</strong> chaves duplicadas, sintaxe inválida.</li>
-          <li><strong>Aresta órfã:</strong> source/target apontando pra nó que sumiu.</li>
+          <li><strong>Aresta órfê:</strong> source/target apontando pra nó que sumiu.</li>
         </ul>
       </div>
 
@@ -449,7 +449,7 @@ store.setGraph(result.data);</code></pre>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Zod schema</h4><p class="text-xs text-neutral-400">Exportado pelo core</p></div>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">safeParse</h4><p class="text-xs text-neutral-400">Sem throw</p></div>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Error banner</h4><p class="text-xs text-neutral-400">Topo da tela</p></div>
-        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Mensagem útil</h4><p class="text-xs text-neutral-400">Path + sugestão</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Mensagem útil</h4><p class="text-xs text-neutral-400">Path + sugestêo</p></div>
       </div>
     </section>
 

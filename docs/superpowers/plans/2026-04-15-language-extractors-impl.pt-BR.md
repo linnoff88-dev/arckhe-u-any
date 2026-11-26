@@ -1,12 +1,12 @@
-# Plano de Implementação da Arquitetura de Extratores Específicos por Linguagem
+# Plano de Implementaçêo da Arquitetura de Extratores Específicos por Linguagem
 
-> 🇬🇧 Versão original em inglês: [2026-04-15-language-extractors-impl.md](./2026-04-15-language-extractors-impl.md)
+> 🇬🇧 Versêo original em inglês: [2026-04-15-language-extractors-impl.md](./2026-04-15-language-extractors-impl.md)
 
 > **Para workers agênticos:** SUB-SKILL OBRIGATÓRIA: Use superpowers:subagent-driven-development (recomendado) ou superpowers:executing-plans para implementar este plano tarefa a tarefa. Os passos usam sintaxe de checkbox (`- [ ]`) para acompanhamento.
 
-**Objetivo:** (1) Desacoplar a lógica de extração de AST dos tipos de nó específicos de TS/JS para que 8 linguagens de código adicionais (Python, Go, Rust, Java, Ruby, PHP, C/C++, C#) ganhem análise estrutural com tree-sitter. Swift e Kotlin estão excluídos — não há pacotes de gramática WASM disponíveis. (2) Substituir a geração ad-hoc de scripts regex feita pelo agente file-analyzer por um script de extração tree-sitter pré-construído e determinístico.
+**Objetivo:** (1) Desacoplar a lógica de extraçêo de AST dos tipos de nó específicos de TS/JS para que 8 linguagens de código adicionais (Python, Go, Rust, Java, Ruby, PHP, C/C++, C#) ganhem análise estrutural com tree-sitter. Swift e Kotlin estêo excluídos — nêo há pacotes de gramática WASM disponíveis. (2) Substituir a geraçêo ad-hoc de scripts regex feita pelo agente file-analyzer por um script de extraçêo tree-sitter pré-construído e determinístico.
 
-**Arquitetura:** Introduzir uma interface `LanguageExtractor` que cada linguagem implementa. O `TreeSitterPlugin` delega a extração ao extractor registrado para a linguagem do arquivo. Um script `extract-structure.mjs` empacotado em `skills/understand/` usa o `PluginRegistry` (que inclui tanto o `TreeSitterPlugin` quanto os parsers não-código) para fornecer extração estrutural determinística para o agente file-analyzer — substituindo a abordagem atual em que o LLM escreve scripts regex descartáveis a cada execução.
+**Arquitetura:** Introduzir uma interface `LanguageExtractor` que cada linguagem implementa. O `TreeSitterPlugin` delega a extraçêo ao extractor registrado para a linguagem do arquivo. Um script `extract-structure.mjs` empacotado em `skills/understand/` usa o `PluginRegistry` (que inclui tanto o `TreeSitterPlugin` quanto os parsers nêo-código) para fornecer extraçêo estrutural determinística para o agente file-analyzer — substituindo a abordagem atual em que o LLM escreve scripts regex descartáveis a cada execuçêo.
 
 **Stack:** web-tree-sitter (WASM), TypeScript, Vitest
 
@@ -145,23 +145,23 @@ git commit -m "feat: add LanguageExtractor interface and shared base utilities"
 
 ---
 
-### Tarefa 2: Mover lógica de extração TS/JS para TypeScriptExtractor
+### Tarefa 2: Mover lógica de extraçêo TS/JS para TypeScriptExtractor
 
 **Arquivos:**
 - Criar: `packages/core/src/plugins/extractors/typescript-extractor.ts`
 - Modificar: `packages/core/src/plugins/tree-sitter-plugin.ts`
 
-Esta é uma refatoração pura. Todos os testes existentes devem continuar passando com zero alterações.
+Esta é uma refatoraçêo pura. Todos os testes existentes devem continuar passando com zero alterações.
 
 - [ ] **Passo 1: Criar TypeScriptExtractor**
 
-Mova todos os métodos de extração específicos de TS/JS (`extractFunction`, `extractClass`, `extractVariableDeclarations`, `extractImport`, `processExportStatement`, `extractParams`, `extractReturnType`, `extractImportSpecifiers`, e o walker do grafo de chamadas) de `tree-sitter-plugin.ts` para `typescript-extractor.ts`, implementando a interface `LanguageExtractor`.
+Mova todos os métodos de extraçêo específicos de TS/JS (`extractFunction`, `extractClass`, `extractVariableDeclarations`, `extractImport`, `processExportStatement`, `extractParams`, `extractReturnType`, `extractImportSpecifiers`, e o walker do grafo de chamadas) de `tree-sitter-plugin.ts` para `typescript-extractor.ts`, implementando a interface `LanguageExtractor`.
 
-Os `languageIds` devem ser `["typescript", "javascript"]`. NÃO inclua `"tsx"` — é uma chave sintética interna ao `TreeSitterPlugin` para seleção de gramática, não um `LanguageConfig.id`. O mapeamento tsx→typescript é tratado em `getExtractor()` abaixo.
+Os `languageIds` devem ser `["typescript", "javascript"]`. NêO inclua `"tsx"` — é uma chave sintética interna ao `TreeSitterPlugin` para seleçêo de gramática, nêo um `LanguageConfig.id`. O mapeamento tsx→typescript é tratado em `getExtractor()` abaixo.
 
 - [ ] **Passo 2: Refatorar TreeSitterPlugin para usar extractors**
 
-Substitua a lógica de extração hardcoded em `TreeSitterPlugin` por despacho via extractor:
+Substitua a lógica de extraçêo hardcoded em `TreeSitterPlugin` por despacho via extractor:
 
 ```typescript
 // In TreeSitterPlugin
@@ -206,7 +206,7 @@ analyzeFile(filePath: string, content: string): StructuralAnalysis {
 }
 ```
 
-O método `extractCallGraph()` segue o mesmo padrão — o ciclo de vida do parser deve ser gerenciado identicamente:
+O método `extractCallGraph()` segue o mesmo padrêo — o ciclo de vida do parser deve ser gerenciado identicamente:
 
 ```typescript
 extractCallGraph(filePath: string, content: string): CallGraphEntry[] {
@@ -248,7 +248,7 @@ git commit -m "refactor: move TS/JS extraction logic to TypeScriptExtractor, dis
 - Modificar: `packages/core/src/plugins/registry.ts`
 - Modificar: `packages/core/src/plugins/discovery.ts`
 
-**Contexto:** O `PluginRegistry` atualmente expõe apenas `analyzeFile` e `resolveImports` — não tem `extractCallGraph`. O script `extract-structure.mjs` (Tarefa 13) precisa de dados do grafo de chamadas através do registry. Além disso, o `DEFAULT_PLUGIN_CONFIG` hardcoda `["typescript", "javascript"]`, o que precisa refletir todas as linguagens suportadas.
+**Contexto:** O `PluginRegistry` atualmente expõe apenas `analyzeFile` e `resolveImports` — nêo tem `extractCallGraph`. O script `extract-structure.mjs` (Tarefa 13) precisa de dados do grafo de chamadas através do registry. Além disso, o `DEFAULT_PLUGIN_CONFIG` hardcoda `["typescript", "javascript"]`, o que precisa refletir todas as linguagens suportadas.
 
 - [ ] **Passo 1: Adicionar extractCallGraph ao PluginRegistry**
 
@@ -263,7 +263,7 @@ extractCallGraph(filePath: string, content: string): CallGraphEntry[] | null {
 
 - [ ] **Passo 2: Atualizar DEFAULT_PLUGIN_CONFIG para derivar linguagens dinamicamente**
 
-Em `discovery.ts`, substitua o hardcoded `["typescript", "javascript"]` por uma derivação dinâmica de `builtinLanguageConfigs`:
+Em `discovery.ts`, substitua o hardcoded `["typescript", "javascript"]` por uma derivaçêo dinâmica de `builtinLanguageConfigs`:
 
 ```typescript
 import { builtinLanguageConfigs } from "../languages/configs/index.js";
@@ -312,7 +312,7 @@ Adicione em `dependencies`:
 "tree-sitter-rust": "^0.24.0"
 ```
 
-Então execute `pnpm install`.
+Entêo execute `pnpm install`.
 
 - [ ] **Passo 2: Adicionar campo treeSitter a todas as 10 configs de linguagem**
 
@@ -344,7 +344,7 @@ treeSitter: { wasmPackage: "tree-sitter-cpp", wasmFile: "tree-sitter-cpp.wasm" }
 treeSitter: { wasmPackage: "tree-sitter-c-sharp", wasmFile: "tree-sitter-c_sharp.wasm" },
 ```
 
-Nota: as configs Swift e Kotlin NÃO são alteradas (sem pacotes WASM disponíveis).
+Nota: as configs Swift e Kotlin NêO sêo alteradas (sem pacotes WASM disponíveis).
 
 - [ ] **Passo 3: Executar pnpm install e verificar que os arquivos WASM resolvem**
 
@@ -609,9 +609,9 @@ Tipos-chave de nós tree-sitter para C/C++:
 - Namespaces: `namespace_definition`
 - Calls: `call_expression` (function, arguments)
 
-Nota: assinaturas de funções em C/C++ são aninhadas (o nome fica dentro de um `function_declarator` dentro do campo `declarator`).
+Nota: assinaturas de funções em C/C++ sêo aninhadas (o nome fica dentro de um `function_declarator` dentro do campo `declarator`).
 
-A `cppConfig` tem `id: "cpp"` e `extensions: [".cpp", ".cc", ".cxx", ".c", ".h", ".hpp", ".hxx"]`. Arquivos C puros (`.c`, `.h`) são parseados com a gramática C++, o que funciona mas não produz tipos de nós específicos de C++ como `class_specifier`. O extractor deve tratar essa ausência graciosamente (retornar arrays vazios para classes ao parsear C puro).
+A `cppConfig` tem `id: "cpp"` e `extensions: [".cpp", ".cc", ".cxx", ".c", ".h", ".hpp", ".hxx"]`. Arquivos C puros (`.c`, `.h`) sêo parseados com a gramática C++, o que funciona mas nêo produz tipos de nós específicos de C++ como `class_specifier`. O extractor deve tratar essa ausência graciosamente (retornar arrays vazios para classes ao parsear C puro).
 
 ```typescript
 languageIds: ["cpp"]
@@ -693,7 +693,7 @@ export const builtinExtractors: LanguageExtractor[] = [
 
 - [ ] **Passo 2: Conectar builtinExtractors ao construtor do TreeSitterPlugin**
 
-Quando nenhum extractor for fornecido, use `builtinExtractors` por padrão.
+Quando nenhum extractor for fornecido, use `builtinExtractors` por padrêo.
 
 - [ ] **Passo 3: Executar suíte completa de testes**
 
@@ -709,21 +709,21 @@ Esperado: Todos os testes passam (existentes + novos testes de extractors)
 **Arquivos:**
 - Criar: `skills/understand/extract-structure.mjs`
 
-**Contexto:** Atualmente o agente file-analyzer (Fase 1) instrui o LLM a escrever um script Node.js/Python descartável baseado em regex a cada execução. Isso é lento, não-determinístico e ignora a infraestrutura tree-sitter que acabamos de construir. Esta tarefa substitui isso por um script pré-construído que usa `PluginRegistry` (que roteia para `TreeSitterPlugin` para arquivos de código e para os parsers regex para arquivos não-código).
+**Contexto:** Atualmente o agente file-analyzer (Fase 1) instrui o LLM a escrever um script Node.js/Python descartável baseado em regex a cada execuçêo. Isso é lento, nêo-determinístico e ignora a infraestrutura tree-sitter que acabamos de construir. Esta tarefa substitui isso por um script pré-construído que usa `PluginRegistry` (que roteia para `TreeSitterPlugin` para arquivos de código e para os parsers regex para arquivos nêo-código).
 
 - [ ] **Passo 1: Criar extract-structure.mjs**
 
 O script:
 1. Aceita path de JSON de entrada (arg 1) e path de JSON de saída (arg 2)
 2. Formato de entrada corresponde ao que file-analyzer.md já especifica: `{ projectRoot, batchFiles: [{path, language, sizeLines, fileCategory}], batchImportData }`
-3. Resolve `@understand-anything/core` do próprio `node_modules` do plugin usando `createRequire` relativo à localização do próprio script (dois diretórios acima até a raiz do plugin)
-4. Cria um `PluginRegistry` com `TreeSitterPlugin` (todas as configs de linguagem embutidas) + todos os parsers não-código registrados
+3. Resolve `@understand-anything/core` do próprio `node_modules` do plugin usando `createRequire` relativo à localizaçêo do próprio script (dois diretórios acima até a raiz do plugin)
+4. Cria um `PluginRegistry` com `TreeSitterPlugin` (todas as configs de linguagem embutidas) + todos os parsers nêo-código registrados
 5. Para cada arquivo: lê o conteúdo, chama `registry.analyzeFile()`, formata a saída para corresponder ao schema de saída do script existente (functions, classes, exports, sections, definitions, services, etc.)
 6. Para arquivos de código com suporte tree-sitter: também extrai o grafo de chamadas via `plugin.extractCallGraph()`
-7. Para arquivos onde não existe plugin (Swift, Kotlin, linguagens desconhecidas): produz `{ path, language, fileCategory, totalLines, nonEmptyLines, metrics }` com dados estruturais vazios — o agente LLM trata desses na Fase 2
+7. Para arquivos onde nêo existe plugin (Swift, Kotlin, linguagens desconhecidas): produz `{ path, language, fileCategory, totalLines, nonEmptyLines, metrics }` com dados estruturais vazios — o agente LLM trata desses na Fase 2
 8. Escreve JSON de saída correspondendo ao schema existente `scriptCompleted/filesAnalyzed/filesSkipped/results`
 
-Lógica-chave de resolução (com fallback para diferentes layouts de instalação):
+Lógica-chave de resoluçêo (com fallback para diferentes layouts de instalaçêo):
 ```javascript
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
@@ -764,11 +764,11 @@ git commit -m "feat: add bundled tree-sitter extraction script for file-analyzer
 **Arquivos:**
 - Modificar: `agents/file-analyzer.md`
 
-**Contexto:** A Fase 1 atualmente tem ~150 linhas instruindo o agente a escrever um script de extração customizado do zero. Substitua por uma seção curta que diga ao agente para executar o script pré-construído `extract-structure.mjs`.
+**Contexto:** A Fase 1 atualmente tem ~150 linhas instruindo o agente a escrever um script de extraçêo customizado do zero. Substitua por uma seçêo curta que diga ao agente para executar o script pré-construído `extract-structure.mjs`.
 
 - [ ] **Passo 1: Substituir a Fase 1 em file-analyzer.md**
 
-Apague toda a Fase 1 atual (~150 linhas de instruções de geração de script regex). Substitua por:
+Apague toda a Fase 1 atual (~150 linhas de instruções de geraçêo de script regex). Substitua por:
 
 1. Diga ao agente para preparar o JSON de entrada (mesmo formato de antes):
    ```bash
@@ -788,9 +788,9 @@ Apague toda a Fase 1 atual (~150 linhas de instruções de geração de script r
      $PROJECT_ROOT/.understand-anything/tmp/ua-file-extract-results-<batchIndex>.json
    ```
 
-3. Se o script sair com código diferente de zero, leia o stderr, diagnostique e reporte o erro. NÃO faça fallback para escrever um script manual — o script empacotado é o único caminho de extração.
+3. Se o script sair com código diferente de zero, leia o stderr, diagnostique e reporte o erro. NêO faça fallback para escrever um script manual — o script empacotado é o único caminho de extraçêo.
 
-4. Manter o formato de saída existente — a Fase 2 (análise semântica) não muda.
+4. Manter o formato de saída existente — a Fase 2 (análise semântica) nêo muda.
 
 - [ ] **Passo 2: Atualizar SKILL.md para passar SKILL_DIR ao despacho de file-analyzer**
 
@@ -801,11 +801,11 @@ Adicione aos parâmetros de despacho:
 > Skill directory (for bundled scripts): `<SKILL_DIR>`
 ```
 
-Isso segue o padrão estabelecido — SKILL.md já passa `<SKILL_DIR>` para `merge-batch-graphs.py` (linha 213) e `merge-subdomain-graphs.py` (linha 44) usando o mesmo mecanismo.
+Isso segue o padrêo estabelecido — SKILL.md já passa `<SKILL_DIR>` para `merge-batch-graphs.py` (linha 213) e `merge-subdomain-graphs.py` (linha 44) usando o mesmo mecanismo.
 
-- [ ] **Passo 3: Verificar que o formato de saída do file-analyzer não mudou**
+- [ ] **Passo 3: Verificar que o formato de saída do file-analyzer nêo mudou**
 
-A Fase 2 do file-analyzer.md NÃO deve precisar de mudanças — ela lê a mesma estrutura JSON dos resultados do script. Verifique que o schema de saída de `extract-structure.mjs` corresponde ao que a Fase 2 espera.
+A Fase 2 do file-analyzer.md NêO deve precisar de mudanças — ela lê a mesma estrutura JSON dos resultados do script. Verifique que o schema de saída de `extract-structure.mjs` corresponde ao que a Fase 2 espera.
 
 - [ ] **Passo 4: Commit**
 
@@ -816,7 +816,7 @@ git commit -m "feat: file-analyzer uses bundled tree-sitter script instead of LL
 
 ---
 
-### Tarefa 15: Verificação final de integração e limpeza
+### Tarefa 15: Verificaçêo final de integraçêo e limpeza
 
 - [ ] **Passo 1: Adicionar exports a packages/core/src/index.ts**
 
@@ -847,12 +847,12 @@ git commit -m "feat: complete language extractor architecture — 10 languages w
 
 ---
 
-## Notas de Implementação
+## Notas de Implementaçêo
 
-**Convenção de arquivos de teste:** Cada extractor de linguagem ganha seu próprio arquivo de teste em `packages/core/src/plugins/extractors/__tests__/<language>-extractor.test.ts`. Isso segue o padrão existente em que `tree-sitter-plugin.test.ts` é co-localizado.
+**Convençêo de arquivos de teste:** Cada extractor de linguagem ganha seu próprio arquivo de teste em `packages/core/src/plugins/extractors/__tests__/<language>-extractor.test.ts`. Isso segue o padrêo existente em que `tree-sitter-plugin.test.ts` é co-localizado.
 
-**Carregamento lazy de gramáticas (otimização futura):** O `TreeSitterPlugin.init()` atual carrega todos os WASMs de gramática de uma vez via `Promise.all`. Com 10 gramáticas (~12MB de WASM total), isso pode causar atraso notável de inicialização. Uma melhoria futura: carregar TS/JS eagerly (mais comum), adiar outras para primeiro uso. Não é obrigatório para este PR — meça primeiro.
+**Carregamento lazy de gramáticas (otimizaçêo futura):** O `TreeSitterPlugin.init()` atual carrega todos os WASMs de gramática de uma vez via `Promise.all`. Com 10 gramáticas (~12MB de WASM total), isso pode causar atraso notável de inicializaçêo. Uma melhoria futura: carregar TS/JS eagerly (mais comum), adiar outras para primeiro uso. Nêo é obrigatório para este PR — meça primeiro.
 
 **Efeito colateral de fingerprint:** `buildFingerprintStore` em `fingerprint.ts` usa `PluginRegistry.analyzeFile` internamente. Uma vez que os novos extractors estejam conectados, o fingerprinting para Python/Go/Rust/etc. automaticamente produzirá fingerprints estruturais em vez de apenas hash-de-conteúdo. Sem mudanças de código necessárias — acontece de graça.
 
-**Nota sobre gramática PHP:** `tree-sitter-php` envia tanto `tree-sitter-php.wasm` (PHP completo + HTML/CSS/JS embutidos) quanto `tree-sitter-php_only.wasm` (apenas PHP). Usamos `tree-sitter-php.wasm`. O extractor PHP deve ser robusto a nós de AST não-PHP que aparecem ao parsear arquivos com templates HTML embutidos.
+**Nota sobre gramática PHP:** `tree-sitter-php` envia tanto `tree-sitter-php.wasm` (PHP completo + HTML/CSS/JS embutidos) quanto `tree-sitter-php_only.wasm` (apenas PHP). Usamos `tree-sitter-php.wasm`. O extractor PHP deve ser robusto a nós de AST nêo-PHP que aparecem ao parsear arquivos com templates HTML embutidos.

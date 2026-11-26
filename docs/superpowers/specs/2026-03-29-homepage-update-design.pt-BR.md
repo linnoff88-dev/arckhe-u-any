@@ -1,6 +1,6 @@
-# Design da Atualização da Homepage — 2026-03-29
+# Design da Atualizaçêo da Homepage — 2026-03-29
 
-> 🇬🇧 Versão original em inglês: [2026-03-29-homepage-update-design.md](./2026-03-29-homepage-update-design.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-29-homepage-update-design.md](./2026-03-29-homepage-update-design.md)
 
 ## Objetivo
 
@@ -10,7 +10,7 @@ Atualizar a homepage Astro (`homepage/`) para refletir features adicionadas nas 
 
 Três áreas para atualizar:
 
-### 1. Seção de Features — Expandir de 3 para 6 Cards
+### 1. Seçêo de Features — Expandir de 3 para 6 Cards
 
 Atual (3 cards):
 - Interactive Knowledge Graph
@@ -19,7 +19,7 @@ Atual (3 cards):
 
 Atualizado (6 cards, 2 linhas de 3):
 
-| # | Título | Ícone | Descrição |
+| # | Título | Ícone | Descriçêo |
 |---|-------|------|-------------|
 | 1 | Interactive Knowledge Graph | `◈` | Visualize files, functions, and dependencies as an explorable graph with hierarchical drill-down and smart layout. |
 | 2 | Beyond Code Analysis | `⬡` | Analyze your entire project — Dockerfiles, Terraform, SQL, Markdown, and 26+ file types mapped into one unified graph. |
@@ -28,7 +28,7 @@ Atualizado (6 cards, 2 linhas de 3):
 | 5 | Dependency Path Finder | `⟿` | Find the shortest path between any two components. Understand how parts of your system connect at a glance. |
 | 6 | Guided Tours & Onboarding | `⟐` | AI-generated walkthroughs that teach the codebase step by step, plus onboarding guides for new team members. |
 
-### 2. Seção de Install
+### 2. Seçêo de Install
 
 Atualizar a nota de "só Claude Code" para multi-plataforma:
 - Antes: "Works with Claude Code — Anthropic's official CLI for Claude."
@@ -49,7 +49,7 @@ Atualizar a tagline:
 ## Fora de Escopo
 
 - Atualizações do README.md
-- Seção de showcase / screenshot
+- Seçêo de showcase / screenshot
 - Componente Nav
-- Seção hero
+- Seçêo hero
 - Mudanças de layout / estrutura global de CSS

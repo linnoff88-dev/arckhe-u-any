@@ -1,6 +1,6 @@
-# Understand Anything — Plano de Implementação da Fase 4 (Avançada)
+# Understand Anything — Plano de Implementaçêo da Fase 4 (Avançada)
 
-> 🇬🇧 Versão original em inglês: [2026-03-14-phase4-implementation.md](./2026-03-14-phase4-implementation.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-14-phase4-implementation.md](./2026-03-14-phase4-implementation.md)
 
 > **Para o Claude:** SUB-SKILL OBRIGATÓRIA: Use superpowers:executing-plans para implementar este plano tarefa por tarefa.
 
@@ -22,7 +22,7 @@ Task 4 (Plugin Registry Core) ───→ Task 5 (Plugin CLI Integration)
 Task 6 (Embedding Search Core) ───→ Task 7 (Embedding Dashboard)
 ```
 
-As Tarefas 1, 2, 3, 4 e 6 são totalmente independentes e podem ser implementadas em qualquer ordem.
+As Tarefas 1, 2, 3, 4 e 6 sêo totalmente independentes e podem ser implementadas em qualquer ordem.
 
 ---
 
@@ -360,7 +360,7 @@ export {
 } from "./diff-analyzer.js";
 ```
 
-**Passo 6: Criar a definição da skill**
+**Passo 6: Criar a definiçêo da skill**
 
 ```markdown
 <!-- packages/skill/.claude/skills/understand-diff.md -->
@@ -416,7 +416,7 @@ git commit -m "feat(skill): add /understand-diff command for PR/diff analysis"
 - Criar: `packages/skill/.claude/skills/understand-explain.md`
 - Modificar: `packages/skill/src/index.ts` (adicionar exports)
 
-**Contexto:** A skill `/understand-explain <path>` fornece uma explicação aprofundada de um arquivo ou função específicos. Reúne todos os nodes que pertencem àquele arquivo, suas conexões, qual layer ocupam e constrói um contexto abrangente para o LLM explicar o componente. Isso difere de `/understand-chat`, que responde qualquer pergunta — `/understand-explain` foca em uma explicação completa de um único componente.
+**Contexto:** A skill `/understand-explain <path>` fornece uma explicaçêo aprofundada de um arquivo ou funçêo específicos. Reúne todos os nodes que pertencem àquele arquivo, suas conexões, qual layer ocupam e constrói um contexto abrangente para o LLM explicar o componente. Isso difere de `/understand-chat`, que responde qualquer pergunta — `/understand-explain` foca em uma explicaçêo completa de um único componente.
 
 **Passo 1: Escrever testes que falham**
 
@@ -701,7 +701,7 @@ export function formatExplainPrompt(ctx: ExplainContext): string {
 cd packages/skill && pnpm test -- --reporter verbose src/__tests__/explain-builder.test.ts
 ```
 
-**Passo 5: Adicionar exports + criar a definição da skill**
+**Passo 5: Adicionar exports + criar a definiçêo da skill**
 
 Adicione em `packages/skill/src/index.ts`:
 ```typescript
@@ -755,7 +755,7 @@ git commit -m "feat(skill): add /understand-explain command for deep-dive file a
 
 ---
 
-## Tarefa 3: Skill /understand-onboard — Geração de Guia de Onboarding
+## Tarefa 3: Skill /understand-onboard — Geraçêo de Guia de Onboarding
 
 **Arquivos:**
 - Criar: `packages/skill/src/onboard-builder.ts`
@@ -763,7 +763,7 @@ git commit -m "feat(skill): add /understand-explain command for deep-dive file a
 - Criar: `packages/skill/.claude/skills/understand-onboard.md`
 - Modificar: `packages/skill/src/index.ts` (adicionar exports)
 
-**Contexto:** A skill `/understand-onboard` gera um guia de onboarding estruturado para novos membros do time. Sintetiza o grafo de conhecimento — visão geral do projeto, layers de arquitetura, conceitos-chave, passos do tour e hotspots de complexidade — em um documento abrangente. A saída é um guia em markdown bem estruturado que pode ser commitado ao repositório ou compartilhado em uma wiki.
+**Contexto:** A skill `/understand-onboard` gera um guia de onboarding estruturado para novos membros do time. Sintetiza o grafo de conhecimento — visêo geral do projeto, layers de arquitetura, conceitos-chave, passos do tour e hotspots de complexidade — em um documento abrangente. A saída é um guia em markdown bem estruturado que pode ser commitado ao repositório ou compartilhado em uma wiki.
 
 **Passo 1: Escrever testes que falham**
 
@@ -999,7 +999,7 @@ export function buildOnboardingGuide(graph: KnowledgeGraph): string {
 cd packages/skill && pnpm test -- --reporter verbose src/__tests__/onboard-builder.test.ts
 ```
 
-**Passo 5: Adicionar exports + criar a definição da skill**
+**Passo 5: Adicionar exports + criar a definiçêo da skill**
 
 Adicione em `packages/skill/src/index.ts`:
 ```typescript
@@ -1055,7 +1055,7 @@ git commit -m "feat(skill): add /understand-onboard command for team onboarding 
 - Criar: `packages/core/src/__tests__/plugin-registry.test.ts`
 - Modificar: `packages/core/src/index.ts` (adicionar exports)
 
-**Contexto:** A interface `AnalyzerPlugin` já existe em `packages/core/src/types.ts`. Atualmente só `TreeSitterPlugin` a implementa. Esta tarefa cria um registry de plugins que descobre, registra e gerencia analyzer plugins. O registry mapeia extensões de arquivo para plugins e fornece um entrypoint unificado `analyzeFile`. Esta é a fundação para plugins comunitários.
+**Contexto:** A interface `AnalyzerPlugin` já existe em `packages/core/src/types.ts`. Atualmente só `TreeSitterPlugin` a implementa. Esta tarefa cria um registry de plugins que descobre, registra e gerencia analyzer plugins. O registry mapeia extensões de arquivo para plugins e fornece um entrypoint unificado `analyzeFile`. Esta é a fundaçêo para plugins comunitários.
 
 **Passo 1: Escrever testes que falham**
 
@@ -1326,14 +1326,14 @@ git commit -m "feat(core): add plugin registry for community analyzer plugins"
 
 ---
 
-## Tarefa 5: Configuração e Descoberta de Plugins
+## Tarefa 5: Configuraçêo e Descoberta de Plugins
 
 **Arquivos:**
 - Criar: `packages/core/src/plugins/discovery.ts`
 - Criar: `packages/core/src/__tests__/plugin-discovery.test.ts`
 - Modificar: `packages/core/src/index.ts` (adicionar exports)
 
-**Contexto:** O registry de plugins da Tarefa 4 gerencia plugins em runtime, mas também precisamos de uma forma de descobrir e configurar plugins a partir do diretório `.understand-anything/` do projeto. Esta tarefa adiciona um schema de arquivo de configuração de plugins e um mecanismo de descoberta que varre os plugins instalados e os registra automaticamente.
+**Contexto:** O registry de plugins da Tarefa 4 gerencia plugins em runtime, mas também precisamos de uma forma de descobrir e configurar plugins a partir do diretório `.understand-anything/` do projeto. Esta tarefa adiciona um schema de arquivo de configuraçêo de plugins e um mecanismo de descoberta que varre os plugins instalados e os registra automaticamente.
 
 **Passo 1: Escrever testes que falham**
 
@@ -1523,7 +1523,7 @@ git commit -m "feat(core): add plugin configuration and discovery system"
 - Criar: `packages/core/src/__tests__/embedding-search.test.ts`
 - Modificar: `packages/core/src/index.ts` (adicionar exports)
 
-**Contexto:** O `SearchEngine` atual usa fuse.js para fuzzy matching de palavras-chave. Busca baseada em embeddings habilita consultas verdadeiramente semânticas como "encontre código que trate de autenticação" mesmo que a palavra "autenticação" não apareça nos dados do node. Esta tarefa adiciona um `SemanticSearchEngine` que armazena e busca embeddings vetoriais. Os embeddings em si são gerados externamente (chamando uma API de embedding) — este módulo cuida do armazenamento e da busca por similaridade de cosseno. Faz fallback para o `SearchEngine` existente quando não há embeddings disponíveis.
+**Contexto:** O `SearchEngine` atual usa fuse.js para fuzzy matching de palavras-chave. Busca baseada em embeddings habilita consultas verdadeiramente semânticas como "encontre código que trate de autenticaçêo" mesmo que a palavra "autenticaçêo" nêo apareça nos dados do node. Esta tarefa adiciona um `SemanticSearchEngine` que armazena e busca embeddings vetoriais. Os embeddings em si sêo gerados externamente (chamando uma API de embedding) — este módulo cuida do armazenamento e da busca por similaridade de cosseno. Faz fallback para o `SearchEngine` existente quando nêo há embeddings disponíveis.
 
 **Passo 1: Escrever testes que falham**
 
@@ -1767,13 +1767,13 @@ git commit -m "feat(core): add embedding-based semantic search engine"
 
 ---
 
-## Tarefa 7: Integração de Busca por Embeddings no Dashboard
+## Tarefa 7: Integraçêo de Busca por Embeddings no Dashboard
 
 **Arquivos:**
 - Modificar: `packages/dashboard/src/store.ts` (adicionar estado de busca semântica)
 - Modificar: `packages/dashboard/src/components/SearchBar.tsx` (toggle de busca semântica)
 
-**Contexto:** Esta tarefa integra o `SemanticSearchEngine` ao dashboard. Quando o grafo de conhecimento inclui embeddings pré-computados (armazenados como campo separado ou arquivo acompanhante), o SearchBar oferece um toggle entre os modos de busca "Fuzzy" e "Semantic". O modo semântico usa similaridade de vetores para consultas como "onde a autenticação é tratada" mesmo que essas palavras exatas não estejam em nenhum node. Para o MVP, adicionaremos o toggle de UI e a fiação — a geração real dos embeddings exige uma chamada de API que faria parte do pipeline de análise.
+**Contexto:** Esta tarefa integra o `SemanticSearchEngine` ao dashboard. Quando o grafo de conhecimento inclui embeddings pré-computados (armazenados como campo separado ou arquivo acompanhante), o SearchBar oferece um toggle entre os modos de busca "Fuzzy" e "Semantic". O modo semântico usa similaridade de vetores para consultas como "onde a autenticaçêo é tratada" mesmo que essas palavras exatas nêo estejam em nenhum node. Para o MVP, adicionaremos o toggle de UI e a fiaçêo — a geraçêo real dos embeddings exige uma chamada de API que faria parte do pipeline de análise.
 
 **Passo 1: Adicionar estado de busca semântica à store**
 
@@ -1853,7 +1853,7 @@ git commit -m "feat(dashboard): add fuzzy/semantic search mode toggle"
 
 ---
 
-## Checklist de Verificação
+## Checklist de Verificaçêo
 
 Após todas as tarefas estarem completas:
 

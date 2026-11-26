@@ -1,12 +1,12 @@
-# Plano de Implementação do Sistema de Temas
+# Plano de Implementaçêo do Sistema de Temas
 
-> 🇬🇧 Versão original em inglês: [2026-03-26-theme-system-implementation.md](./2026-03-26-theme-system-implementation.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-26-theme-system-implementation.md](./2026-03-26-theme-system-implementation.md)
 
 > **Para o Claude:** SUB-SKILL OBRIGATÓRIA: Use superpowers:executing-plans para implementar este plano tarefa a tarefa.
 
-**Objetivo:** Adicionar presets de tema curados com customização de accent ao dashboard.
+**Objetivo:** Adicionar presets de tema curados com customizaçêo de accent ao dashboard.
 
-**Arquitetura:** Injeção de variáveis CSS em runtime via uma theme engine pura, contexto React para estado, localStorage + meta.json para persistência. Cinco presets (4 escuros + 1 claro) com 8 swatches de accent cada.
+**Arquitetura:** Injeçêo de variáveis CSS em runtime via uma theme engine pura, contexto React para estado, localStorage + meta.json para persistência. Cinco presets (4 escuros + 1 claro) com 8 swatches de accent cada.
 
 **Stack Técnico:** React, TypeScript, TailwindCSS v4, Zustand (intacto), propriedades customizadas CSS.
 
@@ -441,7 +441,7 @@ git commit -m "feat(dashboard): add theme preset definitions"
 
 ### Tarefa 5: Criar theme engine
 
-Funções puras sem dependência de React. Cuida da injeção de variáveis CSS e derivação de accent.
+Funções puras sem dependência de React. Cuida da injeçêo de variáveis CSS e derivaçêo de accent.
 
 **Arquivos:**
 - Criar: `understand-anything-plugin/packages/dashboard/src/themes/theme-engine.ts`
@@ -518,7 +518,7 @@ git commit -m "feat(dashboard): add theme engine with CSS variable injection"
 
 ### Tarefa 6: Criar ThemeContext
 
-Contexto React + provider que gerencia estado do tema, persistência e resolução.
+Contexto React + provider que gerencia estado do tema, persistência e resoluçêo.
 
 **Arquivos:**
 - Criar: `understand-anything-plugin/packages/dashboard/src/themes/ThemeContext.tsx`
@@ -699,7 +699,7 @@ git commit -m "feat(core): add optional theme field to AnalysisMeta"
 
 ### Tarefa 8: Criar componente ThemePicker
 
-A UI de popover com seleção de preset e linha de swatches de accent.
+A UI de popover com seleçêo de preset e linha de swatches de accent.
 
 **Arquivos:**
 - Criar: `understand-anything-plugin/packages/dashboard/src/components/ThemePicker.tsx`
@@ -901,7 +901,7 @@ Envolver o valor de retorno inteiro do App com `<ThemeProvider metaTheme={metaTh
 
 **Passo 4: Adicionar ThemePicker ao header**
 
-Na barra de header (o `<header>` ou linha flex superior), adicionar `<ThemePicker />` após os controles existentes (PersonaSelector, DiffToggle, LayerLegend) e antes do botão de ajuda.
+Na barra de header (o `<header>` ou linha flex superior), adicionar `<ThemePicker />` após os controles existentes (PersonaSelector, DiffToggle, LayerLegend) e antes do botêo de ajuda.
 
 **Passo 5: Verificar build**
 
@@ -919,7 +919,7 @@ git commit -m "feat(dashboard): integrate ThemeProvider and ThemePicker into App
 
 ### Tarefa 10: Ajustes de CSS para tema claro
 
-Tratar casos extremos em que variáveis CSS sozinhas não são suficientes para o tema claro.
+Tratar casos extremos em que variáveis CSS sozinhas nêo sêo suficientes para o tema claro.
 
 **Arquivos:**
 - Modificar: `understand-anything-plugin/packages/dashboard/src/index.css`
@@ -947,7 +947,7 @@ Adicionar ao final de index.css:
 }
 ```
 
-**Passo 2: Adicionar transição para mudança suave de tema**
+**Passo 2: Adicionar transiçêo para mudança suave de tema**
 
 Adicionar aos estilos base do `html`:
 
@@ -957,9 +957,9 @@ html {
 }
 ```
 
-**Passo 3: Consideração sobre o WarningBanner**
+**Passo 3: Consideraçêo sobre o WarningBanner**
 
-O WarningBanner usa cores Tailwind amber/orange diretamente (ex.: `bg-amber-900/20`). Essas são cores semânticas de warning e NÃO devem mudar com o tema. Porém, para o tema claro, as cores amber sobre fundo claro precisam de ajuste.
+O WarningBanner usa cores Tailwind amber/orange diretamente (ex.: `bg-amber-900/20`). Essas sêo cores semânticas de warning e NêO devem mudar com o tema. Porém, para o tema claro, as cores amber sobre fundo claro precisam de ajuste.
 
 Adicionar aos overrides do tema claro se necessário:
 
@@ -971,7 +971,7 @@ Adicionar aos overrides do tema claro se necessário:
 }
 ```
 
-Observação: Só adicione isso se o WarningBanner parecer quebrado no tema claro durante o teste visual. Pode funcionar bem como está com as cores amber do Tailwind.
+Observaçêo: Só adicione isso se o WarningBanner parecer quebrado no tema claro durante o teste visual. Pode funcionar bem como está com as cores amber do Tailwind.
 
 **Passo 4: Verificar build**
 
@@ -1086,9 +1086,9 @@ git commit -m "refactor(dashboard): align @theme defaults with theme engine vari
 
 ---
 
-### Tarefa 12: Build completo + verificação visual
+### Tarefa 12: Build completo + verificaçêo visual
 
-**Arquivos:** Nenhum (somente verificação)
+**Arquivos:** Nenhum (somente verificaçêo)
 
 **Passo 1: Buildar core**
 
@@ -1116,7 +1116,7 @@ Rodar: `cd understand-anything-plugin && pnpm dev:dashboard`
 
 Verificar:
 1. Dashboard carrega com tema Dark Gold (default) — parece idêntico ao atual
-2. Botão do theme picker visível no header
+2. Botêo do theme picker visível no header
 3. Clicar no theme picker — popover abre com 5 presets e 8 swatches de accent
 4. Selecionar Dark Ocean — fundos viram azul marinho, accent vira ciano
 5. Selecionar Dark Forest — fundos viram verde escuro, accent vira esmeralda
@@ -1165,4 +1165,4 @@ Task 2 (consolidate colors) ──┤                     │
 - Tarefa 8 depende de 6
 - Tarefa 9 depende de 1, 2, 7, 8
 - Tarefas 10, 11 podem ser feitas após 9
-- Tarefa 12 é verificação final
+- Tarefa 12 é verificaçêo final

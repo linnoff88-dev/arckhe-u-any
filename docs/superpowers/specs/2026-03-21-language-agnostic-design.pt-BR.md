@@ -1,6 +1,6 @@
 # Design de Suporte Agnóstico de Linguagem
 
-> 🇬🇧 Versão original em inglês: [2026-03-21-language-agnostic-design.md](./2026-03-21-language-agnostic-design.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-21-language-agnostic-design.md](./2026-03-21-language-agnostic-design.md)
 
 **Data:** 2026-03-21
 **Status:** Aprovado
@@ -8,13 +8,13 @@
 
 ## Problema
 
-Os prompts de agente, o plugin tree-sitter e o sistema de lições de linguagem da ferramenta são fortemente enviesados para TypeScript/JavaScript. Bases de código não-TS recebem análise degradada porque:
+Os prompts de agente, o plugin tree-sitter e o sistema de lições de linguagem da ferramenta sêo fortemente enviesados para TypeScript/JavaScript. Bases de código nêo-TS recebem análise degradada porque:
 
 1. Prompts de agente usam exemplos e conceitos específicos de TS (ex.: "barrel files", "type guards", "generics")
 2. O plugin tree-sitter só entrega suporte de gramática para TS/JS — análise estrutural falha silenciosamente para outras linguagens
-3. A detecção de lição de linguagem hardcoda padrões de conceitos e nomes de display específicos de TS
+3. A detecçêo de liçêo de linguagem hardcoda padrões de conceitos e nomes de display específicos de TS
 
-A arquitetura (PluginRegistry, GraphBuilder, dashboard, busca) já é neutra quanto à linguagem. O viés está no conteúdo entregue, não no framework.
+A arquitetura (PluginRegistry, GraphBuilder, dashboard, busca) já é neutra quanto à linguagem. O viés está no conteúdo entregue, nêo no framework.
 
 ## Decisões
 
@@ -22,9 +22,9 @@ A arquitetura (PluginRegistry, GraphBuilder, dashboard, busca) já é neutra qua
 - **Linguagens (v1):** TypeScript, JavaScript, Python, Go, Java, Rust, C/C++, C#, Ruby, PHP, Swift, Kotlin
 - **Arquitetura:** Config-first com escape hatch em código (híbrido)
 - **Estratégia de prompt:** Prompt base + arquivos snippet markdown por linguagem em uma pasta `languages/`
-- **Localização da config:** Snippets de prompt em `skills/understand/languages/`, configs tree-sitter em `packages/core/src/languages/`
+- **Localizaçêo da config:** Snippets de prompt em `skills/understand/languages/`, configs tree-sitter em `packages/core/src/languages/`
 - **Projetos multi-linguagem:** Análise de linguagem por arquivo + resumo multi-linguagem em nível de projeto
-- **Detecção de linguagem:** Auto-detectar apenas por extensão de arquivo (sem override manual no v1)
+- **Detecçêo de linguagem:** Auto-detectar apenas por extensêo de arquivo (sem override manual no v1)
 
 ## Design
 
@@ -90,11 +90,11 @@ packages/core/src/languages/
 │   └── kotlin.ts
 ```
 
-Todas as configs built-in são auto-registradas na importação.
+Todas as configs built-in sêo auto-registradas na importaçêo.
 
 ### 2. GenericTreeSitterPlugin
 
-Substitui o atual `TreeSitterPlugin` (somente TS) por uma versão orientada a config.
+Substitui o atual `TreeSitterPlugin` (somente TS) por uma versêo orientada a config.
 
 ```typescript
 // packages/core/src/plugins/generic-tree-sitter-plugin.ts
@@ -127,7 +127,7 @@ class GenericTreeSitterPlugin implements AnalyzerPlugin {
 }
 ```
 
-#### Migração
+#### Migraçêo
 
 - `TreeSitterPlugin` atual deletado, substituído por `GenericTreeSitterPlugin` + configs TS/JS
 - `PluginRegistry` inalterado
@@ -164,7 +164,7 @@ skills/understand/
 
 #### Mudanças no Prompt Base
 
-Todos os exemplos específicos de TS removidos dos prompts base. Substituídos por um ponto de injeção:
+Todos os exemplos específicos de TS removidos dos prompts base. Substituídos por um ponto de injeçêo:
 
 ```markdown
 ## Language-Specific Guidance
@@ -192,7 +192,7 @@ Cada arquivo de linguagem contém:
 > "FastAPI route handler that accepts a Pydantic model, validates input..."
 ```
 
-#### Lógica de Injeção
+#### Lógica de Injeçêo
 
 1. O project scanner detecta linguagens presentes na base de código
 2. File-analyzer: injeta o `.md` da linguagem correspondente para a linguagem daquele arquivo
@@ -201,38 +201,38 @@ Cada arquivo de linguagem contém:
 
 #### Projetos Multi-Linguagem
 
-O prompt do project-scanner ganha uma seção combinada listando todas as linguagens detectadas com seus conceitos-chave.
+O prompt do project-scanner ganha uma seçêo combinada listando todas as linguagens detectadas com seus conceitos-chave.
 
 ### 4. Atualizações de Lições de Linguagem
 
 - Deletar `LANGUAGE_DISPLAY_NAMES` — usar `LanguageRegistry.getById(id).displayName`
 - Deletar padrões de conceitos hardcoded — usar `LanguageConfig.concepts` do registry
-- Geração de lição de linguagem se torna orientada por config
+- Geraçêo de liçêo de linguagem se torna orientada por config
 
 ### 5. Estratégia de Testes
 
 #### Testes Unitários
 
-1. **Validação de LanguageConfig** — Cada config tem todos os campos obrigatórios, `nodeTypes` não vazios
-2. **LanguageRegistry** — Registro, lookup por extensão/id, tratamento de duplicados
-3. **GenericTreeSitterPlugin por linguagem** — Pequeno arquivo de fixture por linguagem verificando extração de função/classe/import
-4. **Geração de lição de linguagem** — Conceitos vindos da config
+1. **Validaçêo de LanguageConfig** — Cada config tem todos os campos obrigatórios, `nodeTypes` nêo vazios
+2. **LanguageRegistry** — Registro, lookup por extensêo/id, tratamento de duplicados
+3. **GenericTreeSitterPlugin por linguagem** — Pequeno arquivo de fixture por linguagem verificando extraçêo de funçêo/classe/import
+4. **Geraçêo de liçêo de linguagem** — Conceitos vindos da config
 
-#### Testes de Integração
+#### Testes de Integraçêo
 
 5. **Projeto multi-linguagem** — Fixture mista TS + Python, verificar que o grafo contém nós das duas linguagens
-6. **Injeção de prompt** — `.md` da linguagem correto injetado com base na linguagem detectada
+6. **Injeçêo de prompt** — `.md` da linguagem correto injetado com base na linguagem detectada
 
-#### Testes de Migração
+#### Testes de Migraçêo
 
 - Testes atuais do tree-sitter-plugin reescritos para `GenericTreeSitterPlugin` com config de TS
-- Devem produzir resultados idênticos para validar migração não-quebrável
+- Devem produzir resultados idênticos para validar migraçêo nêo-quebrável
 
-### 6. Tratamento de Erros e Degradação Graciosa
+### 6. Tratamento de Erros e Degradaçêo Graciosa
 
 #### Princípio-Chave
 
-**Todo arquivo é sempre analisado.** O tree-sitter é um enriquecimento, não um portão. O LLM é o analisador primário; a análise estrutural o enriquece.
+**Todo arquivo é sempre analisado.** O tree-sitter é um enriquecimento, nêo um portêo. O LLM é o analisador primário; a análise estrutural o enriquece.
 
 #### Linguagem Desconhecida
 
@@ -243,7 +243,7 @@ O prompt do project-scanner ganha uma seção combinada listando todas as lingua
 #### Gramática WASM Ausente
 
 - Warning logado, aquela linguagem degrada para LLM-only
-- Outras linguagens não são afetadas
+- Outras linguagens nêo sêo afetadas
 
 #### Config de Linguagem Malformada
 

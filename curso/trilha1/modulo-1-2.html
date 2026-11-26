@@ -71,7 +71,7 @@
         <div class="flex items-center space-x-1 sm:space-x-2">
           <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
           <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Pipeline &amp; Agentes</span></a>
-          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Customização</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Customizaçêo</span></a>
           <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
             <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
             <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
@@ -116,7 +116,7 @@
         <h2 class="text-2xl font-bold">🧱 Nó: o átomo do grafo</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
-        Tudo no Understand Anything começa num <strong class="text-emerald-400">nó</strong>. Um nó é uma unidade do código — arquivo, função, classe, ou conceito de domínio. Cada nó carrega metadados extraídos pelo tree-sitter (símbolos, path, layer) e um sumário gerado por LLM.
+        Tudo no Understand Anything começa num <strong class="text-emerald-400">nó</strong>. Um nó é uma unidade do código — arquivo, funçêo, classe, ou conceito de domínio. Cada nó carrega metadados extraídos pelo tree-sitter (símbolos, path, layer) e um sumário gerado por LLM.
       </p>
 
       <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
@@ -136,7 +136,7 @@
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-bold text-emerald-400 mb-1">file</h4><p class="text-sm text-neutral-400">Arquivo do repositório</p></div>
-        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-bold text-emerald-400 mb-1">function</h4><p class="text-sm text-neutral-400">Função / método isolado</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-bold text-emerald-400 mb-1">function</h4><p class="text-sm text-neutral-400">Funçêo / método isolado</p></div>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-bold text-emerald-400 mb-1">class</h4><p class="text-sm text-neutral-400">Classe / interface</p></div>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-bold text-emerald-400 mb-1">domain</h4><p class="text-sm text-neutral-400">Conceito de negócio</p></div>
       </div>
@@ -156,10 +156,10 @@
         <h3 class="text-lg font-semibold text-emerald-400 mb-4">Tipos de aresta no Understand Anything</h3>
         <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
           <div>imports&nbsp;&nbsp;&nbsp;&nbsp;A → B   // A faz `import B`</div>
-          <div>calls&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A → B   // A chama função/método de B</div>
+          <div>calls&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A → B   // A chama funçêo/método de B</div>
           <div>extends&nbsp;&nbsp;&nbsp;&nbsp;A → B   // A herda de B</div>
           <div>implements A → B   // A implementa interface B</div>
-          <div>contains&nbsp;&nbsp;&nbsp;A → B   // arquivo contém função</div>
+          <div>contains&nbsp;&nbsp;&nbsp;A → B   // arquivo contém funçêo</div>
         </div>
       </div>
 
@@ -168,16 +168,16 @@
           <h4 class="font-bold text-emerald-400 mb-4">✓ O que uma aresta diz</h4>
           <ul class="space-y-3 text-neutral-300">
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Esse arquivo importa esse aqui."</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Essa função é chamada nesses 12 lugares."</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Essa funçêo é chamada nesses 12 lugares."</span></li>
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Mudar essa classe afeta toda essa subárvore."</span></li>
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Esse módulo tem zero fan-in — talvez seja morto."</span></li>
           </ul>
         </div>
         <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
-          <h4 class="font-bold text-red-400 mb-4">✗ O que uma aresta NÃO diz</h4>
+          <h4 class="font-bold text-red-400 mb-4">✗ O que uma aresta NêO diz</h4>
           <ul class="space-y-3 text-neutral-300">
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Quem está certo no design."</span></li>
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Por que essa decisão foi tomada."</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Por que essa decisêo foi tomada."</span></li>
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Se essa dependência é boa ou ruim."</span></li>
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"O que vai quebrar se você mudar (com 100% certeza)."</span></li>
           </ul>
@@ -249,7 +249,7 @@
             <text x="625" y="298" class="tag" fill="#9ca3af">md</text>
           </g>
         </svg>
-        <figcaption class="text-sm text-center italic mt-3 opacity-75">Knowledge graph simplificado: nós são arquivos (tsx, ts, md) e arestas tipam o relacionamento (imports, calls, extends, contains).</figcaption>
+        <figcaption class="text-sm text-center italic mt-3 opacity-75">Knowledge graph simplificado: nós sêo arquivos (tsx, ts, md) e arestas tipam o relacionamento (imports, calls, extends, contains).</figcaption>
       </figure>
 
       <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
@@ -257,7 +257,7 @@
         <ul class="space-y-2 text-neutral-300">
           <li><strong>fan-in</strong> — quantos nós apontam para esse nó (quem depende de mim).</li>
           <li><strong>fan-out</strong> — quantos nós esse nó referencia (de quem eu dependo).</li>
-          <li><strong>centralidade</strong> — quão crítico no grafo (intermediário em caminhos).</li>
+          <li><strong>centralidade</strong> — quêo crítico no grafo (intermediário em caminhos).</li>
           <li><strong>ciclos</strong> — dependências circulares que pedem refactor.</li>
         </ul>
       </div>
@@ -291,12 +291,12 @@
 
       <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
-        <p class="text-neutral-300 mb-2">Adicione <code>.understand-anything/intermediate/</code> ao <code>.gitignore</code>. Mas <strong>versione</strong> o <code>knowledge-graph.json</code> se o time todo usa o dashboard — fica como artefato de documentação que regenera junto com o repo.</p>
+        <p class="text-neutral-300 mb-2">Adicione <code>.understand-anything/intermediate/</code> ao <code>.gitignore</code>. Mas <strong>versione</strong> o <code>knowledge-graph.json</code> se o time todo usa o dashboard — fica como artefato de documentaçêo que regenera junto com o repo.</p>
       </div>
 
       <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">🛡️</span> Schema validation no load</h3>
-        <p class="text-neutral-300 mb-2">Quando o dashboard carrega o JSON, ele valida contra um schema (Zod). Se o grafo está corrompido ou desatualizado, aparece um banner de erro em cima — não quebra a UI silenciosamente.</p>
+        <p class="text-neutral-300 mb-2">Quando o dashboard carrega o JSON, ele valida contra um schema (Zod). Se o grafo está corrompido ou desatualizado, aparece um banner de erro em cima — nêo quebra a UI silenciosamente.</p>
       </div>
     </section>
 
@@ -307,15 +307,15 @@
         <h2 class="text-2xl font-bold">🖼️ Layout do dashboard</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
-        Decisão de design clara: <strong class="text-emerald-400">grafo é o protagonista</strong>. Nada de ChatPanel ocupando metade da tela; nada de editor Monaco. 75% grafo, 360px sidebar à direita, fim de papo.
+        Decisêo de design clara: <strong class="text-emerald-400">grafo é o protagonista</strong>. Nada de ChatPanel ocupando metade da tela; nada de editor Monaco. 75% grafo, 360px sidebar à direita, fim de papo.
       </p>
 
       <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center"><span class="mr-2">🎨</span> Tema dark luxury</h3>
         <ul class="space-y-2 text-neutral-300">
           <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Fundo preto profundo <code>#0a0a0a</code> — alto contraste com nós.</span></li>
-          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Acentos gold/amber <code>#d4a574</code> — destaque de seleção e CTAs.</span></li>
-          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Tipografia DM Serif Display em títulos — sensação "biblioteca" e não "IDE".</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Acentos gold/amber <code>#d4a574</code> — destaque de seleçêo e CTAs.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Tipografia DM Serif Display em títulos — sensaçêo "biblioteca" e nêo "IDE".</span></li>
           <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Inter no body — leitura de listas e summaries longos.</span></li>
         </ul>
       </div>
@@ -329,12 +329,12 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <figure class="bg-dark-700 rounded-xl border border-dark-600 p-3 sm:p-4">
-          <img src="../assets/overview-structural.gif" loading="lazy" alt="Animação do dashboard mostrando o grafo estrutural — arquivos como nós, imports como arestas." class="max-w-full h-auto rounded-lg w-full">
-          <figcaption class="text-xs text-neutral-500 mt-3 text-center italic">Visão <strong class="text-emerald-400">estrutural</strong> — arquivos e imports</figcaption>
+          <img src="../assets/overview-structural.gif" loading="lazy" alt="Animaçêo do dashboard mostrando o grafo estrutural — arquivos como nós, imports como arestas." class="max-w-full h-auto rounded-lg w-full">
+          <figcaption class="text-xs text-neutral-500 mt-3 text-center italic">Visêo <strong class="text-emerald-400">estrutural</strong> — arquivos e imports</figcaption>
         </figure>
         <figure class="bg-dark-700 rounded-xl border border-dark-600 p-3 sm:p-4">
-          <img src="../assets/overview-domain.gif" loading="lazy" alt="Animação do dashboard alternando para a camada de conhecimento de domínio, mostrando conceitos de negócio agrupados." class="max-w-full h-auto rounded-lg w-full">
-          <figcaption class="text-xs text-neutral-500 mt-3 text-center italic">Visão de <strong class="text-emerald-400">domínio</strong> — conceitos de negócio</figcaption>
+          <img src="../assets/overview-domain.gif" loading="lazy" alt="Animaçêo do dashboard alternando para a camada de conhecimento de domínio, mostrando conceitos de negócio agrupados." class="max-w-full h-auto rounded-lg w-full">
+          <figcaption class="text-xs text-neutral-500 mt-3 text-center italic">Visêo de <strong class="text-emerald-400">domínio</strong> — conceitos de negócio</figcaption>
         </figure>
       </div>
     </section>
@@ -346,7 +346,7 @@
         <h2 class="text-2xl font-bold">📑 Sidebar: as abas Info e Files</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
-        A coluna direita de 360px tem duas abas. Toda a informação textual passa por ali — e o conteúdo muda conforme você seleciona um nó ou troca de persona.
+        A coluna direita de 360px tem duas abas. Toda a informaçêo textual passa por ali — e o conteúdo muda conforme você seleciona um nó ou troca de persona.
       </p>
 
       <div class="space-y-6 mb-6">
@@ -354,7 +354,7 @@
           <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">A</span></div>
           <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
             <h4 class="font-semibold text-white mb-2">Aba "Info" — três estados</h4>
-            <p class="text-sm text-neutral-400 mb-3">Default → seleção → persona</p>
+            <p class="text-sm text-neutral-400 mb-3">Default → seleçêo → persona</p>
             <ul class="space-y-2 text-neutral-300 text-sm">
               <li><strong class="text-emerald-400">ProjectOverview</strong> — quando nada está selecionado: stats do repo, layers, top nós.</li>
               <li><strong class="text-emerald-400">NodeInfo</strong> — ao clicar num nó: sumário, símbolos, vizinhos, tipo.</li>
@@ -367,14 +367,14 @@
           <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
             <h4 class="font-semibold text-white mb-2">Aba "Files" — árvore derivada</h4>
             <p class="text-sm text-neutral-400 mb-3">FileExplorer</p>
-            <p class="text-neutral-300 text-sm">A árvore <strong>não vem do filesystem</strong> diretamente — é construída a partir do grafo estrutural. Resultado: você só vê o que está representado como nó, e clicar dali centraliza o grafo no item.</p>
+            <p class="text-neutral-300 text-sm">A árvore <strong>nêo vem do filesystem</strong> diretamente — é construída a partir do grafo estrutural. Resultado: você só vê o que está representado como nó, e clicar dali centraliza o grafo no item.</p>
           </div>
         </div>
       </div>
 
       <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Detalhe que importa</h3>
-        <p class="text-neutral-300">Como a árvore vem do grafo (e não do disco), arquivos ignorados pelo scanner (node_modules, build, etc.) simplesmente não aparecem. Sem ruído.</p>
+        <p class="text-neutral-300">Como a árvore vem do grafo (e nêo do disco), arquivos ignorados pelo scanner (node_modules, build, etc.) simplesmente nêo aparecem. Sem ruído.</p>
       </div>
     </section>
 
@@ -385,7 +385,7 @@
         <h2 class="text-2xl font-bold">📜 Code viewer e full-screen</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
-        Clicar num nó de arquivo abre um <strong class="text-emerald-400">code viewer</strong> que sobe pela base. Botão expand promove para modal full-screen. O syntax highlight é feito por <code>prism-react-renderer</code>.
+        Clicar num nó de arquivo abre um <strong class="text-emerald-400">code viewer</strong> que sobe pela base. Botêo expand promove para modal full-screen. O syntax highlight é feito por <code>prism-react-renderer</code>.
       </p>
 
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
@@ -398,7 +398,7 @@
           <div>// 1. token presente e válido</div>
           <div>// 2. path está na allowlist derivada do grafo</div>
         </div>
-        <p class="text-neutral-400 text-sm mt-4">A allowlist garante que mesmo com o token você não consegue ler arquivos fora do grafo (ex: <code>.env</code>).</p>
+        <p class="text-neutral-400 text-sm mt-4">A allowlist garante que mesmo com o token você nêo consegue ler arquivos fora do grafo (ex: <code>.env</code>).</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -407,13 +407,13 @@
           <ul class="space-y-3 text-neutral-300">
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Ler código sem sair do grafo.</span></li>
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Syntax highlight em ~30 linguagens.</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Modal expandido para inspeção profunda.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Modal expandido para inspeçêo profunda.</span></li>
           </ul>
         </div>
         <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
-          <h4 class="font-bold text-red-400 mb-4">✗ Não é IDE</h4>
+          <h4 class="font-bold text-red-400 mb-4">✗ Nêo é IDE</h4>
           <ul class="space-y-3 text-neutral-300">
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem edição inline.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem ediçêo inline.</span></li>
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem refactor automático.</span></li>
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem terminal / debugger.</span></li>
           </ul>
@@ -425,7 +425,7 @@
     <section id="topico-7" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">7</span>
-        <h2 class="text-2xl font-bold">🧭 Navegação visual e tours guiados</h2>
+        <h2 class="text-2xl font-bold">🧭 Navegaçêo visual e tours guiados</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
         Pan, zoom, search, clique — o usuário navega o grafo como um mapa. Mas o diferencial está nos <strong class="text-emerald-400">tours guiados</strong>: roteiros gerados automaticamente que mostram nós em ordem de dependência.
@@ -436,8 +436,8 @@
           <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">1</span></div>
           <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
             <h4 class="font-semibold text-white mb-2">Entry points</h4>
-            <p class="text-sm text-neutral-400 mb-3">Onde a aplicação começa</p>
-            <p class="text-neutral-300 text-sm">O tour começa pelos arquivos de entrada (main, index, app) — não pelo arquivo aleatório que o "Find file" abriu.</p>
+            <p class="text-sm text-neutral-400 mb-3">Onde a aplicaçêo começa</p>
+            <p class="text-neutral-300 text-sm">O tour começa pelos arquivos de entrada (main, index, app) — nêo pelo arquivo aleatório que o "Find file" abriu.</p>
           </div>
         </div>
         <div class="flex items-start space-x-4">
@@ -445,7 +445,7 @@
           <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
             <h4 class="font-semibold text-white mb-2">Core layers</h4>
             <p class="text-sm text-neutral-400 mb-3">Service, Data, UI, Utility</p>
-            <p class="text-neutral-300 text-sm">Em seguida, o tour percorre as camadas arquiteturais — você entende a divisão antes de mergulhar.</p>
+            <p class="text-neutral-300 text-sm">Em seguida, o tour percorre as camadas arquiteturais — você entende a divisêo antes de mergulhar.</p>
           </div>
         </div>
         <div class="flex items-start space-x-4">
@@ -472,11 +472,11 @@
       <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
         <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
         <div class="space-y-4 mb-8">
-          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Nó é a unidade</strong><span class="text-neutral-400"> — arquivo, função, classe, conceito.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Nó é a unidade</strong><span class="text-neutral-400"> — arquivo, funçêo, classe, conceito.</span></div></div>
           <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Aresta carrega a história</strong><span class="text-neutral-400"> — imports, calls, extends.</span></div></div>
           <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Persistência local</strong><span class="text-neutral-400"> — JSON em <code>.understand-anything/</code>.</span></div></div>
           <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Layout grafo-first</strong><span class="text-neutral-400"> — 75% canvas + 360px sidebar.</span></div></div>
-          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Sidebar reativa</strong><span class="text-neutral-400"> — Info muda conforme seleção/persona; Files vem do grafo.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Sidebar reativa</strong><span class="text-neutral-400"> — Info muda conforme seleçêo/persona; Files vem do grafo.</span></div></div>
           <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Code viewer com sandbox</strong><span class="text-neutral-400"> — token + allowlist evitam leitura indevida.</span></div></div>
           <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Tours por dependência</strong><span class="text-neutral-400"> — leitura na ordem certa.</span></div></div>
         </div>

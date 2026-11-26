@@ -1,12 +1,12 @@
-# Understand Anything — Plano de Implementação da Fase 3 (Modo Aprender)
+# Understand Anything — Plano de Implementaçêo da Fase 3 (Modo Aprender)
 
-> 🇬🇧 Versão original em inglês: [2026-03-14-phase3-implementation.md](./2026-03-14-phase3-implementation.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-14-phase3-implementation.md](./2026-03-14-phase3-implementation.md)
 
 > **Para o Claude:** SUB-SKILL OBRIGATÓRIA: Use superpowers:executing-plans para implementar este plano tarefa a tarefa.
 
-**Objetivo:** Adicionar a camada "Modo Aprender" — geração de tours, explicações contextuais, lições específicas por linguagem e modos de persona (não-técnico / júnior / experiente).
+**Objetivo:** Adicionar a camada "Modo Aprender" — geraçêo de tours, explicações contextuais, lições específicas por linguagem e modos de persona (nêo-técnico / júnior / experiente).
 
-**Arquitetura:** Estende o monorepo existente. O core ganha geração de tours e construtores de prompt para lições de linguagem. O dashboard ganha um novo componente LearnPanel, seletor de persona e explicação aprimorada de nodes. O layout existente de 4 painéis passa a ser adaptativo por persona.
+**Arquitetura:** Estende o monorepo existente. O core ganha geraçêo de tours e construtores de prompt para lições de linguagem. O dashboard ganha um novo componente LearnPanel, seletor de persona e explicaçêo aprimorada de nodes. O layout existente de 4 painéis passa a ser adaptativo por persona.
 
 **Stack Técnica:** Nenhuma nova dependência necessária. Usa react-markdown, @anthropic-ai/sdk, zustand, @xyflow/react, tailwindcss já existentes.
 
@@ -30,14 +30,14 @@ Tasks 1, 2, 4, 5 podem ser desenvolvidas em qualquer ordem. Task 3 depende da Ta
 
 ---
 
-## Tarefa 1: Motor de Geração de Tour (Core)
+## Tarefa 1: Motor de Geraçêo de Tour (Core)
 
 **Arquivos:**
 - Criar: `packages/core/src/analyzer/tour-generator.ts`
 - Criar: `packages/core/src/__tests__/tour-generator.test.ts`
 - Modificar: `packages/core/src/index.ts` (adicionar exports)
 
-**Contexto:** O schema `TourStep` já existe em `packages/core/src/types.ts` (order, title, description, nodeIds, languageLesson?). O `knowledge-graph.json` de amostra já tem 6 tour steps com lições de linguagem. Esta tarefa constrói o motor que GERA esses tours: um construtor de prompt LLM + parser de resposta, e um fallback heurístico que cria tours sem LLM usando topologia do grafo (detecção de entry-point → sort topológico → agrupamento por camadas).
+**Contexto:** O schema `TourStep` já existe em `packages/core/src/types.ts` (order, title, description, nodeIds, languageLesson?). O `knowledge-graph.json` de amostra já tem 6 tour steps com lições de linguagem. Esta tarefa constrói o motor que GERA esses tours: um construtor de prompt LLM + parser de resposta, e um fallback heurístico que cria tours sem LLM usando topologia do grafo (detecçêo de entry-point → sort topológico → agrupamento por camadas).
 
 **Passo 1: Escrever testes que falham**
 
@@ -262,7 +262,7 @@ describe("tour-generator", () => {
 cd packages/core && pnpm test -- --reporter verbose src/__tests__/tour-generator.test.ts
 ```
 
-Esperado: FAIL — módulo não encontrado
+Esperado: FAIL — módulo nêo encontrado
 
 **Passo 3: Implementar tour-generator.ts**
 
@@ -560,7 +560,7 @@ git commit -m "feat(core): add tour generation engine with heuristic and LLM str
 - Modificar: `packages/dashboard/src/store.ts` (adicionar estado e ações do tour)
 - Modificar: `packages/dashboard/src/App.tsx` (substituir NodeInfo bottom-right por painel tabulado)
 
-**Contexto:** O dashboard atualmente tem layout de 4 painéis: GraphView (top-left), CodeViewer (top-right), ChatPanel (bottom-left), NodeInfo (bottom-right). Esta tarefa adiciona estado do tour à store Zustand e cria um componente LearnPanel. O painel bottom-right vira uma visão tabulada alternando entre NodeInfo e LearnPanel. O LearnPanel mostra a lista de passos do tour e o conteúdo do passo atual.
+**Contexto:** O dashboard atualmente tem layout de 4 painéis: GraphView (top-left), CodeViewer (top-right), ChatPanel (bottom-left), NodeInfo (bottom-right). Esta tarefa adiciona estado do tour à store Zustand e cria um componente LearnPanel. O painel bottom-right vira uma visêo tabulada alternando entre NodeInfo e LearnPanel. O LearnPanel mostra a lista de passos do tour e o conteúdo do passo atual.
 
 **Passo 1: Adicionar estado de tour à store Zustand**
 
@@ -580,7 +580,7 @@ nextTourStep: () => void;
 prevTourStep: () => void;
 ```
 
-Adicione à implementação da store:
+Adicione à implementaçêo da store:
 
 ```typescript
 tourActive: false,
@@ -893,7 +893,7 @@ git commit -m "feat(dashboard): add LearnPanel component with tour state managem
 - Modificar: `packages/dashboard/src/components/GraphView.tsx` (destacar nodes do tour)
 - Modificar: `packages/dashboard/src/components/CustomNode.tsx` (estilo de destaque do tour)
 
-**Contexto:** Quando um tour está ativo, o GraphView precisa distinguir visualmente os nodes referenciados pelo passo atual do tour. Esta tarefa adiciona uma prop `isTourHighlighted` ao CustomNode e conecta isso através do GraphView usando `tourHighlightedNodeIds` da store. Nodes destacados pelo tour ganham um ring azul pulsante distinto (diferente dos destaques de busca, que são amarelos).
+**Contexto:** Quando um tour está ativo, o GraphView precisa distinguir visualmente os nodes referenciados pelo passo atual do tour. Esta tarefa adiciona uma prop `isTourHighlighted` ao CustomNode e conecta isso através do GraphView usando `tourHighlightedNodeIds` da store. Nodes destacados pelo tour ganham um ring azul pulsante distinto (diferente dos destaques de busca, que sêo amarelos).
 
 **Passo 1: Adicionar isTourHighlighted ao data de CustomNode**
 
@@ -912,7 +912,7 @@ export interface CustomNodeData extends Record<string, unknown> {
 }
 ```
 
-Adicione a lógica do ring de destaque do tour (tem prioridade sobre destaque de busca, mas não sobre seleção):
+Adicione a lógica do ring de destaque do tour (tem prioridade sobre destaque de busca, mas nêo sobre seleçêo):
 
 ```typescript
 let ringClass = "";
@@ -961,15 +961,15 @@ git commit -m "feat(dashboard): highlight tour-referenced nodes in graph view"
 
 ---
 
-## Tarefa 4: Explicação Contextual de Node (Dashboard)
+## Tarefa 4: Explicaçêo Contextual de Node (Dashboard)
 
 **Arquivos:**
-- Modificar: `packages/dashboard/src/store.ts` (adicionar estado e ação de explicação)
-- Modificar: `packages/dashboard/src/components/NodeInfo.tsx` (adicionar botão Explain + exibição)
+- Modificar: `packages/dashboard/src/store.ts` (adicionar estado e açêo de explicaçêo)
+- Modificar: `packages/dashboard/src/components/NodeInfo.tsx` (adicionar botêo Explain + exibiçêo)
 
-**Contexto:** Usuários devem poder clicar em "Explain" em qualquer node para obter uma explicação detalhada em linguagem natural gerada pelo Claude. Isso reusa o mesmo padrão do Anthropic SDK do ChatPanel, mas alvejando um único node. A explicação inclui o que o node faz, por que existe, como se conecta ao resto do projeto e padrões notáveis. A explicação é cacheada por ID de node para evitar re-chamar a API.
+**Contexto:** Usuários devem poder clicar em "Explain" em qualquer node para obter uma explicaçêo detalhada em linguagem natural gerada pelo Claude. Isso reusa o mesmo padrêo do Anthropic SDK do ChatPanel, mas alvejando um único node. A explicaçêo inclui o que o node faz, por que existe, como se conecta ao resto do projeto e padrões notáveis. A explicaçêo é cacheada por ID de node para evitar re-chamar a API.
 
-**Passo 1: Adicionar estado de explicação à store**
+**Passo 1: Adicionar estado de explicaçêo à store**
 
 Em `packages/dashboard/src/store.ts`, adicione à interface:
 
@@ -980,7 +980,7 @@ nodeExplanationCache: Record<string, string>;
 explainNode: (nodeId: string) => Promise<void>;
 ```
 
-Adicione à implementação:
+Adicione à implementaçêo:
 
 ```typescript
 nodeExplanation: null,
@@ -1065,15 +1065,15 @@ explainNode: async (nodeId) => {
 },
 ```
 
-Não esqueça de adicionar `import Anthropic from "@anthropic-ai/sdk"` se ainda não foi importado (está no store.ts atual).
+Nêo esqueça de adicionar `import Anthropic from "@anthropic-ai/sdk"` se ainda nêo foi importado (está no store.ts atual).
 
-Também adicione à ação `selectNode` — limpar explicação ao trocar de node:
+Também adicione à açêo `selectNode` — limpar explicaçêo ao trocar de node:
 
 ```typescript
 selectNode: (nodeId) => set({ selectedNodeId: nodeId, nodeExplanation: null }),
 ```
 
-**Passo 2: Adicionar botão Explain e exibição ao NodeInfo**
+**Passo 2: Adicionar botêo Explain e exibiçêo ao NodeInfo**
 
 Em `packages/dashboard/src/components/NodeInfo.tsx`, adicione seletores da store e a UI:
 
@@ -1122,7 +1122,7 @@ Adicione após o parágrafo de sumário, antes das tags:
 )}
 ```
 
-Não esqueça de adicionar `import ReactMarkdown from "react-markdown"` ao NodeInfo.
+Nêo esqueça de adicionar `import ReactMarkdown from "react-markdown"` ao NodeInfo.
 
 **Passo 3: Verificar que o dashboard compila**
 
@@ -1139,7 +1139,7 @@ git commit -m "feat(dashboard): add contextual node explanation with Claude API"
 
 ---
 
-## Tarefa 5: Construtor de Prompt de Lição de Linguagem (Core)
+## Tarefa 5: Construtor de Prompt de Liçêo de Linguagem (Core)
 
 **Arquivos:**
 - Criar: `packages/core/src/analyzer/language-lesson.ts`
@@ -1423,17 +1423,17 @@ git commit -m "feat(core): add language lesson prompt builder and concept detect
 
 ---
 
-## Tarefa 6: Exibição Aprimorada de Lição de Linguagem (Dashboard)
+## Tarefa 6: Exibiçêo Aprimorada de Liçêo de Linguagem (Dashboard)
 
 **Arquivos:**
-- Modificar: `packages/dashboard/src/components/NodeInfo.tsx` (exibição aprimorada de languageNotes)
-- Modificar: `packages/dashboard/src/components/LearnPanel.tsx` (lição de linguagem rica no tour)
+- Modificar: `packages/dashboard/src/components/NodeInfo.tsx` (exibiçêo aprimorada de languageNotes)
+- Modificar: `packages/dashboard/src/components/LearnPanel.tsx` (liçêo de linguagem rica no tour)
 
-**Contexto:** O campo `languageNotes` em nodes e `languageLesson` em tour steps já existem nos dados. O NodeInfo atualmente mostra `languageNotes` como texto simples em uma caixa azul. Esta tarefa aprimora ambas as exibições: NodeInfo ganha uma seção colapsável "Language Concepts" com pílulas de conceitos detectados, e a seção de lição de linguagem do LearnPanel ganha um layout mais estruturado com cards de conceitos.
+**Contexto:** O campo `languageNotes` em nodes e `languageLesson` em tour steps já existem nos dados. O NodeInfo atualmente mostra `languageNotes` como texto simples em uma caixa azul. Esta tarefa aprimora ambas as exibições: NodeInfo ganha uma seçêo colapsável "Language Concepts" com pílulas de conceitos detectados, e a seçêo de liçêo de linguagem do LearnPanel ganha um layout mais estruturado com cards de conceitos.
 
-**Passo 1: Aprimorar exibição de languageNotes no NodeInfo**
+**Passo 1: Aprimorar exibiçêo de languageNotes no NodeInfo**
 
-Substitua a seção `languageNotes` existente em `packages/dashboard/src/components/NodeInfo.tsx` por:
+Substitua a seçêo `languageNotes` existente em `packages/dashboard/src/components/NodeInfo.tsx` por:
 
 ```tsx
 {node.languageNotes && (
@@ -1465,9 +1465,9 @@ Substitua a seção `languageNotes` existente em `packages/dashboard/src/compone
 
 Adicione `const [languageExpanded, setLanguageExpanded] = useState(true);` no topo do componente.
 
-**Passo 2: Aprimorar exibição de lição de linguagem no LearnPanel**
+**Passo 2: Aprimorar exibiçêo de liçêo de linguagem no LearnPanel**
 
-A seção `languageLesson` no LearnPanel já foi criada na Task 2. Garanta que combine com este estilo aprimorado com ícone e distinção visual. Nenhuma mudança necessária se a Task 2 foi implementada corretamente.
+A seçêo `languageLesson` no LearnPanel já foi criada na Task 2. Garanta que combine com este estilo aprimorado com ícone e distinçêo visual. Nenhuma mudança necessária se a Task 2 foi implementada corretamente.
 
 **Passo 3: Verificar que o dashboard compila**
 
@@ -1492,9 +1492,9 @@ git commit -m "feat(dashboard): enhance language lesson display with collapsible
 - Modificar: `packages/dashboard/src/App.tsx` (layout adaptativo por persona)
 - Modificar: `packages/dashboard/src/components/GraphView.tsx` (filtrar nodes por persona)
 
-**Contexto:** O documento de design especifica três modos de persona que mudam o que o dashboard mostra. Esta é a maior tarefa da Fase 3, pois afeta layout, filtragem de nodes e visibilidade dos painéis. Os três modos são:
+**Contexto:** O documento de design especifica três modos de persona que mudam o que o dashboard mostra. Esta é a maior tarefa da Fase 3, pois afeta layout, filtragem de nodes e visibilidade dos painéis. Os três modos sêo:
 
-1. **Não-técnico** — Esconde CodeViewer, mostra apenas nodes de conceito + módulo no grafo, expande LearnPanel para todo o lado direito. Para PMs, designers, stakeholders.
+1. **Nêo-técnico** — Esconde CodeViewer, mostra apenas nodes de conceito + módulo no grafo, expande LearnPanel para todo o lado direito. Para PMs, designers, stakeholders.
 2. **Dev júnior** — Layout completo de 4 painéis com LearnPanel proeminente (em vez de NodeInfo). Mostra todos os nodes com indicadores de complexidade. Para devs aprendendo a base de código.
 3. **Dev experiente** — Layout completo de 4 painéis com CodeViewer e ChatPanel proeminentes, NodeInfo em vez de LearnPanel. Para devs sêniores fazendo deep dives.
 
@@ -1624,7 +1624,7 @@ const filteredGraphNodes = persona === "non-technical"
 // Use filteredGraphNodes instead of graph.nodes for building flowNodes
 ```
 
-Para o modo não-técnico, mostre apenas nodes de conceito, módulo e nível de arquivo (pule function/class para simplicidade). Também filtre edges para incluir apenas aquelas onde source e target estão no conjunto filtrado.
+Para o modo nêo-técnico, mostre apenas nodes de conceito, módulo e nível de arquivo (pule function/class para simplicidade). Também filtre edges para incluir apenas aquelas onde source e target estêo no conjunto filtrado.
 
 **Passo 6: Verificar que o dashboard compila**
 
@@ -1641,20 +1641,20 @@ git commit -m "feat(dashboard): add persona mode system (Overview / Learn / Deep
 
 ---
 
-## Checklist de Verificação
+## Checklist de Verificaçêo
 
 Após todas as tarefas concluídas:
 
 1. `cd packages/core && pnpm build && pnpm test` — todos os testes passam (92 existentes + ~20 novos)
 2. `cd packages/dashboard && pnpm build` — compila sem erros
 3. `pnpm dev:dashboard` — tour funciona ponta a ponta com dados de amostra:
-   - Botão Start Tour aparece no bottom-right
+   - Botêo Start Tour aparece no bottom-right
    - Passos navegam com Prev/Next
-   - Nodes do grafo são destacados por passo
+   - Nodes do grafo sêo destacados por passo
    - Lições de linguagem aparecem nos passos do tour
 4. Seletor de persona no header alterna layouts corretamente:
-   - Não-técnico: 2 colunas, sem CodeViewer, apenas nodes de alto nível
+   - Nêo-técnico: 2 colunas, sem CodeViewer, apenas nodes de alto nível
    - Júnior/Learn: 4 painéis com LearnPanel
    - Experiente/Deep Dive: 4 painéis com NodeInfo
-5. Botão "Explain This" no NodeInfo gera explicação contextual via API Claude
+5. Botêo "Explain This" no NodeInfo gera explicaçêo contextual via API Claude
 6. Todas as features existentes da Fase 1 + Fase 2 continuam funcionando (busca, chat, camadas, layout dagre)

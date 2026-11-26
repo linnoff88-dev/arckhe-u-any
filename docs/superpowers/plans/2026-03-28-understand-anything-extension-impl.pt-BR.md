@@ -1,12 +1,12 @@
-# Suporte Universal a Tipos de Arquivo — Plano de Implementação
+# Suporte Universal a Tipos de Arquivo — Plano de Implementaçêo
 
-> 🇬🇧 Versão original em inglês: [2026-03-28-understand-anything-extension-impl.md](./2026-03-28-understand-anything-extension-impl.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-28-understand-anything-extension-impl.md](./2026-03-28-understand-anything-extension-impl.md)
 
 > **Para o Claude:** SUB-SKILL OBRIGATÓRIA: Use superpowers:executing-plans para implementar este plano tarefa por tarefa.
 
-**Objetivo:** Estender o Understand Anything para analisar 26+ tipos de arquivo não-código (Markdown, Dockerfile, YAML, SQL, Terraform, etc.) com novos tipos de node/edge no grafo, parsers customizados, prompts de agente atualizados e visualização no dashboard.
+**Objetivo:** Estender o Understand Anything para analisar 26+ tipos de arquivo nêo-código (Markdown, Dockerfile, YAML, SQL, Terraform, etc.) com novos tipos de node/edge no grafo, parsers customizados, prompts de agente atualizados e visualizaçêo no dashboard.
 
-**Arquitetura:** Estender o pipeline existente LanguageConfig + AnalyzerPlugin. Adicionar 8 novos tipos de node e 8 novos tipos de edge ao schema. Construir 12 analyzers leves baseados em regex/parser para formatos estruturados, somente LLM para não-estruturados. Atualizar todos os 5 prompts de agente para lidar com arquivos não-código. Adicionar novas cores de node e renderização no sidebar do dashboard.
+**Arquitetura:** Estender o pipeline existente LanguageConfig + AnalyzerPlugin. Adicionar 8 novos tipos de node e 8 novos tipos de edge ao schema. Construir 12 analyzers leves baseados em regex/parser para formatos estruturados, somente LLM para nêo-estruturados. Atualizar todos os 5 prompts de agente para lidar com arquivos nêo-código. Adicionar novas cores de node e renderizaçêo no sidebar do dashboard.
 
 **Stack Técnica:** TypeScript, Zod, Vitest, React, React Flow, Zustand, TailwindCSS v4, pacote npm `yaml`, `@iarna/toml`, `jsonc-parser`
 
@@ -74,7 +74,7 @@ describe("Extended types", () => {
 **Passo 2: Rodar o teste para verificar que falha**
 
 Rode: `pnpm --filter @understand-anything/core test -- --run types.test`
-Esperado: FAIL — erros de compilação TypeScript para tipos novos que ainda não existem
+Esperado: FAIL — erros de compilaçêo TypeScript para tipos novos que ainda nêo existem
 
 **Passo 3: Implementar as extensões de tipo**
 
@@ -187,7 +187,7 @@ git commit -m "feat(core): extend GraphNode/EdgeType/StructuralAnalysis for non-
 
 ---
 
-## Tarefa 2: Estender Validação de Schema — Schemas Zod & Aliases
+## Tarefa 2: Estender Validaçêo de Schema — Schemas Zod & Aliases
 
 **Arquivos:**
 - Modificar: `understand-anything-plugin/packages/core/src/schema.ts:1-554`
@@ -389,7 +389,7 @@ git commit -m "feat(core): make resolveImports optional on AnalyzerPlugin"
 
 ---
 
-## Tarefa 4: Adicionar Configs de Linguagens Não-Código (26 configs)
+## Tarefa 4: Adicionar Configs de Linguagens Nêo-Código (26 configs)
 
 **Arquivos:**
 - Create: `understand-anything-plugin/packages/core/src/languages/configs/markdown.ts`
@@ -459,11 +459,11 @@ describe("Non-code language configs", () => {
 **Passo 2: Rodar o teste para verificar que falha**
 
 Rode: `pnpm --filter @understand-anything/core test -- --run language-registry.test`
-Esperado: FAIL — nenhum config registrado para extensões não-código
+Esperado: FAIL — nenhum config registrado para extensões nêo-código
 
 **Passo 3: Criar todos os arquivos de config**
 
-Cada config segue o mesmo padrão de `typescript.ts`. Exemplo para markdown:
+Cada config segue o mesmo padrêo de `typescript.ts`. Exemplo para markdown:
 
 ```typescript
 // markdown.ts
@@ -483,13 +483,13 @@ export const markdownConfig = {
 } satisfies LanguageConfig;
 ```
 
-Crie configs similares para os 26 tipos. Mapeamentos-chave de extensão:
+Crie configs similares para os 26 tipos. Mapeamentos-chave de extensêo:
 - yaml: `.yaml`, `.yml`
 - json: `.json`, `.jsonc`
 - toml: `.toml`
-- env: `.env` (Nota: LanguageRegistry precisa de correspondência por filename, não apenas extensão)
+- env: `.env` (Nota: LanguageRegistry precisa de correspondência por filename, nêo apenas extensêo)
 - xml: `.xml`
-- dockerfile: `Dockerfile` (detecção por filename — precisa de tratamento especial)
+- dockerfile: `Dockerfile` (detecçêo por filename — precisa de tratamento especial)
 - sql: `.sql`
 - graphql: `.graphql`, `.gql`
 - protobuf: `.proto`
@@ -506,7 +506,7 @@ Crie configs similares para os 26 tipos. Mapeamentos-chave de extensão:
 - restructuredtext: `.rst`
 - jenkinsfile: (por filename — `Jenkinsfile`)
 
-**Importante:** Para detecção por filename (Dockerfile, Makefile, Jenkinsfile), estenda o LanguageRegistry para suportar um array `filenames` além de `extensions`. Adicione um campo `filenames?: string[]` ao `LanguageConfig` e atualize `getForFile()` para checar basename contra filenames quando o lookup por extensão falhar.
+**Importante:** Para detecçêo por filename (Dockerfile, Makefile, Jenkinsfile), estenda o LanguageRegistry para suportar um array `filenames` além de `extensions`. Adicione um campo `filenames?: string[]` ao `LanguageConfig` e atualize `getForFile()` para checar basename contra filenames quando o lookup por extensêo falhar.
 
 Atualize `configs/index.ts` para importar e registrar todos os novos configs em `builtinLanguageConfigs`.
 
@@ -597,11 +597,11 @@ Suítes de teste similares para:
 **Passo 2: Rodar os testes para verificar que falham**
 
 Rode: `pnpm --filter @understand-anything/core test -- --run parsers.test`
-Esperado: FAIL — módulos de parser não existem
+Esperado: FAIL — módulos de parser nêo existem
 
 **Passo 3: Implementar todos os 12 parsers**
 
-Cada parser segue este padrão:
+Cada parser segue este padrêo:
 
 ```typescript
 import type { AnalyzerPlugin, StructuralAnalysis, ReferenceResolution } from "../../types.js";
@@ -738,7 +738,7 @@ describe("Non-code file support", () => {
 **Passo 2: Rodar o teste para verificar que falha**
 
 Rode: `pnpm --filter @understand-anything/core test -- --run graph-builder.test`
-Esperado: FAIL — os métodos `addNonCodeFile` e `addNonCodeFileWithAnalysis` não existem
+Esperado: FAIL — os métodos `addNonCodeFile` e `addNonCodeFileWithAnalysis` nêo existem
 
 **Passo 3: Implementar extensões do GraphBuilder**
 
@@ -897,8 +897,8 @@ git commit -m "feat(core): export new types and parsers from core"
 Mudanças-chave no prompt:
 1. Remover o filtro code-only — escanear `.md`, `.yaml`, `.json`, `.sql`, `.tf`, `Dockerfile`, etc.
 2. Adicionar um campo `fileCategory` a cada arquivo descoberto: `"code" | "config" | "docs" | "infra" | "data" | "script" | "markup"`
-3. Atualizar a lista de exclusão — ainda excluir `node_modules/`, `.git/`, binários, mas incluir arquivos não-código
-4. Adicionar lógica de detecção de categoria no script de descoberta:
+3. Atualizar a lista de exclusêo — ainda excluir `node_modules/`, `.git/`, binários, mas incluir arquivos nêo-código
+4. Adicionar lógica de detecçêo de categoria no script de descoberta:
    - `.md`, `.rst`, `.txt` → `"docs"`
    - `.yaml`, `.yml`, `.json`, `.toml`, `.env`, `.xml` → `"config"`
    - `Dockerfile`, `docker-compose.*`, `.tf`, `.github/workflows/*`, `Makefile`, `Jenkinsfile` → `"infra"`
@@ -925,10 +925,10 @@ git commit -m "feat(agents): update project-scanner to discover all file types"
 **Passo 1: Adicionar prompts de análise type-aware**
 
 Mudanças-chave:
-1. Adicionar uma seção no topo explicando categorias de arquivo e como analisar cada uma:
+1. Adicionar uma seçêo no topo explicando categorias de arquivo e como analisar cada uma:
    - **Arquivos de código** (comportamento atual): Extrair funções, classes, imports, call graph
    - **Arquivos de config**: Extrair configurações-chave, o que configuram, qual código afetam
-   - **Arquivos de documentação**: Extrair seções/headings, conceitos-chave, componentes de código referenciados
+   - **Arquivos de documentaçêo**: Extrair seções/headings, conceitos-chave, componentes de código referenciados
    - **Arquivos de infraestrutura**: Extrair serviços, portas, volumes, deployments, qual código eles deploiam
    - **Arquivos de Data/Schema**: Extrair tabelas, colunas, tipos, relacionamentos, código consumidor
    - **Arquivos de Pipeline**: Extrair jobs, steps, triggers, targets deploiados
@@ -943,7 +943,7 @@ Mudanças-chave:
 
 3. Adicionar campo `nodeType` na saída: que tipo de GraphNode cada arquivo deve se tornar (file, config, document, service, etc.)
 
-4. Atualizar a orientação de geração de edges:
+4. Atualizar a orientaçêo de geraçêo de edges:
    - Arquivos de config: gerar edges `configures` para arquivos de código que afetam
    - Arquivos de doc: gerar edges `documents` para o código descrito
    - Dockerfiles: gerar edges `deploys` para diretórios de código
@@ -951,7 +951,7 @@ Mudanças-chave:
    - Configs de CI: gerar edges `triggers` para pipelines
    - Schemas de API: gerar edges `defines_schema` para endpoints
 
-5. Atualizar orientação de tagging com novas tags: `documentation`, `configuration`, `infrastructure`, `database`, `api-schema`, `ci-cd`, `deployment`, `migration`
+5. Atualizar orientaçêo de tagging com novas tags: `documentation`, `configuration`, `infrastructure`, `database`, `api-schema`, `ci-cd`, `deployment`, `migration`
 
 **Passo 2: Commit**
 
@@ -967,15 +967,15 @@ git commit -m "feat(agents): add type-aware analysis prompts for non-code files"
 **Arquivos:**
 - Modificar: `understand-anything-plugin/skills/understand/architecture-analyzer-prompt.md`
 
-**Passo 1: Adicionar detecção de padrões não-código**
+**Passo 1: Adicionar detecçêo de padrões nêo-código**
 
 Mudanças-chave:
 1. Adicionar novos padrões arquiteturais a detectar:
    - **Topologia de deploy**: Dockerfile → docker-compose → manifestos K8s
-   - **Pipeline de dados**: Definição de schema → migração → endpoint de API → código cliente
-   - **Cobertura de documentação**: Quais módulos têm docs correspondentes
-   - **Grafo de configuração**: Quais arquivos de config afetam quais caminhos de código
-2. Atualizar hints de layer para incluir camadas não-código:
+   - **Pipeline de dados**: Definiçêo de schema → migraçêo → endpoint de API → código cliente
+   - **Cobertura de documentaçêo**: Quais módulos têm docs correspondentes
+   - **Grafo de configuraçêo**: Quais arquivos de config afetam quais caminhos de código
+2. Atualizar hints de layer para incluir camadas nêo-código:
    - Layer `"infrastructure"` para Dockerfiles, K8s, Terraform
    - Layer `"documentation"` para docs
    - Layer `"data"` para SQL, schemas
@@ -996,17 +996,17 @@ git commit -m "feat(agents): add non-code pattern detection to architecture anal
 **Arquivos:**
 - Modificar: `understand-anything-plugin/skills/understand/tour-builder-prompt.md`
 
-**Passo 1: Adicionar paradas de tour para não-código**
+**Passo 1: Adicionar paradas de tour para nêo-código**
 
 Mudanças-chave:
-1. Atualizar a orientação de step do tour para incluir arquivos não-código:
-   - Step 1 poderia ser README.md (visão geral do projeto)
+1. Atualizar a orientaçêo de step do tour para incluir arquivos nêo-código:
+   - Step 1 poderia ser README.md (visêo geral do projeto)
    - Paradas de infraestrutura: "Como a app é containerizada"
    - Paradas de dados: "O schema do banco"
    - Paradas de CI/CD: "Como o código é deploiado"
-2. Atualizar `languageLesson` para cobrir também conceitos não-código:
+2. Atualizar `languageLesson` para cobrir também conceitos nêo-código:
    - Dockerfile: multi-stage builds, layer caching
-   - SQL: normalização, foreign keys
+   - SQL: normalizaçêo, foreign keys
    - YAML: anchors, merge keys
    - Terraform: state management, modules
 
@@ -1024,12 +1024,12 @@ git commit -m "feat(agents): extend tour builder for non-code file stops"
 **Arquivos:**
 - Modificar: `understand-anything-plugin/skills/understand/graph-reviewer-prompt.md`
 
-**Passo 1: Atualizar validação para novos tipos de node/edge**
+**Passo 1: Atualizar validaçêo para novos tipos de node/edge**
 
 Mudanças-chave:
-1. Adicionar novos tipos de node à lista de tipos válidos no script de validação
+1. Adicionar novos tipos de node à lista de tipos válidos no script de validaçêo
 2. Adicionar novos tipos de edge à lista de tipos válidos
-3. Adicionar checks de qualidade para nodes não-código:
+3. Adicionar checks de qualidade para nodes nêo-código:
    - Config nodes devem ter edges `configures`
    - Document nodes devem ter edges `documents`
    - Service nodes devem ter edges `deploys`
@@ -1059,7 +1059,7 @@ git commit -m "feat(agents): update graph reviewer for new node/edge types"
 - Create: `understand-anything-plugin/skills/understand/languages/html.md`
 - Create: `understand-anything-plugin/skills/understand/languages/css.md`
 
-Cada snippet segue o padrão dos existentes `typescript.md` / `python.md`:
+Cada snippet segue o padrêo dos existentes `typescript.md` / `python.md`:
 
 ```markdown
 # Markdown
@@ -1102,13 +1102,13 @@ git commit -m "feat(agents): add language context snippets for 11 non-code file 
 **Arquivos:**
 - Modificar: `understand-anything-plugin/skills/understand/SKILL.md`
 
-**Passo 1: Atualizar o pipeline para tratar arquivos não-código**
+**Passo 1: Atualizar o pipeline para tratar arquivos nêo-código**
 
 Mudanças-chave:
-1. **Phase 1 (SCAN)**: Atualizar o batching de arquivos para incluir não-código. Adicionar `fileCategory` aos metadados de batch.
-2. **Phase 2 (ANALYZE)**: Atualizar a construção de batches para agrupar arquivos não-código relacionados (ex.: Dockerfile + docker-compose.yml). Passar `fileCategory` ao prompt do file-analyzer.
-3. **Phase 4 (ARCHITECTURE)**: Injetar snippets de linguagem não-código para linguagens não-código detectadas.
-4. **Phase 5 (TOUR)**: Incluir nodes não-código no pool de candidatos a tour.
+1. **Phase 1 (SCAN)**: Atualizar o batching de arquivos para incluir nêo-código. Adicionar `fileCategory` aos metadados de batch.
+2. **Phase 2 (ANALYZE)**: Atualizar a construçêo de batches para agrupar arquivos nêo-código relacionados (ex.: Dockerfile + docker-compose.yml). Passar `fileCategory` ao prompt do file-analyzer.
+3. **Phase 4 (ARCHITECTURE)**: Injetar snippets de linguagem nêo-código para linguagens nêo-código detectadas.
+4. **Phase 5 (TOUR)**: Incluir nodes nêo-código no pool de candidatos a tour.
 5. **Phase 7 (SAVE)**: Sem mudanças necessárias (o schema lida com novos tipos).
 6. **Tabela de referência de Node/Edge**: Adicionar os 8 novos tipos de node e 8 novos tipos de edge.
 
@@ -1268,9 +1268,9 @@ git commit -m "feat(dashboard): add new node/edge type support to NodeInfo sideb
 **Arquivos:**
 - Modificar: `understand-anything-plugin/packages/dashboard/src/components/ProjectOverview.tsx`
 
-**Passo 1: Adicionar distribuição de tipo de arquivo**
+**Passo 1: Adicionar distribuiçêo de tipo de arquivo**
 
-Adicione uma seção "File Types" após o grid de stats que mostra contagem por categoria de tipo de node:
+Adicione uma seçêo "File Types" após o grid de stats que mostra contagem por categoria de tipo de node:
 - Code: file + function + class
 - Config: config
 - Docs: document
@@ -1303,9 +1303,9 @@ nodeTypeFilters: Record<string, boolean>; // { code: true, config: true, docs: t
 toggleNodeTypeFilter: (category: string) => void;
 ```
 
-Padrão de todas as categorias para `true` (visíveis).
+Padrêo de todas as categorias para `true` (visíveis).
 
-**Passo 2: Aplicar filtros na computação de topologia do GraphView**
+**Passo 2: Aplicar filtros na computaçêo de topologia do GraphView**
 
 Em `useLayerDetailTopology`, filtre nodes baseado em `nodeTypeFilters` antes do layout.
 
@@ -1322,7 +1322,7 @@ git commit -m "feat(dashboard): add node type category filter controls"
 
 ---
 
-## Tarefa 20: Verificação de Build do Dashboard
+## Tarefa 20: Verificaçêo de Build do Dashboard
 
 **Passo 1: Buildar o dashboard**
 
@@ -1353,19 +1353,19 @@ git commit -m "fix: lint and build fixes for universal file type support"
 
 ---
 
-## Tarefa 21: Teste de Integração — Verificação Ponta a Ponta
+## Tarefa 21: Teste de Integraçêo — Verificaçêo Ponta a Ponta
 
 **Passo 1: Smoke test no dev server**
 
 Rode: `pnpm dev:dashboard`
-- Carregue um grafo de conhecimento que inclua nodes não-código
+- Carregue um grafo de conhecimento que inclua nodes nêo-código
 - Verifique que os novos tipos de node renderizam com as cores corretas
 - Verifique que o sidebar NodeInfo mostra os novos labels de edge
 - Verifique que os controles de filtro funcionam
 
-**Passo 2: Gerar grafo de teste com nodes não-código**
+**Passo 2: Gerar grafo de teste com nodes nêo-código**
 
-Atualize `scripts/generate-large-graph.mjs` para incluir tipos de node não-código na geração aleatória, depois gere um grafo de teste e carregue-o no dashboard.
+Atualize `scripts/generate-large-graph.mjs` para incluir tipos de node nêo-código na geraçêo aleatória, depois gere um grafo de teste e carregue-o no dashboard.
 
 **Passo 3: Commit**
 
@@ -1379,12 +1379,12 @@ git commit -m "feat(scripts): include non-code node types in test graph generato
 ## Tarefa 22: Version Bump & Commit Final
 
 **Arquivos:**
-- Modificar: `understand-anything-plugin/package.json` → bump da versão
-- Modificar: `.claude-plugin/marketplace.json` → bump da versão
-- Modificar: `.claude-plugin/plugin.json` → bump da versão
-- Modificar: `.cursor-plugin/plugin.json` → bump da versão
+- Modificar: `understand-anything-plugin/package.json` → bump da versêo
+- Modificar: `.claude-plugin/marketplace.json` → bump da versêo
+- Modificar: `.claude-plugin/plugin.json` → bump da versêo
+- Modificar: `.cursor-plugin/plugin.json` → bump da versêo
 
-**Passo 1: Bump da versão em todos os 4 arquivos** (ex.: 1.3.0 → 1.4.0)
+**Passo 1: Bump da versêo em todos os 4 arquivos** (ex.: 1.3.0 → 1.4.0)
 
 **Passo 2: Commit final**
 
@@ -1400,7 +1400,7 @@ git commit -m "chore: bump version to 1.4.0 for universal file type support"
 | # | Tarefa | Arquivos | Depende de |
 |---|------|-------|------------|
 | 1 | Estender tipos do core | types.ts | — |
-| 2 | Estender validação de schema | schema.ts | 1 |
+| 2 | Estender validaçêo de schema | schema.ts | 1 |
 | 3 | Atualizar PluginRegistry | registry.ts | 1 |
 | 4 | Adicionar 26 language configs | languages/configs/ | 1 |
 | 5 | Construir 12 parsers customizados | plugins/parsers/ | 1, 3 |
@@ -1418,11 +1418,11 @@ git commit -m "chore: bump version to 1.4.0 for universal file type support"
 | 17 | NodeInfo do dashboard | NodeInfo.tsx | 15 |
 | 18 | ProjectOverview do dashboard | ProjectOverview.tsx | 15 |
 | 19 | Controles de filtro do dashboard | store.ts, GraphView.tsx, App.tsx | 15-18 |
-| 20 | Verificação de build | — | 1-19 |
-| 21 | Teste de integração | — | 20 |
+| 20 | Verificaçêo de build | — | 1-19 |
+| 21 | Teste de integraçêo | — | 20 |
 | 22 | Version bump | package.json × 4 | 21 |
 
 **Grupos paralelizáveis:**
-- Tarefas 1-7 (core) são sequenciais
+- Tarefas 1-7 (core) sêo sequenciais
 - Tarefas 8-14 (prompts de agente) podem rodar em paralelo entre si, e em paralelo com as Tarefas 15-19 (dashboard)
-- Tarefas 20-22 são sequenciais e dependem de todas as tarefas anteriores
+- Tarefas 20-22 sêo sequenciais e dependem de todas as tarefas anteriores

@@ -1,12 +1,12 @@
-# Plano de Implementação do .understandignore
+# Plano de Implementaçêo do .understandignore
 
-> 🇬🇧 Versão original em inglês: [2026-04-10-understandignore-impl.md](./2026-04-10-understandignore-impl.md)
+> 🇬🇧 Versêo original em inglês: [2026-04-10-understandignore-impl.md](./2026-04-10-understandignore-impl.md)
 
 > **Para workers agênticos:** SUB-SKILL OBRIGATÓRIA: Use superpowers:subagent-driven-development (recomendado) ou superpowers:executing-plans para implementar este plano tarefa a tarefa. Os passos usam sintaxe de checkbox (`- [ ]`) para acompanhamento.
 
-**Objetivo:** Adicionar exclusão de arquivos configurável pelo usuário via arquivos `.understandignore` usando sintaxe `.gitignore`, com arquivos iniciais gerados automaticamente e uma pausa de revisão pré-análise.
+**Objetivo:** Adicionar exclusêo de arquivos configurável pelo usuário via arquivos `.understandignore` usando sintaxe `.gitignore`, com arquivos iniciais gerados automaticamente e uma pausa de revisêo pré-análise.
 
-**Arquitetura:** Um módulo `IgnoreFilter` em `packages/core` usa o pacote npm `ignore` para fazer parse de arquivos `.understandignore` e filtrar paths. Um `IgnoreGenerator` companheiro escaneia o projeto em busca de padrões comuns e produz um arquivo inicial com sugestões comentadas. O agente `project-scanner` aplica o filtro como uma segunda passagem após suas exclusões hardcoded existentes. A skill `/understand` adiciona uma Fase 0.5 que gera o arquivo inicial e pausa para revisão do usuário.
+**Arquitetura:** Um módulo `IgnoreFilter` em `packages/core` usa o pacote npm `ignore` para fazer parse de arquivos `.understandignore` e filtrar paths. Um `IgnoreGenerator` companheiro escaneia o projeto em busca de padrões comuns e produz um arquivo inicial com sugestões comentadas. O agente `project-scanner` aplica o filtro como uma segunda passagem após suas exclusões hardcoded existentes. A skill `/understand` adiciona uma Fase 0.5 que gera o arquivo inicial e pausa para revisêo do usuário.
 
 **Stack:** TypeScript, pacote npm `ignore`, Vitest
 
@@ -226,7 +226,7 @@ describe("IgnoreFilter", () => {
 - [ ] **Passo 2: Executar os testes para verificar que falham**
 
 Execute: `pnpm --filter @understand-anything/core test -- --run src/__tests__/ignore-filter.test.ts`
-Esperado: FALHA — módulo não encontrado
+Esperado: FALHA — módulo nêo encontrado
 
 - [ ] **Passo 3: Implementar IgnoreFilter**
 
@@ -352,7 +352,7 @@ export function createIgnoreFilter(projectRoot: string): IgnoreFilter {
 Execute: `pnpm --filter @understand-anything/core test -- --run src/__tests__/ignore-filter.test.ts`
 Esperado: Todos os testes PASSAM
 
-- [ ] **Passo 5: Build para verificar que não há erros de tipo**
+- [ ] **Passo 5: Build para verificar que nêo há erros de tipo**
 
 Execute: `pnpm --filter @understand-anything/core build`
 Esperado: Build limpo
@@ -482,7 +482,7 @@ describe("generateStarterIgnoreFile", () => {
 - [ ] **Passo 2: Executar os testes para verificar que falham**
 
 Execute: `pnpm --filter @understand-anything/core test -- --run src/__tests__/ignore-generator.test.ts`
-Esperado: FALHA — módulo não encontrado
+Esperado: FALHA — módulo nêo encontrado
 
 - [ ] **Passo 3: Implementar IgnoreGenerator**
 
@@ -655,7 +655,7 @@ This filtering must be deterministic (not LLM-based). Use a Node.js script with 
 
 - [ ] **Passo 4: Atualizar o schema de saída do scan**
 
-Encontre a seção do schema JSON de saída e adicione o campo `filteredByIgnore`:
+Encontre a seçêo do schema JSON de saída e adicione o campo `filteredByIgnore`:
 
 ```json
 {
@@ -685,13 +685,13 @@ git commit -m "feat(agent): add .understandignore support and bin/obj exclusions
 **Arquivos:**
 - Modificar: `understand-anything-plugin/skills/understand/SKILL.md`
 
-- [ ] **Passo 1: Ler a seção da Fase 0 atual do SKILL.md**
+- [ ] **Passo 1: Ler a seçêo da Fase 0 atual do SKILL.md**
 
 Leia `understand-anything-plugin/skills/understand/SKILL.md` linhas 22-80 para entender a Fase 0.
 
 - [ ] **Passo 2: Adicionar Fase 0.5 após a Fase 0**
 
-Após a seção da Fase 0 (depois do separador `---` antes da Fase 1), insira:
+Após a seçêo da Fase 0 (depois do separador `---` antes da Fase 1), insira:
 
 ```markdown
 ## Phase 0.5 — Ignore Configuration
@@ -717,7 +717,7 @@ Set up and verify the `.understandignore` file before scanning.
 
 - [ ] **Passo 3: Atualizar o relato da Fase 1**
 
-Na seção da Fase 1, após o gate check (~linha 114), adicione uma nota sobre relatar estatísticas de ignore:
+Na seçêo da Fase 1, após o gate check (~linha 114), adicione uma nota sobre relatar estatísticas de ignore:
 
 ```markdown
 After scanning, if the scan result includes `filteredByIgnore > 0`, report:
@@ -769,7 +769,7 @@ node -e "import('@understand-anything/core').then(m => { console.log('IgnoreFilt
 ```
 Esperado: Ambos mostram `function`
 
-- [ ] **Passo 6: Commit final (se houver alterações não-staged)**
+- [ ] **Passo 6: Commit final (se houver alterações nêo-staged)**
 
 ```bash
 git status

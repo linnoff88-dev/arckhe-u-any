@@ -1,18 +1,18 @@
-# Understand Anything — Plano de Implementação da Fase 2 (Inteligência)
+# Understand Anything — Plano de Implementaçêo da Fase 2 (Inteligência)
 
-> 🇬🇧 Versão original em inglês: [2026-03-14-phase2-implementation.md](./2026-03-14-phase2-implementation.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-14-phase2-implementation.md](./2026-03-14-phase2-implementation.md)
 
 > **Para o Claude:** SUB-SKILL OBRIGATÓRIA: Use superpowers:executing-plans para implementar este plano tarefa a tarefa.
 
-**Objetivo:** Adicionar a camada de "Inteligência" — busca aprimorada, detecção de obsolescência, auto-detecção de camadas, comando de skill `/understand-chat` e um painel de chat no dashboard com Q&A sensível a contexto.
+**Objetivo:** Adicionar a camada de "Inteligência" — busca aprimorada, detecçêo de obsolescência, auto-detecçêo de camadas, comando de skill `/understand-chat` e um painel de chat no dashboard com Q&A sensível a contexto.
 
-**Arquitetura:** Estende o monorepo existente (packages/core, packages/dashboard) com um novo pacote packages/skill. O core ganha um motor de busca, detecção de obsolescência e detecção de camadas. O dashboard ganha auto-layout, UX de busca aprimorada e painel de chat. O pacote skill fornece o comando `/understand-chat` para o Claude Code.
+**Arquitetura:** Estende o monorepo existente (packages/core, packages/dashboard) com um novo pacote packages/skill. O core ganha um motor de busca, detecçêo de obsolescência e detecçêo de camadas. O dashboard ganha auto-layout, UX de busca aprimorada e painel de chat. O pacote skill fornece o comando `/understand-chat` para o Claude Code.
 
-**Stack Técnica:** Stack existente + fuse.js (busca fuzzy), zod (validação de schema), @dagrejs/dagre (layout de grafo)
+**Stack Técnica:** Stack existente + fuse.js (busca fuzzy), zod (validaçêo de schema), @dagrejs/dagre (layout de grafo)
 
 ---
 
-## Tarefa 1: Validação de Schema com Zod no Carregamento do Grafo
+## Tarefa 1: Validaçêo de Schema com Zod no Carregamento do Grafo
 
 **Arquivos:**
 - Criar: `packages/core/src/schema.ts`
@@ -20,7 +20,7 @@
 - Modificar: `packages/core/package.json`
 - Criar: `packages/core/src/__tests__/schema.test.ts`
 
-**Contexto:** Atualmente `loadGraph` faz `JSON.parse()` sem validação. Arquivos de grafo corrompidos ou incompatíveis produzem silenciosamente dados quebrados. Adicione schemas zod correspondentes a todos os tipos em `types.ts` e valide no load. Isso é fundacional — todas as features da Fase 2 dependem de dados corretos do grafo.
+**Contexto:** Atualmente `loadGraph` faz `JSON.parse()` sem validaçêo. Arquivos de grafo corrompidos ou incompatíveis produzem silenciosamente dados quebrados. Adicione schemas zod correspondentes a todos os tipos em `types.ts` e valide no load. Isso é fundacional — todas as features da Fase 2 dependem de dados corretos do grafo.
 
 **Passo 1: Instalar zod**
 
@@ -139,7 +139,7 @@ describe('schema validation', () => {
 ```bash
 pnpm --filter @understand-anything/core test
 ```
-Esperado: FAIL — `schema.ts` ainda não existe.
+Esperado: FAIL — `schema.ts` ainda nêo existe.
 
 **Passo 4: Implementar schema.ts**
 
@@ -229,11 +229,11 @@ export function validateGraph(data: unknown): ValidationResult {
 }
 ```
 
-**Passo 5: Conectar a validação ao loadGraph da persistência**
+**Passo 5: Conectar a validaçêo ao loadGraph da persistência**
 
 Modifique `packages/core/src/persistence/index.ts`:
 
-Adicione um parâmetro opcional `validate` (padrão `true`) ao `loadGraph`. Quando true, executa `validateGraph` no JSON parseado. Se a validação falhar, lança um erro com detalhes. Mantém compatibilidade retroativa por padrão validando.
+Adicione um parâmetro opcional `validate` (padrêo `true`) ao `loadGraph`. Quando true, executa `validateGraph` no JSON parseado. Se a validaçêo falhar, lança um erro com detalhes. Mantém compatibilidade retroativa por padrêo validando.
 
 ```typescript
 import { validateGraph } from '../schema.js';
@@ -289,7 +289,7 @@ git commit -m "feat(core): add zod schema validation for knowledge graph loading
 - Modificar: `packages/core/src/index.ts`
 - Modificar: `packages/core/package.json`
 
-**Contexto:** A store atual do dashboard tem busca básica por substring case-insensitive entre name/summary/tags. A Fase 2 precisa de correspondência fuzzy e pontuação de relevância. Construímos um `SearchEngine` reutilizável no core (usado tanto pelo dashboard quanto pela skill), potencializado por Fuse.js. A store do dashboard mudará para esse motor em uma tarefa posterior.
+**Contexto:** A store atual do dashboard tem busca básica por substring case-insensitive entre name/summary/tags. A Fase 2 precisa de correspondência fuzzy e pontuaçêo de relevância. Construímos um `SearchEngine` reutilizável no core (usado tanto pelo dashboard quanto pela skill), potencializado por Fuse.js. A store do dashboard mudará para esse motor em uma tarefa posterior.
 
 **Passo 1: Instalar fuse.js**
 
@@ -406,7 +406,7 @@ describe('SearchEngine', () => {
 ```bash
 pnpm --filter @understand-anything/core test
 ```
-Esperado: FAIL — `search.ts` não existe.
+Esperado: FAIL — `search.ts` nêo existe.
 
 **Passo 4: Implementar SearchEngine**
 
@@ -495,14 +495,14 @@ git commit -m "feat(core): add fuzzy search engine with Fuse.js"
 
 ---
 
-## Tarefa 3: Auto-Layout com Dagre na Visualização do Grafo
+## Tarefa 3: Auto-Layout com Dagre na Visualizaçêo do Grafo
 
 **Arquivos:**
 - Criar: `packages/dashboard/src/utils/layout.ts`
 - Modificar: `packages/dashboard/src/components/GraphView.tsx`
 - Modificar: `packages/dashboard/package.json`
 
-**Contexto:** Atualmente o GraphView posiciona nodes em uma grade simples `(index % 3) * 300`. Isso produz grafos caóticos em projetos reais. Adicione dagre (layout hierárquico de grafo) para computar posições respeitando a direção das edges. Os nodes fluem de cima para baixo, com edges determinando hierarquia.
+**Contexto:** Atualmente o GraphView posiciona nodes em uma grade simples `(index % 3) * 300`. Isso produz grafos caóticos em projetos reais. Adicione dagre (layout hierárquico de grafo) para computar posições respeitando a direçêo das edges. Os nodes fluem de cima para baixo, com edges determinando hierarquia.
 
 **Passo 1: Instalar dagre**
 
@@ -565,18 +565,18 @@ export function applyDagreLayout(
 Substitua o posicionamento em grade `(index % 3) * 300` no `GraphView.tsx` por uma chamada a `applyDagreLayout`. As mudanças principais:
 
 1. Importe `applyDagreLayout` de `../utils/layout.js`
-2. Construa nodes/edges do flow a partir dos dados do grafo (sem posição)
+2. Construa nodes/edges do flow a partir dos dados do grafo (sem posiçêo)
 3. Passe por `applyDagreLayout` para obter nodes posicionados
 4. Use `useMemo` para recomputar layout só quando grafo/busca mudarem
 
-O componente deve preservar toda funcionalidade existente (nodes customizados, destaque de busca, seleção, controles, minimap).
+O componente deve preservar toda funcionalidade existente (nodes customizados, destaque de busca, seleçêo, controles, minimap).
 
 **Passo 4: Verificar manualmente**
 
 ```bash
 pnpm dev:dashboard
 ```
-Abra http://localhost:5173 — o grafo deve exibir nodes em layout hierárquico seguindo a direção das edges, não em grade plana.
+Abra http://localhost:5173 — o grafo deve exibir nodes em layout hierárquico seguindo a direçêo das edges, nêo em grade plana.
 
 **Passo 5: Commit**
 
@@ -587,14 +587,14 @@ git commit -m "feat(dashboard): add dagre auto-layout for hierarchical graph vis
 
 ---
 
-## Tarefa 4: Detecção de Obsolescência + Atualizações Incrementais
+## Tarefa 4: Detecçêo de Obsolescência + Atualizações Incrementais
 
 **Arquivos:**
 - Criar: `packages/core/src/staleness.ts`
 - Criar: `packages/core/src/__tests__/staleness.test.ts`
 - Modificar: `packages/core/src/index.ts`
 
-**Contexto:** O documento de design especifica um fluxo de auto-sincronização: ler `meta.json` → fazer git diff contra o último hash → re-analisar apenas arquivos alterados → mesclar no grafo existente. Esta tarefa constrói a detecção de obsolescência e a lógica de merge do grafo. Ela NÃO invoca LLM ou tree-sitter (isso é orquestração, feita pela skill). Fornece os blocos: detectar arquivos alterados, mesclar nodes/edges atualizados em um grafo existente.
+**Contexto:** O documento de design especifica um fluxo de auto-sincronizaçêo: ler `meta.json` → fazer git diff contra o último hash → re-analisar apenas arquivos alterados → mesclar no grafo existente. Esta tarefa constrói a detecçêo de obsolescência e a lógica de merge do grafo. Ela NêO invoca LLM ou tree-sitter (isso é orquestraçêo, feita pela skill). Fornece os blocos: detectar arquivos alterados, mesclar nodes/edges atualizados em um grafo existente.
 
 **Passo 1: Escrever testes que falham**
 
@@ -737,7 +737,7 @@ describe('staleness detection', () => {
 ```bash
 pnpm --filter @understand-anything/core test
 ```
-Esperado: FAIL — `staleness.ts` não existe.
+Esperado: FAIL — `staleness.ts` nêo existe.
 
 **Passo 4: Implementar staleness.ts**
 
@@ -836,14 +836,14 @@ git commit -m "feat(core): add staleness detection and incremental graph merging
 
 ---
 
-## Tarefa 5: Auto-Detecção de Camadas
+## Tarefa 5: Auto-Detecçêo de Camadas
 
 **Arquivos:**
 - Criar: `packages/core/src/analyzer/layer-detector.ts`
 - Criar: `packages/core/src/__tests__/layer-detector.test.ts`
 - Modificar: `packages/core/src/index.ts`
 
-**Contexto:** A detecção de camadas agrupa nodes em camadas lógicas (ex.: "API Layer", "Data Layer", "UI Layer") com base em caminhos de arquivos, padrões de nomenclatura e estrutura de edges. Usa uma abordagem heurística: analisa caminhos por padrões comuns (routes/, controllers/, models/, services/, etc.) e conectividade de nodes. Um construtor de prompt LLM é fornecido para detecção aprimorada quando LLM está disponível, mas a heurística funciona sozinha. As camadas populam o campo `layers[]` no KnowledgeGraph.
+**Contexto:** A detecçêo de camadas agrupa nodes em camadas lógicas (ex.: "API Layer", "Data Layer", "UI Layer") com base em caminhos de arquivos, padrões de nomenclatura e estrutura de edges. Usa uma abordagem heurística: analisa caminhos por padrões comuns (routes/, controllers/, models/, services/, etc.) e conectividade de nodes. Um construtor de prompt LLM é fornecido para detecçêo aprimorada quando LLM está disponível, mas a heurística funciona sozinha. As camadas populam o campo `layers[]` no KnowledgeGraph.
 
 **Passo 1: Escrever testes que falham**
 
@@ -963,7 +963,7 @@ describe('LLM layer detection prompt', () => {
 ```bash
 pnpm --filter @understand-anything/core test
 ```
-Esperado: FAIL — `layer-detector.ts` não existe.
+Esperado: FAIL — `layer-detector.ts` nêo existe.
 
 **Passo 4: Implementar layer-detector.ts**
 
@@ -1181,7 +1181,7 @@ git commit -m "feat(core): add heuristic and LLM-based layer auto-detection"
 
 ---
 
-## Tarefa 6: Estruturação do Pacote Skill + Comando `/understand-chat`
+## Tarefa 6: Estruturaçêo do Pacote Skill + Comando `/understand-chat`
 
 **Arquivos:**
 - Criar: `packages/skill/package.json`
@@ -1189,9 +1189,9 @@ git commit -m "feat(core): add heuristic and LLM-based layer auto-detection"
 - Criar: `packages/skill/src/understand-chat.ts`
 - Criar: `packages/skill/src/context-builder.ts`
 - Criar: `packages/skill/src/__tests__/context-builder.test.ts`
-- Criar: `packages/skill/.claude/skills/understand-chat.md` (arquivo de definição da skill)
+- Criar: `packages/skill/.claude/skills/understand-chat.md` (arquivo de definiçêo da skill)
 
-**Contexto:** Este é o primeiro comando de skill do Claude Code. `/understand-chat` provê Q&A no terminal usando o grafo de conhecimento. Como skill do Claude Code, precisa de: (1) um arquivo markdown de skill que o Claude carrega, (2) um context-builder que extrai contexto relevante do grafo para uma query do usuário, (3) o template de prompt que combina contexto + query. A skill lê o `.understand-anything/knowledge-graph.json` persistido e usa a sessão Claude ativa para o LLM — nenhuma chamada de API separada é necessária.
+**Contexto:** Este é o primeiro comando de skill do Claude Code. `/understand-chat` provê Q&A no terminal usando o grafo de conhecimento. Como skill do Claude Code, precisa de: (1) um arquivo markdown de skill que o Claude carrega, (2) um context-builder que extrai contexto relevante do grafo para uma query do usuário, (3) o template de prompt que combina contexto + query. A skill lê o `.understand-anything/knowledge-graph.json` persistido e usa a sessêo Claude ativa para o LLM — nenhuma chamada de API separada é necessária.
 
 **Passo 1: Criar package.json da skill**
 
@@ -1311,7 +1311,7 @@ describe('formatContextForPrompt', () => {
 ```bash
 pnpm install && pnpm --filter @understand-anything/skill test
 ```
-Esperado: FAIL — arquivos ainda não existem.
+Esperado: FAIL — arquivos ainda nêo existem.
 
 **Passo 5: Implementar context-builder.ts**
 
@@ -1439,7 +1439,7 @@ ${query}`;
 }
 ```
 
-**Passo 7: Criar o arquivo de definição da skill do Claude Code**
+**Passo 7: Criar o arquivo de definiçêo da skill do Claude Code**
 
 ```markdown
 <!-- packages/skill/.claude/skills/understand-chat.md -->
@@ -1487,14 +1487,14 @@ git commit -m "feat(skill): scaffold skill package with /understand-chat command
 
 ---
 
-## Tarefa 7: Aprimoramento da Busca no Dashboard + Integração com a Store
+## Tarefa 7: Aprimoramento da Busca no Dashboard + Integraçêo com a Store
 
 **Arquivos:**
 - Modificar: `packages/dashboard/src/store.ts`
 - Modificar: `packages/dashboard/src/components/SearchBar.tsx`
 - Modificar: `packages/dashboard/src/components/GraphView.tsx`
 
-**Contexto:** Conecte o `SearchEngine` do core ao dashboard. Substitua o filtro simples por substring na store Zustand pelo `SearchEngine` do core. Aprimore a SearchBar para mostrar resultados pontuados com ícones de tipo de node. Aprimore a GraphView para destacar resultados de busca com intensidade variável conforme a pontuação de relevância.
+**Contexto:** Conecte o `SearchEngine` do core ao dashboard. Substitua o filtro simples por substring na store Zustand pelo `SearchEngine` do core. Aprimore a SearchBar para mostrar resultados pontuados com ícones de tipo de node. Aprimore a GraphView para destacar resultados de busca com intensidade variável conforme a pontuaçêo de relevância.
 
 **Passo 1: Atualizar a store Zustand**
 
@@ -1553,9 +1553,9 @@ Atualize `SearchBar.tsx` para exibir pontuações de resultados e mostrar um dro
 **Passo 3: Atualizar GraphView para usar destaque pontuado**
 
 Atualize `GraphView.tsx`:
-- Intensidade do destaque de busca varia por pontuação (pontuação menor = melhor match = destaque mais brilhante)
+- Intensidade do destaque de busca varia por pontuaçêo (pontuaçêo menor = melhor match = destaque mais brilhante)
 - Melhores matches: ring amarelo brilhante; matches fracos: amarelo mais discreto
-- Passe a pontuação de busca como data para CustomNode para que ele ajuste sua aparência
+- Passe a pontuaçêo de busca como data para CustomNode para que ele ajuste sua aparência
 
 **Passo 4: Verificar manualmente**
 
@@ -1580,7 +1580,7 @@ git commit -m "feat(dashboard): wire core SearchEngine with fuzzy matching and s
 - Modificar: `packages/dashboard/src/store.ts`
 - Modificar: `packages/dashboard/src/App.tsx`
 
-**Contexto:** Substitua o placeholder "Chat — coming soon" por um painel de chat funcional. Para o dashboard standalone (sem sessão Claude Code), o usuário fornece uma chave de API Claude. O chat é sensível a contexto: inclui automaticamente o contexto do node selecionado e relações próximas no grafo. Usa o pacote `@anthropic-ai/sdk` com streaming para respostas em tempo real. O painel mostra uma lista de mensagens e um input, com mensagens de usuário e assistente.
+**Contexto:** Substitua o placeholder "Chat — coming soon" por um painel de chat funcional. Para o dashboard standalone (sem sessêo Claude Code), o usuário fornece uma chave de API Claude. O chat é sensível a contexto: inclui automaticamente o contexto do node selecionado e relações próximas no grafo. Usa o pacote `@anthropic-ai/sdk` com streaming para respostas em tempo real. O painel mostra uma lista de mensagens e um input, com mensagens de usuário e assistente.
 
 **Passo 1: Instalar o Anthropic SDK**
 
@@ -1607,7 +1607,7 @@ sendChatMessage: (message: string) => Promise<void>;
 clearChat: () => void;
 ```
 
-A implementação do `sendChatMessage`:
+A implementaçêo do `sendChatMessage`:
 1. Pega o `graph`, `selectedNodeId` e `apiKey` atuais da store
 2. Usa `buildChatContext` + `formatContextForPrompt` de `@understand-anything/core` (ou inline a mesma lógica já que o pacote skill usa o core)
 3. Constrói um system prompt com o contexto do grafo
@@ -1680,7 +1680,7 @@ git commit -m "feat(dashboard): add context-aware chat panel with Claude API int
 
 ---
 
-## Tarefa 9: Visualização de Camadas no Dashboard
+## Tarefa 9: Visualizaçêo de Camadas no Dashboard
 
 **Arquivos:**
 - Modificar: `packages/dashboard/src/store.ts`
@@ -1740,7 +1740,7 @@ git commit -m "feat(dashboard): add layer visualization with grouping and legend
 
 ---
 
-## Tarefa 10: Polimento de Integração — Dados de Amostra, Verificação de Build, Atualização do README
+## Tarefa 10: Polimento de Integraçêo — Dados de Amostra, Verificaçêo de Build, Atualizaçêo do README
 
 **Arquivos:**
 - Modificar: `packages/dashboard/public/knowledge-graph.json`
@@ -1748,7 +1748,7 @@ git commit -m "feat(dashboard): add layer visualization with grouping and legend
 - Modificar: `README.md`
 - Modificar: `packages/core/src/index.ts` (garantir exports limpos)
 
-**Contexto:** Tarefa final: criar um grafo de conhecimento de amostra mais rico que exercita todas as features da Fase 2 (camadas, muitos nodes, tipos variados). Verificar que o build completo passa. Atualizar a documentação.
+**Contexto:** Tarefa final: criar um grafo de conhecimento de amostra mais rico que exercita todas as features da Fase 2 (camadas, muitos nodes, tipos variados). Verificar que o build completo passa. Atualizar a documentaçêo.
 
 **Passo 1: Criar grafo de conhecimento de amostra rico**
 
@@ -1795,7 +1795,7 @@ Adicione contexto da Fase 2:
 
 **Passo 4: Atualizar README.md**
 
-Adicione descrições das features da Fase 2, placeholder atualizado da seção de screenshots, novos comandos.
+Adicione descrições das features da Fase 2, placeholder atualizado da seçêo de screenshots, novos comandos.
 
 **Passo 5: Commit**
 
@@ -1806,18 +1806,18 @@ git commit -m "docs: update sample data, CLAUDE.md, and README for Phase 2"
 
 ---
 
-## Checklist de Verificação
+## Checklist de Verificaçêo
 
 Após todas as tarefas concluídas:
 
-1. **Validação de schema**: Carregue um JSON corrompido → verifique que lança erro com mensagem clara
+1. **Validaçêo de schema**: Carregue um JSON corrompido → verifique que lança erro com mensagem clara
 2. **Busca fuzzy**: Digite "auth contrl" na busca → verifique que encontra "AuthController" ou similar
-3. **Auto-layout**: Abra o dashboard → verifique nodes organizados hierarquicamente, não em grade
+3. **Auto-layout**: Abra o dashboard → verifique nodes organizados hierarquicamente, nêo em grade
 4. **Obsolescência**: Chame `isStale('/project', 'oldHash')` → verifique que detecta mudanças
-5. **Detecção de camadas**: Chame `detectLayers(graph)` em um projeto com routes/models/services → verifique camadas populadas
+5. **Detecçêo de camadas**: Chame `detectLayers(graph)` em um projeto com routes/models/services → verifique camadas populadas
 6. **`/understand-chat`**: Verifique que o arquivo de skill existe em `packages/skill/.claude/skills/understand-chat.md`
 7. **Painel de chat**: Insira chave de API, selecione node, faça pergunta → verifique resposta contextual
-8. **Visualização de camadas**: Alterne camadas para ligado → verifique aparecimento de group nodes coloridos
+8. **Visualizaçêo de camadas**: Alterne camadas para ligado → verifique aparecimento de group nodes coloridos
 9. **Todos os testes passam**: `pnpm --filter @understand-anything/core test && pnpm --filter @understand-anything/skill test`
 10. **Build completo**: `pnpm -r build` passa
 
@@ -1842,7 +1842,7 @@ Task 9 ────────────────────────�
 ```
 
 **Grupos paralelos seguros:**
-- Tasks 1, 2, 3, 4, 5, 6 são todas independentes (mas rodam sequencialmente conforme subagent-driven-dev)
+- Tasks 1, 2, 3, 4, 5, 6 sêo todas independentes (mas rodam sequencialmente conforme subagent-driven-dev)
 - Task 7 depende das Tasks 2 + 3
 - Task 8 depende da Task 6
 - Task 9 depende das Tasks 3 + 5

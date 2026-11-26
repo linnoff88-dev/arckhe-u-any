@@ -1,14 +1,14 @@
-# Plano de Implementação do /understand-knowledge
+# Plano de Implementaçêo do /understand-knowledge
 
-> 🇬🇧 Versão original em inglês: [2026-04-09-understand-knowledge.md](./2026-04-09-understand-knowledge.md)
+> 🇬🇧 Versêo original em inglês: [2026-04-09-understand-knowledge.md](./2026-04-09-understand-knowledge.md)
 
 > **Para workers agênticos:** SUB-SKILL OBRIGATÓRIA: Use superpowers:subagent-driven-development (recomendado) ou superpowers:executing-plans para implementar este plano tarefa a tarefa. Os passos usam sintaxe de checkbox (`- [ ]`) para acompanhamento.
 
-**Objetivo:** Adicionar uma skill `/understand-knowledge` que recebe qualquer pasta de notas markdown (Obsidian, Logseq, Dendron, Foam, estilo Karpathy, Zettelkasten ou simples) e produz um grafo de conhecimento interativo com nodes e edges tipados, e visualização em dashboard.
+**Objetivo:** Adicionar uma skill `/understand-knowledge` que recebe qualquer pasta de notas markdown (Obsidian, Logseq, Dendron, Foam, estilo Karpathy, Zettelkasten ou simples) e produz um grafo de conhecimento interativo com nodes e edges tipados, e visualizaçêo em dashboard.
 
 **Arquitetura:** Estende o schema existente com 5 tipos de node de conhecimento e 6 tipos de edge de conhecimento. Um novo pipeline de 5 agentes (knowledge-scanner → format-detector → article-analyzer → relationship-builder → graph-reviewer) processa arquivos markdown. O dashboard renderiza grafos de conhecimento com layout vertical, uma sidebar específica de conhecimento e um painel de modo de leitura — tudo guiado por um novo campo `kind` no objeto raiz do grafo.
 
-**Stack:** TypeScript, Zod (validação de schema), React + ReactFlow (dashboard), dagre (layout), TailwindCSS v4, Vitest (testes)
+**Stack:** TypeScript, Zod (validaçêo de schema), React + ReactFlow (dashboard), dagre (layout), TailwindCSS v4, Vitest (testes)
 
 **Spec:** `docs/superpowers/specs/2026-04-09-understand-knowledge-design.md`
 
@@ -20,7 +20,7 @@
 - Modificar: `understand-anything-plugin/packages/core/src/types.ts` — adicionar 5 tipos de node, 6 tipos de edge, interface `KnowledgeMeta`, campo `kind`
 - Modificar: `understand-anything-plugin/packages/core/src/schema.ts` — adicionar novos tipos aos schemas Zod, adicionar aliases
 - Modificar: `understand-anything-plugin/packages/core/src/types.test.ts` — adicionar testes para novos tipos
-- Teste: `understand-anything-plugin/packages/core/src/__tests__/knowledge-schema.test.ts` — testes de validação para schema específico de conhecimento
+- Teste: `understand-anything-plugin/packages/core/src/__tests__/knowledge-schema.test.ts` — testes de validaçêo para schema específico de conhecimento
 
 ### Alterações no dashboard
 - Modificar: `understand-anything-plugin/packages/dashboard/src/store.ts` — adicionar tipos de node de conhecimento, categorias de edge, `ViewMode`, categorias de node
@@ -46,7 +46,7 @@
 - Criar: `understand-anything-plugin/agents/article-analyzer.md`
 - Criar: `understand-anything-plugin/agents/relationship-builder.md`
 
-O agente existente `graph-reviewer.md` é reutilizado para a etapa final de validação.
+O agente existente `graph-reviewer.md` é reutilizado para a etapa final de validaçêo.
 
 ---
 
@@ -147,7 +147,7 @@ git commit -m "feat(core): add knowledge node types, edge types, KnowledgeMeta, 
 
 ---
 
-## Tarefa 2: Estender Validação de Schema
+## Tarefa 2: Estender Validaçêo de Schema
 
 **Arquivos:**
 - Modificar: `understand-anything-plugin/packages/core/src/schema.ts`
@@ -220,7 +220,7 @@ Adicione a `EDGE_TYPE_ALIASES`:
   created_by: "authored_by",
 ```
 
-- [ ] **Passo 4: Escrever o teste que deve falhar para validação de grafo de conhecimento**
+- [ ] **Passo 4: Escrever o teste que deve falhar para validaçêo de grafo de conhecimento**
 
 Crie `understand-anything-plugin/packages/core/src/__tests__/knowledge-schema.test.ts`:
 
@@ -371,7 +371,7 @@ describe("knowledge graph schema validation", () => {
 - [ ] **Passo 5: Executar os testes para verificar que falham**
 
 Execute: `pnpm --filter @understand-anything/core test -- --run src/__tests__/knowledge-schema.test.ts`
-Esperado: Testes falham porque EdgeTypeSchema ainda não inclui tipos de conhecimento (se schema.ts não foi atualizado), ou passam se os Passos 1-3 foram feitos corretamente.
+Esperado: Testes falham porque EdgeTypeSchema ainda nêo inclui tipos de conhecimento (se schema.ts nêo foi atualizado), ou passam se os Passos 1-3 foram feitos corretamente.
 
 - [ ] **Passo 6: Executar todos os testes do core para verificar que nada quebrou**
 
@@ -407,9 +407,9 @@ Em `understand-anything-plugin/packages/dashboard/src/index.css`, adicione após
 
 - [ ] **Passo 2: Adicionar utilitários text-color do Tailwind para nodes de conhecimento**
 
-Verifique se TailwindCSS v4 captura as variáveis CSS automaticamente. Se o padrão existente usa classes `text-node-*` definidas em outro lugar, adicione entradas correspondentes. Verifique se há um config do Tailwind ou se as variáveis CSS são consumidas diretamente.
+Verifique se TailwindCSS v4 captura as variáveis CSS automaticamente. Se o padrêo existente usa classes `text-node-*` definidas em outro lugar, adicione entradas correspondentes. Verifique se há um config do Tailwind ou se as variáveis CSS sêo consumidas diretamente.
 
-Veja como `text-node-file` etc. existentes são definidos — se estiverem no arquivo CSS como utility classes, adicione:
+Veja como `text-node-file` etc. existentes sêo definidos — se estiverem no arquivo CSS como utility classes, adicione:
 
 ```css
   .text-node-article { color: var(--color-node-article); }
@@ -419,7 +419,7 @@ Veja como `text-node-file` etc. existentes são definidos — se estiverem no ar
   .text-node-source { color: var(--color-node-source); }
 ```
 
-E variantes `border-node-*` e `bg-node-*` correspondentes se o padrão exigir.
+E variantes `border-node-*` e `bg-node-*` correspondentes se o padrêo exigir.
 
 - [ ] **Passo 3: Commit**
 
@@ -488,7 +488,7 @@ Atualize o `NODE_CATEGORY_MAP` (encontre onde mapeia tipos de node para categori
   source: "knowledge",
 ```
 
-- [ ] **Passo 5: Adicionar padrão de filtro para tipo de node de conhecimento**
+- [ ] **Passo 5: Adicionar padrêo de filtro para tipo de node de conhecimento**
 
 No estado inicial `nodeTypeFilters` do store, adicione:
 
@@ -729,16 +729,16 @@ export default function KnowledgeInfo() {
 }
 ```
 
-- [ ] **Passo 2: Integrar KnowledgeInfo na renderização da sidebar do App.tsx**
+- [ ] **Passo 2: Integrar KnowledgeInfo na renderizaçêo da sidebar do App.tsx**
 
-Em `understand-anything-plugin/packages/dashboard/src/App.tsx`, encontre onde a sidebar renderiza `NodeInfo` e adicione uma condição: se `graph.kind === "knowledge"` e um node estiver selecionado, renderize `KnowledgeInfo` em vez de `NodeInfo`.
+Em `understand-anything-plugin/packages/dashboard/src/App.tsx`, encontre onde a sidebar renderiza `NodeInfo` e adicione uma condiçêo: se `graph.kind === "knowledge"` e um node estiver selecionado, renderize `KnowledgeInfo` em vez de `NodeInfo`.
 
 Importe no topo:
 ```typescript
 import KnowledgeInfo from "./components/KnowledgeInfo";
 ```
 
-Na seção da sidebar, envolva a renderização existente de NodeInfo:
+Na seçêo da sidebar, envolva a renderizaçêo existente de NodeInfo:
 ```tsx
 {graph?.kind === "knowledge" ? <KnowledgeInfo /> : <NodeInfo />}
 ```
@@ -890,7 +890,7 @@ Importe e renderize `ReadingPanel` no layout principal do dashboard, posicionado
 import ReadingPanel from "./components/ReadingPanel";
 ```
 
-Adicione `<ReadingPanel />` dentro do container do dashboard, após a área de visualização do grafo.
+Adicione `<ReadingPanel />` dentro do container do dashboard, após a área de visualizaçêo do grafo.
 
 - [ ] **Passo 3: Build e verificar**
 
@@ -910,17 +910,17 @@ git commit -m "feat(dashboard): add ReadingPanel for article reading mode in kno
 
 **Arquivos:**
 - Modificar: `understand-anything-plugin/packages/dashboard/src/components/GraphView.tsx`
-- Modificar: `understand-anything-plugin/packages/dashboard/src/utils/layout.ts` (se a direção ainda não for configurável)
+- Modificar: `understand-anything-plugin/packages/dashboard/src/utils/layout.ts` (se a direçêo ainda nêo for configurável)
 
-- [ ] **Passo 1: Verificar como a direção do layout é passada para o dagre**
+- [ ] **Passo 1: Verificar como a direçêo do layout é passada para o dagre**
 
-Leia `GraphView.tsx` para encontrar onde `applyDagreLayout` é chamado. O `applyDagreLayout` em layout.ts já aceita um parâmetro `direction: "TB" | "LR"` (padrão `"TB"`).
+Leia `GraphView.tsx` para encontrar onde `applyDagreLayout` é chamado. O `applyDagreLayout` em layout.ts já aceita um parâmetro `direction: "TB" | "LR"` (padrêo `"TB"`).
 
-Encontre onde GraphView chama essa função e verifique qual direção ele passa.
+Encontre onde GraphView chama essa funçêo e verifique qual direçêo ele passa.
 
-- [ ] **Passo 2: Passar o kind do grafo para a decisão de layout**
+- [ ] **Passo 2: Passar o kind do grafo para a decisêo de layout**
 
-Em `GraphView.tsx`, onde o layout é aplicado, verifique o campo `kind` do grafo. Se `kind === "knowledge"`, use `"TB"` (top-to-bottom). Se `kind === "codebase"` ou undefined, mantenha o padrão existente.
+Em `GraphView.tsx`, onde o layout é aplicado, verifique o campo `kind` do grafo. Se `kind === "knowledge"`, use `"TB"` (top-to-bottom). Se `kind === "codebase"` ou undefined, mantenha o padrêo existente.
 
 O objeto graph está disponível via o store. Adicione:
 
@@ -945,14 +945,14 @@ git commit -m "feat(dashboard): use vertical top-down layout for knowledge graph
 
 ---
 
-## Tarefa 9: Dashboard — Estilização de Edge de Conhecimento
+## Tarefa 9: Dashboard — Estilizaçêo de Edge de Conhecimento
 
 **Arquivos:**
 - Modificar: `understand-anything-plugin/packages/dashboard/src/components/GraphView.tsx`
 
 - [ ] **Passo 1: Adicionar mapa de estilos de edge de conhecimento**
 
-Em `GraphView.tsx`, adicione um mapa de estilos para tipos de edge de conhecimento. Siga o padrão existente de `DomainGraphView.tsx` que usa a prop `style` do ReactFlow:
+Em `GraphView.tsx`, adicione um mapa de estilos para tipos de edge de conhecimento. Siga o padrêo existente de `DomainGraphView.tsx` que usa a prop `style` do ReactFlow:
 
 ```typescript
 const KNOWLEDGE_EDGE_STYLES: Record<string, React.CSSProperties> = {
@@ -967,7 +967,7 @@ const KNOWLEDGE_EDGE_STYLES: Record<string, React.CSSProperties> = {
 
 - [ ] **Passo 2: Aplicar estilos ao construir edges do ReactFlow**
 
-Onde edges são convertidos para o formato ReactFlow, verifique se o grafo é `kind === "knowledge"` e se o tipo de edge tem um estilo de conhecimento. Mescle o estilo:
+Onde edges sêo convertidos para o formato ReactFlow, verifique se o grafo é `kind === "knowledge"` e se o tipo de edge tem um estilo de conhecimento. Mescle o estilo:
 
 ```typescript
 const knowledgeStyle = graph?.kind === "knowledge" ? KNOWLEDGE_EDGE_STYLES[edge.type] : undefined;
@@ -1000,7 +1000,7 @@ Em `ProjectOverview.tsx`, detecte `graph.kind === "knowledge"` e mostre estatís
 
 - Total de artigos, entidades, tópicos, claims, sources (em vez de "code, config, docs, infra, data")
 - Formato detectado (do `knowledgeMeta.format` do primeiro node)
-- Remover seções "Languages" e "Frameworks" para grafos de conhecimento (ficarão vazias)
+- Remover seções "Languages" e "Frameworks" para grafos de conhecimento (ficarêo vazias)
 
 Adicione após o grid de estatísticas existente:
 
@@ -1023,7 +1023,7 @@ Reutilize ou crie um componente `StatBox` correspondendo ao estilo existente.
 
 - [ ] **Passo 2: Esconder seções específicas de código condicionalmente**
 
-Envolva as seções "Languages", "Frameworks" e a discriminação por tipo de arquivo específicas de código em uma condição:
+Envolva as seções "Languages", "Frameworks" e a discriminaçêo por tipo de arquivo específicas de código em uma condiçêo:
 
 ```tsx
 {graph.kind !== "knowledge" && (
@@ -1409,44 +1409,44 @@ git commit -m "feat(agents): add knowledge-scanner, format-detector, article-ana
 - Criar: `understand-anything-plugin/skills/understand-knowledge/formats/plain.md`
 
 **IMPORTANTE**: Cada guia de formato deve ser **baseado em pesquisa**. O agente implementador DEVE:
-1. Usar WebSearch e WebFetch para ler a **documentação oficial** de cada formato
-2. Estudar as regras reais de parsing, não suposições
-3. Incluir exemplos específicos de sintaxe da documentação real
+1. Usar WebSearch e WebFetch para ler a **documentaçêo oficial** de cada formato
+2. Estudar as regras reais de parsing, nêo suposições
+3. Incluir exemplos específicos de sintaxe da documentaçêo real
 
 - [ ] **Passo 1: Criar guia de formato obsidian.md**
 
-Pesquise a documentação oficial do Obsidian (https://help.obsidian.md/) e crie `understand-anything-plugin/skills/understand-knowledge/formats/obsidian.md`:
+Pesquise a documentaçêo oficial do Obsidian (https://help.obsidian.md/) e crie `understand-anything-plugin/skills/understand-knowledge/formats/obsidian.md`:
 
 O guia deve cobrir:
-- Detecção: existe diretório `.obsidian/`
+- Detecçêo: existe diretório `.obsidian/`
 - Sintaxe de link: `[[wikilink]]`, `[[note|alias]]`, `[[note#heading]]`, `![[embed]]`
 - Metadados: YAML frontmatter entre delimitadores `---`
 - Tags: `#tag` inline, `tags:` no frontmatter (tanto array quanto separados por espaço)
 - Properties: Obsidian Properties (campos de frontmatter renderizados na UI)
-- Semântica de pastas: Obsidian não atribui significado a pastas por padrão
+- Semântica de pastas: Obsidian nêo atribui significado a pastas por padrêo
 - Arquivos especiais: `.obsidian/app.json`, `.obsidian/workspace.json` (ignorar)
 - Canvas: arquivos `.canvas` (formato JSON, descrevem layouts espaciais — extraia referências de cartões)
 - Dataview: campos inline `key:: value`, `[key:: value]`
 
 - [ ] **Passo 2: Criar guia de formato logseq.md**
 
-Pesquise a documentação do Logseq (https://docs.logseq.com/) e crie `understand-anything-plugin/skills/understand-knowledge/formats/logseq.md`:
+Pesquise a documentaçêo do Logseq (https://docs.logseq.com/) e crie `understand-anything-plugin/skills/understand-knowledge/formats/logseq.md`:
 
 Cobrir:
-- Detecção: diretórios `logseq/` + `pages/`
+- Detecçêo: diretórios `logseq/` + `pages/`
 - Estrutura: `journals/YYYY_MM_DD.md` (notas diárias), `pages/*.md` (páginas nomeadas)
 - Sintaxe de link: `[[wikilinks]]`, `((block-references))` por UUID
 - Baseado em blocos: conteúdo organizado em outlines com bullet points
 - Properties: sintaxe `key:: value` em blocos
 - Tags: `#tag` inline, page tags via properties
-- Especial: `logseq/config.edn` para configuração
+- Especial: `logseq/config.edn` para configuraçêo
 
 - [ ] **Passo 3: Criar guia de formato dendron.md**
 
 Pesquise a wiki do Dendron (https://wiki.dendron.so/) e crie `understand-anything-plugin/skills/understand-knowledge/formats/dendron.md`:
 
 Cobrir:
-- Detecção: arquivos `.dendron.yml` ou `*.schema.yml`
+- Detecçêo: arquivos `.dendron.yml` ou `*.schema.yml`
 - Hierarquia: nomes de arquivo delimitados por ponto (`a.b.c.md`)
 - Sintaxe de link: `[[wikilinks]]` com consciência de hierarquia
 - Schemas: arquivos `.schema.yml` definem estrutura hierárquica esperada
@@ -1455,13 +1455,13 @@ Cobrir:
 
 - [ ] **Passo 4: Criar guia de formato foam.md**
 
-Pesquise a documentação do Foam (https://foambubble.github.io/foam/) e crie `understand-anything-plugin/skills/understand-knowledge/formats/foam.md`:
+Pesquise a documentaçêo do Foam (https://foambubble.github.io/foam/) e crie `understand-anything-plugin/skills/understand-knowledge/formats/foam.md`:
 
 Cobrir:
-- Detecção: diretório `.foam/` ou `.vscode/foam.json`
+- Detecçêo: diretório `.foam/` ou `.vscode/foam.json`
 - Sintaxe de link: `[[wikilinks]]` mais link reference definitions no rodapé do arquivo
 - Placeholder links: links para arquivos inexistentes
-- Frontmatter: YAML padrão
+- Frontmatter: YAML padrêo
 - Auto-linking: Foam atualiza automaticamente links em rename/move de arquivo
 
 - [ ] **Passo 5: Criar guia de formato karpathy.md**
@@ -1469,10 +1469,10 @@ Cobrir:
 Pesquise o gist do Karpathy (https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) e crie `understand-anything-plugin/skills/understand-knowledge/formats/karpathy.md`:
 
 Cobrir:
-- Detecção: diretórios `raw/` + `wiki/` + `index.md`
+- Detecçêo: diretórios `raw/` + `wiki/` + `index.md`
 - Estrutura: `raw/` (fontes imutáveis), `wiki/` (artigos compilados), `_meta/` (estado)
 - Arquivos especiais: `index.md` (lista mestre de páginas), `log.md` (log append-only de operações)
-- Estilo de link: links markdown padrão (não wikilinks)
+- Estilo de link: links markdown padrêo (nêo wikilinks)
 - Log parsing: entradas `## [YYYY-MM-DD] operation | Title`
 - Artigos da wiki: compilados por LLM, podem ter cross-references e backlinks
 
@@ -1481,11 +1481,11 @@ Cobrir:
 Pesquise zettelkasten.de e crie `understand-anything-plugin/skills/understand-knowledge/formats/zettelkasten.md`:
 
 Cobrir:
-- Detecção: `[[wikilinks]]` + prefixos únicos de ID em nomes de arquivo (timestamps como `202604091234`)
+- Detecçêo: `[[wikilinks]]` + prefixos únicos de ID em nomes de arquivo (timestamps como `202604091234`)
 - Notas atômicas: uma ideia por nota
 - IDs únicos: timestamp ou prefixo alfanumérico no nome do arquivo
 - Links: `[[wikilinks]]` com links tipados opcionais
-- Frontmatter: YAML com tags, data de criação
+- Frontmatter: YAML com tags, data de criaçêo
 - Sem hierarquia de pastas: estrutura plana, conexões apenas via links
 
 - [ ] **Passo 7: Criar guia de formato plain.md**
@@ -1493,12 +1493,12 @@ Cobrir:
 Crie `understand-anything-plugin/skills/understand-knowledge/formats/plain.md`:
 
 Cobrir:
-- Detecção: fallback quando nenhum outro formato é detectado
-- Links: links markdown padrão `[text](relative/path.md)`
-- Estrutura: hierarquia de pastas fornece categorização
+- Detecçêo: fallback quando nenhum outro formato é detectado
+- Links: links markdown padrêo `[text](relative/path.md)`
+- Estrutura: hierarquia de pastas fornece categorizaçêo
 - Headings: hierarquia `#` fornece estrutura dentro de arquivos
 - Sem expectativas de metadados especiais
-- Tags: não esperadas (LLM infere tópicos)
+- Tags: nêo esperadas (LLM infere tópicos)
 
 - [ ] **Passo 8: Commit**
 
@@ -1514,7 +1514,7 @@ git commit -m "feat(skill): add 7 research-backed format guides for knowledge ba
 **Arquivos:**
 - Criar: `understand-anything-plugin/skills/understand-knowledge/SKILL.md`
 
-- [ ] **Passo 1: Criar a definição da skill**
+- [ ] **Passo 1: Criar a definiçêo da skill**
 
 Crie `understand-anything-plugin/skills/understand-knowledge/SKILL.md`:
 
@@ -1724,12 +1724,12 @@ Verifique que o arquivo da skill existe e tem frontmatter válido:
 Execute: `head -5 understand-anything-plugin/skills/understand-knowledge/SKILL.md`
 Esperado: YAML delimitado por `---` válido com name, description, argument-hint
 
-- [ ] **Passo 6: Verificar que todos os agentes estão presentes**
+- [ ] **Passo 6: Verificar que todos os agentes estêo presentes**
 
 Execute: `ls understand-anything-plugin/agents/ | grep knowledge\|format\|article\|relationship`
 Esperado: `knowledge-scanner.md`, `format-detector.md`, `article-analyzer.md`, `relationship-builder.md`
 
-- [ ] **Passo 7: Verificar que todos os guias de formato estão presentes**
+- [ ] **Passo 7: Verificar que todos os guias de formato estêo presentes**
 
 Execute: `ls understand-anything-plugin/skills/understand-knowledge/formats/`
 Esperado: `obsidian.md`, `logseq.md`, `dendron.md`, `foam.md`, `karpathy.md`, `zettelkasten.md`, `plain.md`

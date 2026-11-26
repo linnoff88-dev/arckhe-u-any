@@ -192,7 +192,7 @@
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">🎯</span> Por que pré-resolver importMap?</h3>
         <p class="text-neutral-300 mb-4">Sem isso, cada <code>file-analyzer</code> teria que parsear o arquivo de novo só pra responder "quem este arquivo importa?". Multiplicado por milhares de arquivos, vira hora de LLM.</p>
-        <p class="text-neutral-300">Com o importMap pronto, o agente recebe o trabalho mastigado: aqui está seu arquivo, aqui estão os imports já resolvidos pra caminhos absolutos. Só pensa no que importa: <em>o que esse código faz?</em></p>
+        <p class="text-neutral-300">Com o importMap pronto, o agente recebe o trabalho mastigado: aqui está seu arquivo, aqui estêo os imports já resolvidos pra caminhos absolutos. Só pensa no que importa: <em>o que esse código faz?</em></p>
       </div>
 
       <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
@@ -202,7 +202,7 @@
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Glob + ignore</h4><p class="text-xs text-neutral-400">Respeita .gitignore</p></div>
-        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Language detect</h4><p class="text-xs text-neutral-400">Por extensão e pista</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Language detect</h4><p class="text-xs text-neutral-400">Por extensêo e pista</p></div>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">importMap</h4><p class="text-xs text-neutral-400">Pré-resolvido via tree-sitter</p></div>
         <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><h4 class="font-semibold text-blue-400 mb-1">Scope</h4><p class="text-xs text-neutral-400">Subdiretório opcional</p></div>
       </div>
@@ -241,7 +241,7 @@
           <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
             <h4 class="font-semibold mb-2">Write intermediate JSON</h4>
             <p class="text-sm text-neutral-400 mb-3">Persistência fora do contexto</p>
-            <p class="text-neutral-300 text-sm">O resultado vai pra <code>.understand-anything/intermediate/&lt;hash&gt;.json</code>. <strong>Não volta pro contexto</strong> da conversa — é disco.</p>
+            <p class="text-neutral-300 text-sm">O resultado vai pra <code>.understand-anything/intermediate/&lt;hash&gt;.json</code>. <strong>Nêo volta pro contexto</strong> da conversa — é disco.</p>
           </div>
         </div>
         <div class="flex items-start space-x-4">
@@ -295,7 +295,7 @@
         <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
           <h4 class="font-bold text-red-400 mb-4">✗ Quando heurística falha</h4>
           <ul class="space-y-3 text-neutral-300">
-            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Codebase sem convenção (pastas <code>src/foo/</code>, <code>src/bar/</code>)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Codebase sem convençêo (pastas <code>src/foo/</code>, <code>src/bar/</code>)</span></li>
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Arquivo "utilitário" que na verdade orquestra negócio</span></li>
             <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Hybrid frameworks (Next.js: app/, pages/, lib/)</span></li>
           </ul>
@@ -319,10 +319,10 @@
     <section id="topico-4" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span>
-        <h2 class="text-2xl font-bold">🧭 tour-builder: ensinar, não só mostrar</h2>
+        <h2 class="text-2xl font-bold">🧭 tour-builder: ensinar, nêo só mostrar</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
-        O <code class="text-blue-400">tour-builder</code> transforma o grafo em uma <strong>sequência didática</strong>. Ordenação topológica + narrativa LLM = "comece pelo <code>main.ts</code>, depois <code>config/</code>, depois <code>auth.ts</code>...". É o diferencial: ferramentas burras só mostram. Esta ensina.
+        O <code class="text-blue-400">tour-builder</code> transforma o grafo em uma <strong>sequência didática</strong>. Ordenaçêo topológica + narrativa LLM = "comece pelo <code>main.ts</code>, depois <code>config/</code>, depois <code>auth.ts</code>...". É o diferencial: ferramentas burras só mostram. Esta ensina.
       </p>
 
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
@@ -343,7 +343,7 @@
   "persona": "junior-dev",
   "estimatedMinutes": 8,
   "stops": [
-    { "nodeId": "f_routes_auth", "narration": "Entrada da requisição..." },
+    { "nodeId": "f_routes_auth", "narration": "Entrada da requisiçêo..." },
     { "nodeId": "f_authService", "narration": "Aqui validamos a senha..." },
     { "nodeId": "f_jwtIssue",    "narration": "E aqui emitimos o token..." }
   ]
@@ -365,7 +365,7 @@
         <h2 class="text-2xl font-bold">🔍 graph-reviewer: a última linha de defesa</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
-        O <code class="text-blue-400">graph-reviewer</code> roda no fim. Função única: garantir que o grafo é <strong>internamente consistente</strong>. Aresta apontando pra nó que não existe? Tour com stop quebrado? Layer fora da taxonomy? Erro antes de persistir — o usuário não vai descobrir num banner vermelho no dashboard.
+        O <code class="text-blue-400">graph-reviewer</code> roda no fim. Funçêo única: garantir que o grafo é <strong>internamente consistente</strong>. Aresta apontando pra nó que nêo existe? Tour com stop quebrado? Layer fora da taxonomy? Erro antes de persistir — o usuário nêo vai descobrir num banner vermelho no dashboard.
       </p>
 
       <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
@@ -375,7 +375,7 @@
           <li><strong>Tour stops:</strong> todos os <code>nodeId</code> referenciados existem</li>
           <li><strong>Layer taxonomy:</strong> camadas dentro do conjunto permitido</li>
           <li><strong>Required fields:</strong> nenhum nó sem <code>id</code>, <code>kind</code>, <code>label</code></li>
-          <li><strong>Cycle warnings:</strong> ciclos detectados quando não deveriam existir</li>
+          <li><strong>Cycle warnings:</strong> ciclos detectados quando nêo deveriam existir</li>
         </ul>
       </div>
 
@@ -407,7 +407,7 @@
         <h2 class="text-2xl font-bold">💾 .understand-anything/: o disco onde tudo mora</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
-        Esse diretório (criado no projeto-alvo, não no Understand Anything) é onde o pipeline grava tudo. Saber o que <strong>commitar</strong> e o que <strong>ignorar</strong> faz diferença entre PR limpo e PR com 40 MB de JSON sem motivo.
+        Esse diretório (criado no projeto-alvo, nêo no Understand Anything) é onde o pipeline grava tudo. Saber o que <strong>commitar</strong> e o que <strong>ignorar</strong> faz diferença entre PR limpo e PR com 40 MB de JSON sem motivo.
       </p>
 
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
@@ -427,7 +427,7 @@
           <ul class="space-y-3 text-neutral-300">
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><code>knowledge-graph.json</code> — onboarding instantâneo pro time</span></li>
             <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><code>tours.json</code> — walkthroughs versionados</span></li>
-            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><code>domain-graph.json</code> — visão de negócio para PMs</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><code>domain-graph.json</code> — visêo de negócio para PMs</span></li>
           </ul>
         </div>
         <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">

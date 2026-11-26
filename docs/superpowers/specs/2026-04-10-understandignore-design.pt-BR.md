@@ -1,21 +1,21 @@
 # Spec de Design do .understandignore
 
-> 🇬🇧 Versão original em inglês: [2026-04-10-understandignore-design.md](./2026-04-10-understandignore-design.md)
+> 🇬🇧 Versêo original em inglês: [2026-04-10-understandignore-design.md](./2026-04-10-understandignore-design.md)
 
-## Visão Geral
+## Visêo Geral
 
-Adicionar exclusão de arquivos configurável pelo usuário via arquivos `.understandignore`, usando sintaxe `.gitignore`. Isso torna a análise mais rápida pulando arquivos irrelevantes (código vendor, output gerado, fixtures de teste) sem modificar defaults hardcoded.
+Adicionar exclusêo de arquivos configurável pelo usuário via arquivos `.understandignore`, usando sintaxe `.gitignore`. Isso torna a análise mais rápida pulando arquivos irrelevantes (código vendor, output gerado, fixtures de teste) sem modificar defaults hardcoded.
 
 ## Objetivos
 
 - Permitir que usuários excluam arquivos/diretórios da análise via `.understandignore`
 - Usar sintaxe `.gitignore` (familiar, sem curva de aprendizado)
 - Manter defaults hardcoded como built-in — `.understandignore` adiciona padrões em cima
-- Permitir negação `!` para forçar inclusão de arquivos excluídos pelos defaults
-- Auto-gerar um arquivo starter comentado no primeiro run (código determinístico, não LLM)
+- Permitir negaçêo `!` para forçar inclusêo de arquivos excluídos pelos defaults
+- Auto-gerar um arquivo starter comentado no primeiro run (código determinístico, nêo LLM)
 - Pausar antes da análise para deixar o usuário revisar o arquivo ignore
 
-## Não-Objetivos
+## Nêo-Objetivos
 
 - Substituir `.gitignore` — isso é específico de análise
 - Arquivos `.understandignore` por diretório (apenas raiz do projeto e `.understand-anything/`)
@@ -43,15 +43,15 @@ export function createIgnoreFilter(projectRoot: string): IgnoreFilter;
 
 `createIgnoreFilter` carrega padrões nesta ordem (entradas posteriores podem sobrepor as anteriores):
 
-1. **Defaults hardcoded** — os padrões de exclusão existentes do project-scanner (node_modules/, .git/, dist/, build/, bin/, obj/, *.lock, *.min.js, etc.)
+1. **Defaults hardcoded** — os padrões de exclusêo existentes do project-scanner (node_modules/, .git/, dist/, build/, bin/, obj/, *.lock, *.min.js, etc.)
 2. **`.understand-anything/.understandignore`** — em nível de projeto, vive junto ao output
-3. **`.understandignore`** na raiz do projeto — localização alternativa para visibilidade
+3. **`.understandignore`** na raiz do projeto — localizaçêo alternativa para visibilidade
 
-Padrões mesclam aditivamente. Negação `!` em arquivos do usuário pode sobrepor defaults hardcoded (ex.: `!dist/` força-inclui dist/).
+Padrões mesclam aditivamente. Negaçêo `!` em arquivos do usuário pode sobrepor defaults hardcoded (ex.: `!dist/` força-inclui dist/).
 
 ### Padrões Default Hardcoded
 
-Estes são os defaults built-in (batendo com o comportamento atual do project-scanner, mais bin/obj para .NET):
+Estes sêo os defaults built-in (batendo com o comportamento atual do project-scanner, mais bin/obj para .NET):
 
 ```
 # Dependency directories
@@ -136,7 +136,7 @@ export function generateStarterIgnoreFile(projectRoot: string): string;
 - Todas as sugestões vêm **comentadas** — o usuário precisa descomentar para ativar
 - Comentário de cabeçalho explica o arquivo, sintaxe e defaults built-in
 
-### Lógica de Detecção
+### Lógica de Detecçêo
 
 | Se existir | Sugerir |
 |-----------|---------|
@@ -149,7 +149,7 @@ export function generateStarterIgnoreFile(projectRoot: string): string;
 | `scripts/` | `# scripts/` |
 | `migrations/` | `# migrations/` |
 | arquivos `*.snap` | `# *.snap` |
-| `bin/` (não-.NET, ou seja, shell scripts) | `# bin/` |
+| `bin/` (nêo-.NET, ou seja, shell scripts) | `# bin/` |
 | `obj/` | `# obj/` |
 
 ### Formato do Arquivo Gerado
@@ -181,29 +181,29 @@ export function generateStarterIgnoreFile(projectRoot: string): string;
 # ... (more suggestions based on detection)
 ```
 
-Só gerado se `.understand-anything/.understandignore` ainda não existir.
+Só gerado se `.understand-anything/.understandignore` ainda nêo existir.
 
 ---
 
-## Integração com a Skill
+## Integraçêo com a Skill
 
 ### Fase 0.5: Setup de Ignore (nova fase no SKILL.md)
 
 Adicionada entre Pre-flight (Fase 0) e SCAN (Fase 1):
 
 1. Verifica se `.understand-anything/.understandignore` existe
-2. Se não, roda `generateStarterIgnoreFile(projectRoot)` e escreve o resultado em `.understand-anything/.understandignore`
+2. Se nêo, roda `generateStarterIgnoreFile(projectRoot)` e escreve o resultado em `.understand-anything/.understandignore`
 3. Reporta ao usuário:
    - **Primeiro run:** "Generated `.understand-anything/.understandignore` with suggested exclusions. Please review it and uncomment any patterns you'd like to exclude. When ready, confirm to continue."
    - **Runs subsequentes:** "Found `.understand-anything/.understandignore`. Review it if needed, then confirm to continue."
-4. Espera confirmação do usuário antes de prosseguir
+4. Espera confirmaçêo do usuário antes de prosseguir
 
 ### Mudanças na Fase 1: SCAN
 
 O script de scan do agente `project-scanner` é atualizado para:
 
 1. Coletar arquivos via `git ls-files` (ou fallback)
-2. Aplicar o filtro de padrão hardcoded do agente (Camada 1 — comportamento existente)
+2. Aplicar o filtro de padrêo hardcoded do agente (Camada 1 — comportamento existente)
 3. Aplicar `IgnoreFilter` do core (Camada 2 — padrões do usuário)
 4. Adicionar contagem `filteredByIgnore` à saída do scan
 5. Reportar: "Scanned {totalFiles} files ({filteredByIgnore} excluded by .understandignore)"
@@ -214,13 +214,13 @@ Filtragem em duas camadas:
 
 ---
 
-## Atualização do Agente Project Scanner
+## Atualizaçêo do Agente Project Scanner
 
 Mudanças em `understand-anything-plugin/agents/project-scanner.md`:
 
 - Após a lista de arquivos ser construída e a filtragem de Camada 1 aplicada, o agente roda um script Node.js que importa `createIgnoreFilter` de `@understand-anything/core` e filtra os paths restantes
 - O JSON de resultado do scan inclui um novo campo `filteredByIgnore: number`
-- Padrões de exclusão hardcoded existentes no prompt do agente permanecem para compatibilidade retroativa
+- Padrões de exclusêo hardcoded existentes no prompt do agente permanecem para compatibilidade retroativa
 
 ---
 
@@ -230,19 +230,19 @@ Mudanças em `understand-anything-plugin/agents/project-scanner.md`:
 
 - Parseia padrões glob básicos (`*.log`, `dist/`)
 - Lida com comentários `#` e linhas em branco
-- Lida com negação `!` (force-include)
+- Lida com negaçêo `!` (force-include)
 - Lida com casamento recursivo `**/`
 - Lida com `/` final para padrões só de diretório
 - Mescla defaults + padrões do usuário corretamente
 - `!` em arquivo do usuário sobrepõe defaults hardcoded
-- Retorna `false` para paths que não casam com nenhum padrão
+- Retorna `false` para paths que nêo casam com nenhum padrêo
 
 ### `packages/core/src/__tests__/ignore-generator.test.ts`
 
 - Gera arquivo starter com comentário de cabeçalho
 - Detecta diretórios existentes e sugere padrões relevantes
 - Todas as sugestões vêm comentadas (prefixadas com `# `)
-- Não sobrescreve arquivo existente
+- Nêo sobrescreve arquivo existente
 - Inclui sugestões de bin/obj quando relevantes
 
 ---
@@ -256,5 +256,5 @@ Mudanças em `understand-anything-plugin/agents/project-scanner.md`:
 | `packages/core/src/__tests__/ignore-filter.test.ts` | Testes da lógica de filtro |
 | `packages/core/src/__tests__/ignore-generator.test.ts` | Testes do gerador |
 | `agents/project-scanner.md` | Adicionar filtragem Camada 2 via IgnoreFilter |
-| `skills/understand/SKILL.md` | Adicionar Fase 0.5 (gerar + pausar para revisão) |
+| `skills/understand/SKILL.md` | Adicionar Fase 0.5 (gerar + pausar para revisêo) |
 | `packages/core/package.json` | Adicionar dependência npm `ignore` |

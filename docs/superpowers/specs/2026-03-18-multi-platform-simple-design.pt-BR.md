@@ -1,6 +1,6 @@
 # Suporte Multi-Plataforma de Skills — Design Simplificado
 
-> 🇬🇧 Versão original em inglês: [2026-03-18-multi-platform-simple-design.md](./2026-03-18-multi-platform-simple-design.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-18-multi-platform-simple-design.md](./2026-03-18-multi-platform-simple-design.md)
 
 **Data**: 2026-03-18
 **Status**: Aprovado
@@ -8,15 +8,15 @@
 
 ## Princípios de Design
 
-Segue o padrão de [obra/superpowers](https://github.com/obra/superpowers):
+Segue o padrêo de [obra/superpowers](https://github.com/obra/superpowers):
 1. **Mesmos arquivos, todas as plataformas** — sem marcadores de template, sem etapa de build, sem variantes específicas de plataforma
-2. **`model: inherit`** — agentes usam o modelo da sessão pai, ficando agnósticos de plataforma
-3. **Instalação orientada por IA** — arquivos `.{platform}/INSTALL.md` que o agente de IA lê e executa
-4. **Skills auto-contidas** — templates de prompt do pipeline vivem dentro do diretório da skill, não em uma pasta `agents/` separada
+2. **`model: inherit`** — agentes usam o modelo da sessêo pai, ficando agnósticos de plataforma
+3. **Instalaçêo orientada por IA** — arquivos `.{platform}/INSTALL.md` que o agente de IA lê e executa
+4. **Skills auto-contidas** — templates de prompt do pipeline vivem dentro do diretório da skill, nêo em uma pasta `agents/` separada
 
 ## Mudança 1: Mover os Agentes do Pipeline Para Dentro da Skill
 
-Os 5 agentes do pipeline (project-scanner, file-analyzer, architecture-analyzer, tour-builder, graph-reviewer) são usados exclusivamente pela skill `/understand`. Eles viram templates de prompt co-localizados com a skill:
+Os 5 agentes do pipeline (project-scanner, file-analyzer, architecture-analyzer, tour-builder, graph-reviewer) sêo usados exclusivamente pela skill `/understand`. Eles viram templates de prompt co-localizados com a skill:
 
 **Antes:**
 ```
@@ -45,7 +45,7 @@ Os arquivos de template do prompt mantêm o conteúdo completo das instruções 
 
 ### Custo de Contexto
 
-Ler templates pela sessão principal adiciona ~11K tokens no total (~5.5% de um contexto de 200K). Isso é sequencial (um template por vez), e a compressão de contexto recupera conteúdo anterior. Trade-off aceitável pela portabilidade.
+Ler templates pela sessêo principal adiciona ~11K tokens no total (~5.5% de um contexto de 200K). Isso é sequencial (um template por vez), e a compressêo de contexto recupera conteúdo anterior. Trade-off aceitável pela portabilidade.
 
 ## Mudança 2: Novo Agente Registrado — knowledge-graph-guide
 
@@ -71,11 +71,11 @@ Esse agente conhece:
 - Como usar o dashboard interativo
 - Como interpretar camadas arquiteturais e tours guiados
 
-## Mudança 3: Arquivos de Instalação por Plataforma
+## Mudança 3: Arquivos de Instalaçêo por Plataforma
 
 Cada plataforma ganha um `INSTALL.md` que o agente de IA pode buscar e seguir:
 
-| Arquivo | Plataforma | Mecanismo de Instalação |
+| Arquivo | Plataforma | Mecanismo de Instalaçêo |
 |------|----------|-------------------|
 | `.codex/INSTALL.md` | Codex | `git clone` + symlink para `~/.agents/skills/` |
 | `.opencode/INSTALL.md` | OpenCode | Config de plugin em `opencode.json` |
@@ -89,22 +89,22 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Und
 
 O agente executa o clone + symlink/config automaticamente.
 
-## Mudança 4: Atualização do README
+## Mudança 4: Atualizaçêo do README
 
-Adicionar uma seção "Multi-Platform Installation" ao README.md com um one-liner por plataforma.
+Adicionar uma seçêo "Multi-Platform Installation" ao README.md com um one-liner por plataforma.
 
 ## Resumo de Arquivos
 
-| Ação | Arquivos |
+| Açêo | Arquivos |
 |--------|-------|
 | Deletar | `agents/project-scanner.md`, `agents/file-analyzer.md`, `agents/architecture-analyzer.md`, `agents/tour-builder.md`, `agents/graph-reviewer.md` |
 | Criar | `skills/understand/project-scanner-prompt.md`, `skills/understand/file-analyzer-prompt.md`, `skills/understand/architecture-analyzer-prompt.md`, `skills/understand/tour-builder-prompt.md`, `skills/understand/graph-reviewer-prompt.md` |
 | Criar | `agents/knowledge-graph-guide.md` |
 | Criar | `.codex/INSTALL.md`, `.opencode/INSTALL.md`, `.openclaw/INSTALL.md`, `.cursor/INSTALL.md` |
 | Modificar | `skills/understand/SKILL.md` (referências de dispatch) |
-| Modificar | `README.md` (seção multi-plataforma) |
+| Modificar | `README.md` (seçêo multi-plataforma) |
 
-## O Que Não Precisamos
+## O Que Nêo Precisamos
 
 - ~~`platforms/platform-config.json`~~ — mesmos arquivos em todo lugar
 - ~~`platforms/build.mjs`~~ — sem etapa de build

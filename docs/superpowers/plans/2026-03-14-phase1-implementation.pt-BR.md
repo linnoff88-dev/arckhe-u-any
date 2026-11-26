@@ -1,10 +1,10 @@
-# Understand Anything — Plano de Implementação da Fase 1
+# Understand Anything — Plano de Implementaçêo da Fase 1
 
-> 🇬🇧 Versão original em inglês: [2026-03-14-phase1-implementation.md](./2026-03-14-phase1-implementation.md)
+> 🇬🇧 Versêo original em inglês: [2026-03-14-phase1-implementation.md](./2026-03-14-phase1-implementation.md)
 
 > **Para o Claude:** SUB-SKILL OBRIGATÓRIA: Use superpowers:executing-plans para implementar este plano tarefa a tarefa.
 
-**Objetivo:** Construir o MVP fundacional — um monorepo pnpm com um motor de análise central (LLM + tree-sitter), um comando de skill `/understand` e um dashboard React básico com visualização em grafo e visualizador de código.
+**Objetivo:** Construir o MVP fundacional — um monorepo pnpm com um motor de análise central (LLM + tree-sitter), um comando de skill `/understand` e um dashboard React básico com visualizaçêo em grafo e visualizador de código.
 
 **Arquitetura:** Monorepo com 3 pacotes (core, skill, dashboard) compartilhando um schema JSON de grafo de conhecimento. O pacote core lida com análise e persistência. A skill invoca o core e abre o dashboard. O dashboard lê o JSON e renderiza um workspace multi-painel.
 
@@ -12,7 +12,7 @@
 
 ---
 
-## Tarefa 1: Estruturação do Projeto — Raiz do Monorepo
+## Tarefa 1: Estruturaçêo do Projeto — Raiz do Monorepo
 
 **Arquivos:**
 - Criar: `package.json`
@@ -103,7 +103,7 @@ git commit -m "chore: scaffold monorepo root with pnpm workspaces"
 
 ---
 
-## Tarefa 2: Pacote Core — Estruturação e Tipos do Grafo de Conhecimento
+## Tarefa 2: Pacote Core — Estruturaçêo e Tipos do Grafo de Conhecimento
 
 **Arquivos:**
 - Criar: `packages/core/package.json`
@@ -309,7 +309,7 @@ export * from "./types.js";
 Execute: `cd /path/to/project && pnpm install && pnpm --filter @understand-anything/core build`
 Esperado: Compila sem erros, `packages/core/dist/` criado
 
-**Passo 6: Escrever um teste de validação de tipos**
+**Passo 6: Escrever um teste de validaçêo de tipos**
 
 Criar: `packages/core/src/types.test.ts`
 
@@ -510,7 +510,7 @@ describe("Persistence", () => {
 **Passo 2: Executar teste para verificar que falha**
 
 Execute: `pnpm --filter @understand-anything/core test`
-Esperado: FAIL — módulo `./index.js` não encontrado
+Esperado: FAIL — módulo `./index.js` nêo encontrado
 
 **Passo 3: Implementar o módulo de persistência**
 
@@ -710,7 +710,7 @@ import * as path from "path";
 **Passo 3: Executar teste para verificar que falha**
 
 Execute: `pnpm --filter @understand-anything/core test`
-Esperado: FAIL — módulo não encontrado
+Esperado: FAIL — módulo nêo encontrado
 
 **Passo 4: Implementar o plugin tree-sitter**
 
@@ -1135,7 +1135,7 @@ describe("GraphBuilder", () => {
 **Passo 2: Executar teste para verificar que falha**
 
 Execute: `pnpm --filter @understand-anything/core test`
-Esperado: FAIL — módulo não encontrado
+Esperado: FAIL — módulo nêo encontrado
 
 **Passo 3: Implementar o GraphBuilder**
 
@@ -1334,7 +1334,7 @@ Esperado: Todos os testes do GraphBuilder PASS
 
 Criar: `packages/core/src/analyzer/llm-analyzer.ts`
 
-Define a interface para análise baseada em LLM. As chamadas reais ao LLM acontecem via skill (que tem acesso à sessão do Claude). O pacote core define os prompts e o formato de resposta esperado.
+Define a interface para análise baseada em LLM. As chamadas reais ao LLM acontecem via skill (que tem acesso à sessêo do Claude). O pacote core define os prompts e o formato de resposta esperado.
 
 ```typescript
 /**
@@ -1616,7 +1616,7 @@ git commit -m "feat(core): add graph builder and LLM analysis prompt system"
 
 ---
 
-## Tarefa 6: Pacote Dashboard — Estruturação com Vite + React
+## Tarefa 6: Pacote Dashboard — Estruturaçêo com Vite + React
 
 **Arquivos:**
 - Criar: `packages/dashboard/` (via scaffold do Vite e depois customizar)
@@ -1720,7 +1720,7 @@ git commit -m "feat(dashboard): scaffold React + Vite app with Tailwind, Zustand
 
 ---
 
-## Tarefa 7: Dashboard — Painel de Visualização em Grafo com React Flow
+## Tarefa 7: Dashboard — Painel de Visualizaçêo em Grafo com React Flow
 
 **Arquivos:**
 - Criar: `packages/dashboard/src/components/GraphView.tsx`
@@ -2368,7 +2368,7 @@ git commit -m "feat(dashboard): add main layout with search bar, graph view, cod
 
 ---
 
-## Tarefa 10: Integração — Conectar Tudo + README
+## Tarefa 10: Integraçêo — Conectar Tudo + README
 
 **Arquivos:**
 - Criar: `README.md`
@@ -2461,7 +2461,7 @@ git commit -m "docs: add README and CLAUDE.md with project overview and conventi
 
 ---
 
-## Checklist de Verificação
+## Checklist de Verificaçêo
 
 Após concluir todas as 10 tarefas:
 
